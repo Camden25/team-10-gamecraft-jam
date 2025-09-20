@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://e6dvi2semte5"]
+
+[ext_resource type="Script" uid="uid://k1by3k57gr2r" path="res://Bullets/Bullet.gd" id="1_jexuk"]
+
+[node name="Bullet" type="CharacterBody2D"]
+script = ExtResource("1_jexuk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
