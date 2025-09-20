@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://yy4jyrmbl6hu"]
+[gd_scene load_steps=8 format=3 uid="uid://yy4jyrmbl6hu"]
 
-[ext_resource type="Script" path="res://Bosses/Scripts/Boss.gd" id="1_h6esm"]
-[ext_resource type="Script" path="res://Bosses/Scripts/Phase.gd" id="2_8sqon"]
-[ext_resource type="Texture2D" uid="uid://bftfeu813i71u" path="res://light.png" id="5_0uwnp"]
+[ext_resource type="Script" uid="uid://cd35g4rm086fx" path="res://Bosses/Scripts/Boss.gd" id="1_h6esm"]
+[ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="2_8sqon"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5g7g"]
 size = Vector2(120, 180)
@@ -42,8 +41,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h8vwy"]
 _data = {
-"1": SubResource("Animation_mn7a3"),
-"2": SubResource("Animation_h8jtw")
+&"1": SubResource("Animation_mn7a3"),
+&"2": SubResource("Animation_h8jtw")
 }
 
 [node name="Boss" type="CharacterBody2D"]
@@ -73,7 +72,7 @@ shape = SubResource("RectangleShape2D_b64we")
 
 [node name="PhaseTransitions" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_h8vwy")
+&"": SubResource("AnimationLibrary_h8vwy")
 }
 
 [node name="Phases" type="Node2D" parent="."]
@@ -85,7 +84,6 @@ phase_health = 500
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.5
-texture = ExtResource("5_0uwnp")
 texture_scale = 2.0
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
