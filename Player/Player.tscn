@@ -15,3 +15,9 @@ shape = SubResource("RectangleShape2D_3qydi")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(20, 20)
 texture = SubResource("PlaceholderTexture2D_q3lat")
+
+[node name="ColorDamageTimer" type="Timer" parent="."]
+
+[node name="HealthLabelTEMP" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
