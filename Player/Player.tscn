@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b17mw5a7sl1uj"]
+[gd_scene load_steps=8 format=3 uid="uid://b17mw5a7sl1uj"]
 
 [ext_resource type="Script" uid="uid://cjomjfe3gexg6" path="res://Player/player.gd" id="1_3qydi"]
 [ext_resource type="Texture2D" uid="uid://cu6f65bmx4hy1" path="res://Player/Assets/PlayerCharacter512.png" id="2_q3lat"]
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_tok1r"]
 [ext_resource type="Script" uid="uid://etnsmxlou2wc" path="res://Player/Abilities/Dash.gd" id="4_ddoul"]
+[ext_resource type="Script" uid="uid://bwq0t6i57mow8" path="res://Player/Abilities/Immune.gd" id="5_8g4oa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3qydi"]
 
@@ -41,3 +42,6 @@ text = "100"
 [node name="Dash" type="Node2D" parent="Actions"]
 script = ExtResource("4_ddoul")
 metadata/_custom_type_script = "uid://djpdmjiqd5j87"
+
+[node name="Immune" type="Node2D" parent="Actions"]
+script = ExtResource("5_8g4oa")

@@ -10,6 +10,9 @@ var knockback := Vector2()
 var ability_movement := Vector2()
 
 var disabled := false
+## Add 1 for each source of damage immunity, remove 1 when no longer immune
+## Slightly gross but it works
+var damage_immune := 0
 
 var color_index := 0
 var can_take_color_damage := true
@@ -52,7 +55,10 @@ func _process(_delta) -> void:
 			return
 		
 		can_take_color_damage = false
-		modify_health(-1)
+		if color_string == "black":
+			modify_health(-2)
+		else:
+			modify_health(-1)
 		$ColorDamageTimer.start()
 
 func _physics_process(delta) -> void:
@@ -94,6 +100,12 @@ func knockback_taken(area, knockback_amount) -> void:
 	#disabled = true
 	#visible = false
 	#$Hurtbox/CollisionShape2D.disabled = true
+
+func modify_health(modify_amount: int) -> void:
+	if modify_amount < 0 and damage_immune > 0:
+		return
+
+	super.modify_health(modify_amount)
 
 func death_check() -> void:
 	super.death_check()
