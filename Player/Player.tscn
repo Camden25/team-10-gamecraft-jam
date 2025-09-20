@@ -1,10 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://bs0oa38w5s0yt"]
 
 [ext_resource type="Script" uid="uid://cjomjfe3gexg6" path="res://Player/player.gd" id="1_3qydi"]
+[ext_resource type="Texture2D" uid="uid://cu6f65bmx4hy1" path="res://Player/Assets/PlayerCharacter512.png" id="2_q3lat"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3qydi"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_q3lat"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_3qydi")
@@ -13,11 +12,14 @@ script = ExtResource("1_3qydi")
 shape = SubResource("RectangleShape2D_3qydi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(20, 20)
-texture = SubResource("PlaceholderTexture2D_q3lat")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_q3lat")
 
 [node name="ColorDamageTimer" type="Timer" parent="."]
 
 [node name="HealthLabelTEMP" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = -15.0
+offset_top = 53.0
+offset_right = 25.0
+offset_bottom = 76.0
+text = "100"

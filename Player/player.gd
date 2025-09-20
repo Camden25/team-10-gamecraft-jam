@@ -24,7 +24,7 @@ func _ready() -> void:
 func _process(delta) -> void:
 	# Handling for stopping the player going out of the window
 	var window_size = get_window().size  # Get current window size
-	var half_player_size = Vector2(10, 10)  # Adjust based on player sprite size/2
+	var half_player_size = Vector2(64, 64)
 
 	position.x = clamp(position.x, half_player_size.x, window_size.x - half_player_size.x)
 	position.y = clamp(position.y, half_player_size.y, window_size.y - half_player_size.y)
