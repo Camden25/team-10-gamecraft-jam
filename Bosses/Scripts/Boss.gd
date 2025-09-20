@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends HealthCharacter
 
 class_name Boss
 
@@ -10,9 +10,6 @@ var waiting_for_new_phase = false
 
 var can_attack = false
 var attacking = false
-
-var max_health = 10
-var health = 10
 
 @export var move_speed = 450
 @export var knockback_multiplier = 1

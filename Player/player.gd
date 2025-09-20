@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends HealthCharacter
 class_name Player
 
 @export var move_speed = 50000
