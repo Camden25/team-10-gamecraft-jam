@@ -10,6 +10,6 @@ config_version=5
 
 [application]
 
-config/name="team-10-gamecraft-jam\\"
+config/name="team-10-gamecraft-jam"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
