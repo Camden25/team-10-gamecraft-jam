@@ -12,6 +12,7 @@ var secondary_map: Dictionary = {
 }
 
 func _ready() -> void:
+	add_to_group("paint_layer")
 	for i in range(6):
 		for y in range(4):
 			paint_cell(Vector2i(i, y), colors[i])
