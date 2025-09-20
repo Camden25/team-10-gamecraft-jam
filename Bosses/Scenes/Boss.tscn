@@ -84,7 +84,6 @@ boss_path = NodePath("../..")
 phase_health = 500
 
 [node name="Node2D" type="Node2D" parent="Phases/1"]
-position = Vector2(0, -2)
 script = ExtResource("3_8rgwt")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
