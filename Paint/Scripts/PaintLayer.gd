@@ -12,6 +12,8 @@ var secondary_map: Dictionary = {
 	"green": ["cyan","yellow"]
 }
 
+var tile_array: Array[Vector2i] = []
+
 func _ready() -> void:
 	add_to_group("paint_layer")
 	
@@ -184,3 +186,12 @@ func mix_colors(color_a: String, color_b: String) -> String:
 		return "black"
 	
 	return "black" # fallback
+
+func get_all_tiles() -> Array:
+	if !tile_array.size():
+		var window_size = get_window().size
+		for i in range(window_size.x / tile_set.tile_size.x):
+			for j in range(window_size.y / tile_set.tile_size.y):
+				tile_array.append(Vector2i(i, j))
+	
+	return tile_array
