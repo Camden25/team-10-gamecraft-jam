@@ -12,4 +12,4 @@ func _ready() -> void:
 
 	var boss_instance: Boss = boss_scene.instantiate()
 	add_child(boss_instance)
-	boss_instance.position = Vector2(100, 100)
+	boss_instance.position = Vector2(1000, 1000)

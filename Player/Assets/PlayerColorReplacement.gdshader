@@ -9,6 +9,9 @@ uniform float color2_threshold : hint_range(0.0, 1.0, 0.01);
 
 void fragment() {
 	vec4 tex_color = texture(TEXTURE, UV);
+	if(tex_color.a == 0.0) {
+		discard;
+	}
 	
 	float color1_distance = length(tex_color.rgb - color1.rgb);
 	
