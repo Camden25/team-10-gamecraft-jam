@@ -55,23 +55,13 @@ func phase_transition(phase):
 	$PhaseTransitions.play(str(phase))
 	await $PhaseTransitions.animation_finished
 	active_phase = $Phases.get_children()[phase-1]
-	max_health = active_phase.phase_health
-	health = max_health
+	set_max_health(active_phase.phase_health)
+	set_health(active_phase.phase_health)
 	can_attack = true
-
-func damage_taken(damage):
-	print("damage taken: " + str(damage))
-	health -= damage
-	print("health remaining: " + str(health))
-	if health <= 0:
-		if current_phase_num < phases:
-			waiting_for_new_phase = true
-		else:
-			death()
 
 func death():
 	print("dead")
 	queue_free()
 
 func _on_hurtbox_area_entered(area):
-	damage_taken(area.damage)
+	pass
