@@ -72,6 +72,44 @@ func paint_square_world(world_pos: Vector2, color: String, radius: int) -> void:
 	for cell2: Vector2i in get_points_in_square(cell, radius):
 		paint_cell(cell2, color)
 
+func paint_line_world(start_pos: Vector2, end_pos: Vector2, color: String, radius: float) -> void:
+	for cell: Vector2i in get_points_in_line(local_to_map(start_pos), local_to_map(end_pos)):
+		if radius > 1:
+			for cell2: Vector2i in get_points_in_circle(cell, radius):
+				paint_cell(cell2, color)
+		else:
+			paint_cell(cell, color)
+
+## Using Bresenham line algorithm for this
+func get_points_in_line(start: Vector2i, end: Vector2i) -> Array[Vector2i]:
+	var points: Array[Vector2i] = []
+	
+	var x0 = start.x
+	var y0 = start.y
+	var x1 = end.x
+	var y1 = end.y
+	
+	var dx = abs(x1 - x0)
+	var dy = abs(y1 - y0)
+	var sx = 1 if x0 < x1 else -1
+	var sy = 1 if y0 < y1 else -1
+	var err = dx - dy
+	
+	# Always include the start point
+	points.append(Vector2i(x0, y0))
+	
+	while x0 != x1 or y0 != y1:
+		var err2 = err * 2
+		if err2 > -dy:
+			err -= dy
+			x0 += sx
+		if err2 < dx:
+			err += dx
+			y0 += sy
+		points.append(Vector2i(x0, y0))
+	
+	return points
+
 func get_points_in_circle(cell: Vector2i, radius: float) -> Array:
 	var points = []
 	var min_x = int(floor(cell.x - radius))
