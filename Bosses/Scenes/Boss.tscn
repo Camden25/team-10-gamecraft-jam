@@ -1,0 +1,91 @@
+[gd_scene load_steps=9 format=3 uid="uid://yy4jyrmbl6hu"]
+
+[ext_resource type="Script" path="res://Bosses/Scripts/Boss.gd" id="1_h6esm"]
+[ext_resource type="Script" path="res://Bosses/Scripts/Phase.gd" id="2_8sqon"]
+[ext_resource type="Texture2D" uid="uid://bftfeu813i71u" path="res://light.png" id="5_0uwnp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5g7g"]
+size = Vector2(120, 180)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b64we"]
+size = Vector2(120, 180)
+
+[sub_resource type="Animation" id="Animation_mn7a3"]
+resource_name = "1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_h8jtw"]
+resource_name = "2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h8vwy"]
+_data = {
+"1": SubResource("Animation_mn7a3"),
+"2": SubResource("Animation_h8jtw")
+}
+
+[node name="Boss" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 129
+motion_mode = 1
+script = ExtResource("1_h6esm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Sprite2D"]
+offset_left = -60.0
+offset_top = -90.0
+offset_right = 60.0
+offset_bottom = 90.0
+color = Color(0.0666667, 0.301961, 0.219608, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_v5g7g")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_b64we")
+
+[node name="PhaseTransitions" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h8vwy")
+}
+
+[node name="Phases" type="Node2D" parent="."]
+
+[node name="1" type="Node2D" parent="Phases"]
+script = ExtResource("2_8sqon")
+boss_path = NodePath("../..")
+phase_health = 500
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.5
+texture = ExtResource("5_0uwnp")
+texture_scale = 2.0
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
