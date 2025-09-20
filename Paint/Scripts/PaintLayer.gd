@@ -1,30 +1,55 @@
 extends TileMapLayer
 class_name PaintLayer
 
-@export var colors: Array[String] = ["red", "orange", "yellow", "green", "blue", "purple", "black"]
+@export var colors: Array[String] = ["cyan", "blue", "magenta", "red", "yellow", "green", "black"]
 
-var primaries: Array[String] = ["red", "yellow", "blue"]
-var secondaries: Array[String] = ["orange", "green", "purple"]
+var primaries: Array[String] = ["cyan", "magenta", "yellow"]
+var secondaries: Array[String] = ["blue", "red", "green"]
 var secondary_map: Dictionary = {
-	"orange": ["red","yellow"],
-	"green": ["yellow","blue"],
-	"purple": ["red","blue"]
+	"blue": ["cyan","magenta"],
+	"red": ["magenta","yellow"],
+	"green": ["cyan","yellow"]
 }
 
 func _ready() -> void:
 	add_to_group("paint_layer")
-	for i in range(6):
-		for y in range(4):
-			paint_cell(Vector2i(i, y), colors[i])
 	
-	for i in range(3):
-		for x in range(6):
-			paint_cell(Vector2i(x, i+1), colors[2*i])
+	await get_tree().create_timer(1).timeout
+	
+	paint_cell(Vector2(60, 33), "magenta")
+	
+	for x in range(120):
+		for y in range(67):
+			if (x-60)**2 + (y-33)**2 <= 100:
+				paint_cell(Vector2(x,y), "cyan")
+	
+	for x in range(120):
+		for y in range(67):
+			if (x-85)**2 + (y-33)**2 <= 400:
+				paint_cell(Vector2(x,y), "yellow")
+	
+	for x in range(120):
+		for y in range(67):
+			if (x-30)**2 + (y-10)**2 <= 900:
+				paint_cell(Vector2(x,y), "magenta")
+	
+	for x in range(120):
+		for y in range(67):
+			if (x-45)**2 + (y-50)**2 <= 600:
+				paint_cell(Vector2(x,y), "yellow")
+	
+	#for i in range(6):
+		#for y in range(4):
+			#paint_cell(Vector2i(i, y), colors[i])
+	#
+	#for i in range(3):
+		#for x in range(6):
+			#paint_cell(Vector2i(x, i+1), colors[2*i])
 
 func paint_cell(cell: Vector2i, color: String) -> void:
 	var current_cell_color := get_color_at_cell(cell)
 	if current_cell_color != "":
-		print("Location: ", cell, "  Old color: ", current_cell_color, "  Mixed color: ", color, "  New color: ", mix_colors(current_cell_color, color))
+		#print("Location: ", cell, "  Old color: ", current_cell_color, "  Mixed color: ", color, "  New color: ", mix_colors(current_cell_color, color))
 		color = mix_colors(current_cell_color, color)
 	
 	var tile_id := colors.find(color)

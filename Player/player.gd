@@ -7,6 +7,8 @@ var move_dir := Vector2()
 @export var knockback_multiplier = 1
 var knockback := Vector2()
 
+var ability_movement := Vector2()
+
 var disabled := false
 
 var color_index := 0
@@ -14,14 +16,27 @@ var can_take_color_damage := true
 
 var paint_layer: PaintLayer # IF WE DELETE PAINT LAYERS AND REPLACE THEM, CHANGE ME LATER
 
-func _ready() -> void:
+var color_list := {
+	"cyan" : ["35cbc8", "99dace"],
+	"blue" : ["403e85", "9a9eb8"],
+	"magenta" : ["d757b7", "d99bb8"],
+	"red" : ["b3133b", "b26d7e"],
+	"yellow" : ["ffdb85", "f7dfc3"],
+	"green" : ["54bc54", "afd4a8"],
+	"black" : ["1b192a", "83838a"]
+}
+
+func _init() -> void:
 	add_to_group("player")
+
+func _ready() -> void:
 	$ColorDamageTimer.wait_time = 0.1
 	$ColorDamageTimer.one_shot = true 
 	$ColorDamageTimer.connect("timeout", Callable(self, "_on_timer_timeout"))
 	paint_layer = get_tree().get_first_node_in_group("paint_layer")
+	set_color_visual()
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	# Handling for stopping the player going out of the window
 	var window_size = get_window().size  # Get current window size
 	var half_player_size = Vector2(64, 64)
@@ -42,12 +57,16 @@ func _process(delta) -> void:
 func _physics_process(delta) -> void:
 	if disabled:
 		return
-
+	
 	get_input()
 	
-	velocity = (move_dir*move_speed + knockback*knockback_multiplier) * delta
+	if ability_movement != Vector2(0, 0):
+		move_dir = Vector2(0, 0)
+	
+	velocity = (move_dir*move_speed + knockback*knockback_multiplier + ability_movement) * delta
 	
 	move_dir = Vector2(0, 0)
+	ability_movement = Vector2(0, 0)
 	
 	move_and_slide()
 
@@ -65,16 +84,30 @@ func set_move_dir() -> void:
 func knockback_taken(area, knockback_amount) -> void:
 	knockback = global_position.direction_to(area.global_position) * knockback_amount
 
-func swap_in() -> void:
-	disabled = false
-	visible = true
-	$Hurtbox/CollisionShape2D.disabled = false
-
-func swap_out() -> void:
-	disabled = true
-	visible = false
-	$Hurtbox/CollisionShape2D.disabled = true
+#func swap_in() -> void:
+	#disabled = false
+	#visible = true
+	#$Hurtbox/CollisionShape2D.disabled = false
+#
+#func swap_out() -> void:
+	#disabled = true
+	#visible = false
+	#$Hurtbox/CollisionShape2D.disabled = true
 
 func death_check() -> void:
 	super.death_check()
 	$HealthLabelTEMP.text = "%d" % get_health()
+
+func swap_color(new_color: String) -> void:
+	color_index = paint_layer.colors.find(new_color)
+	set_color_visual()
+
+func next_color() -> void:
+	color_index += 1
+	if color_index > 5:
+		color_index = 0
+	set_color_visual()
+
+func set_color_visual() -> void:
+	$Sprite2D.material.set_shader_parameter("color1_replacement", Color(color_list[paint_layer.colors[color_index]][0]))
+	$Sprite2D.material.set_shader_parameter("color2_replacement", Color(color_list[paint_layer.colors[color_index]][1]))
