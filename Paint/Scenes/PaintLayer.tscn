@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwxj4iny22i3"]
+
+[ext_resource type="Texture2D" uid="uid://btrijwtyccw7h" path="res://Paint/Assets/PaintLayers.png" id="1_3wsxo"]
+[ext_resource type="Script" uid="uid://cauogdxh1ujb3" path="res://Paint/Scripts/PaintLayer.gd" id="1_rwnoh"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8lvj6"]
+texture = ExtResource("1_3wsxo")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_5ew7y"]
+tile_size = Vector2i(128, 128)
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Paint 0"
+terrain_set_0/terrain_0/color = Color(1, 1, 1, 1)
+sources/0 = SubResource("TileSetAtlasSource_8lvj6")
+
+[node name="PaintLayer" type="TileMapLayer"]
+tile_set = SubResource("TileSet_5ew7y")
+script = ExtResource("1_rwnoh")
