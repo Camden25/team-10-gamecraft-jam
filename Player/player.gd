@@ -27,6 +27,7 @@ var color_list := {
 }
 
 func _init() -> void:
+	super._init()
 	add_to_group("player")
 
 func _ready() -> void:

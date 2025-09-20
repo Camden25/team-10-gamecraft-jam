@@ -17,7 +17,7 @@ func _ready() -> void:
 	await get_tree().create_timer(1).timeout
 	
 	paint_cell(Vector2(60, 33), "magenta")
-	
+	"""
 	for x in range(120):
 		for y in range(67):
 			if (x-60)**2 + (y-33)**2 <= 100:
@@ -37,6 +37,12 @@ func _ready() -> void:
 		for y in range(67):
 			if (x-45)**2 + (y-50)**2 <= 600:
 				paint_cell(Vector2(x,y), "yellow")
+				"""
+
+	paint_circle_world(Vector2(300, 300), colors[1], 5)
+
+	paint_square_world(Vector2(500, 700), colors[3], 8)
+	paint_square_world(Vector2(600, 800), colors[5], 8)
 	
 	#for i in range(6):
 		#for y in range(4):
@@ -55,6 +61,44 @@ func paint_cell(cell: Vector2i, color: String) -> void:
 	var tile_id := colors.find(color)
 	if tile_id != -1:
 		set_cell(cell, 0, Vector2i(tile_id, 0))
+
+func paint_circle_world(world_pos: Vector2, color: String, radius: float) -> void:
+	var cell := local_to_map(world_pos)
+	for cell2: Vector2i in get_points_in_circle(cell, radius):
+		paint_cell(cell2, color)
+
+func paint_square_world(world_pos: Vector2, color: String, radius: int) -> void:
+	var cell := local_to_map(world_pos)
+	for cell2: Vector2i in get_points_in_square(cell, radius):
+		paint_cell(cell2, color)
+
+func get_points_in_circle(cell: Vector2i, radius: float) -> Array:
+	var points = []
+	var min_x = int(floor(cell.x - radius))
+	var max_x = int(floor(cell.x + radius))
+	var min_y = int(floor(cell.y - radius))
+	var max_y = int(floor(cell.y + radius))
+
+	for x in range(min_x, max_x + 1):
+		for y in range(min_y, max_y + 1):
+			var point = Vector2i(x, y)
+			if cell.distance_to(point) <= radius:
+				points.append(point)
+	
+	return points
+
+func get_points_in_square(cell: Vector2i, radius: int) -> Array:
+	var points = []
+	var min_x = int(floor(cell.x - radius))
+	var max_x = int(floor(cell.x + radius))
+	var min_y = int(floor(cell.y - radius))
+	var max_y = int(floor(cell.y + radius))
+
+	for x in range(min_x, max_x + 1):
+		for y in range(min_y, max_y + 1):
+			points.append(Vector2i(x, y))
+	
+	return points
 
 func paint_cell_world(world_pos: Vector2, color: String) -> void:
 	var cell := local_to_map(world_pos)
