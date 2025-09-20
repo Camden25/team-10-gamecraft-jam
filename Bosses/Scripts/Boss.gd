@@ -23,16 +23,12 @@ var move_dir = Vector2()
 var knockback = Vector2()
 var ability_movement = Vector2()
 
-@onready var player_manager = get_tree().get_nodes_in_group("Player Manager")[0]
-var player = null
-
 func _ready():
+	add_to_group("boss")
 	randomize()
 	waiting_for_new_phase = true
 
 func _process(delta):
-	player = player_manager.current_player
-	
 	if can_attack and waiting_for_new_phase == false:
 		active_phase.choose_attack()
 	if waiting_for_new_phase and attacking == false:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://yy4jyrmbl6hu"]
+[gd_scene load_steps=9 format=3 uid="uid://yy4jyrmbl6hu"]
 
 [ext_resource type="Script" uid="uid://cd35g4rm086fx" path="res://Bosses/Scripts/Boss.gd" id="1_h6esm"]
 [ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="2_8sqon"]
+[ext_resource type="Script" uid="uid://c2tgtrt8aantn" path="res://Bosses/Scripts/Punch.gd" id="3_8rgwt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5g7g"]
 size = Vector2(120, 180)
@@ -81,6 +82,10 @@ libraries = {
 script = ExtResource("2_8sqon")
 boss_path = NodePath("../..")
 phase_health = 500
+
+[node name="Node2D" type="Node2D" parent="Phases/1"]
+position = Vector2(0, -2)
+script = ExtResource("3_8rgwt")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.5
