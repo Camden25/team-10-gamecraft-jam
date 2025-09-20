@@ -15,11 +15,16 @@ var active_attack: BossAttack
 
 @onready var boss = get_node(boss_path)
 
+func _ready() -> void:
+	for attack: BossAttack in get_children(true):
+		attack.post_init()
+
 func choose_attack():
 	boss.can_attack = false
 	boss.attacking = true
-	active_attack = get_child(randi_range(0, get_child_count()-1))
-	if active_attack != prev_attack:
+	var child_count = get_child_count()
+	active_attack = get_child(randi_range(0, child_count)-1)
+	if active_attack != prev_attack or child_count == 1:
 		prev_attack = active_attack
 		active_attack.start_attack()
 	else:
