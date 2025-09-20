@@ -2,6 +2,7 @@ extends TileMapLayer
 class_name PaintLayer
 
 @export var colors: Array[String] = ["cyan", "blue", "magenta", "red", "yellow", "green", "black"]
+@export var black_decay_time: float = 5.0
 
 var primaries: Array[String] = ["cyan", "magenta", "yellow"]
 var secondaries: Array[String] = ["blue", "red", "green"]
@@ -61,6 +62,12 @@ func paint_cell(cell: Vector2i, color: String) -> void:
 	var tile_id := colors.find(color)
 	if tile_id != -1:
 		set_cell(cell, 0, Vector2i(tile_id, 0))
+		if color == "black":
+			reset_black_tile(cell)
+
+func reset_black_tile(cell: Vector2i):
+	await get_tree().create_timer(black_decay_time).timeout
+	set_cell(cell, 0, Vector2i(-1, 0))
 
 func paint_circle_world(world_pos: Vector2, color: String, radius: float) -> void:
 	var cell := local_to_map(world_pos)

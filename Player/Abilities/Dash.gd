@@ -31,6 +31,7 @@ func start_dash():
 	dashes_left -= 1
 	is_dashing = true
 	player.next_color()
+	player.damage_immune += 1
 	dash_timer()
 
 func dash(delta):
@@ -40,6 +41,7 @@ func dash(delta):
 func end_dash():
 	print("end dash")
 	is_dashing = false
+	player.damage_immune -= 1
 	dash_cooldown_timer()
 
 func dash_timer():
