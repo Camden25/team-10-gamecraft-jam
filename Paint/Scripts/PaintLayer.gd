@@ -11,7 +11,7 @@ var secondary_map: Dictionary = {
 	"purple": ["red","blue"]
 }
 
-func _ready():
+func _ready() -> void:
 	for i in range(6):
 		for y in range(4):
 			paint_cell(Vector2i(i, y), colors[i])
@@ -20,7 +20,7 @@ func _ready():
 		for x in range(6):
 			paint_cell(Vector2i(x, i+1), colors[2*i])
 
-func paint_cell(cell: Vector2i, color: String):
+func paint_cell(cell: Vector2i, color: String) -> void:
 	var current_cell_color := get_color_at_cell(cell)
 	if current_cell_color != "":
 		print("Location: ", cell, "  Old color: ", current_cell_color, "  Mixed color: ", color, "  New color: ", mix_colors(current_cell_color, color))
@@ -30,7 +30,7 @@ func paint_cell(cell: Vector2i, color: String):
 	if tile_id != -1:
 		set_cell(cell, 0, Vector2i(tile_id, 0))
 
-func paint_cell_world(world_pos: Vector2i, color: String):
+func paint_cell_world(world_pos: Vector2, color: String) -> void:
 	var cell := local_to_map(world_pos)
 	paint_cell(cell, color)
 
@@ -39,6 +39,10 @@ func get_color_at_cell(cell: Vector2i) -> String:
 	if tile_id == -1:
 		return "" # no tile present
 	return colors[tile_id]
+
+func get_color_at_world(world_pos: Vector2) -> String:
+	var cell := local_to_map(world_pos)
+	return get_color_at_cell(cell)
 
 func mix_colors(color_a: String, color_b: String) -> String:
 	# same color -> stays the same
