@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://ds2r3mfc2p217"]
+
+[ext_resource type="FontFile" uid="uid://bpdcujuxs4kq2" path="res://Menus/Assets/font.otf" id="1_a35vq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qyw23"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wg7li"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jbr3a"]
+
+[resource]
+default_font = ExtResource("1_a35vq")
+default_font_size = 64
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(0.574219, 0.574219, 0.574219, 1)
+Button/colors/font_pressed_color = Color(0.262745, 0.262745, 0.298039, 1)
+Button/styles/hover = SubResource("StyleBoxEmpty_qyw23")
+Button/styles/normal = SubResource("StyleBoxEmpty_wg7li")
+Button/styles/pressed = SubResource("StyleBoxEmpty_jbr3a")

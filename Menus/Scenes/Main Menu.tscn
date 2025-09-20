@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://fewbrhimlr8g"]
+
+[ext_resource type="Script" uid="uid://b6d7d4qpscnr6" path="res://Menus/Scripts/Main Menu.gd" id="1_cpkr3"]
+[ext_resource type="Texture2D" uid="uid://b6a5wtauaxtnu" path="res://Menus/Assets/MenuTitle.PNG" id="2_a2mxr"]
+[ext_resource type="Texture2D" uid="uid://c6a00dv2kic8s" path="res://Menus/Assets/MenuSetting.PNG" id="4_2k2vm"]
+[ext_resource type="Texture2D" uid="uid://cfl4grnay6j05" path="res://Menus/Assets/MenuStart.PNG" id="4_83v3q"]
+[ext_resource type="Texture2D" uid="uid://b48fe3f01k040" path="res://Menus/Assets/MenuQuit.PNG" id="6_fm2nd"]
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_cpkr3")
+
+[node name="Title" type="Sprite2D" parent="."]
+position = Vector2(400, 250)
+texture = ExtResource("2_a2mxr")
+
+[node name="StartButton" type="TextureButton" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 421.0
+offset_top = 286.0
+offset_right = 672.0
+offset_bottom = 398.0
+rotation = -0.312414
+pivot_offset = Vector2(126.11, 60.22)
+texture_normal = ExtResource("4_83v3q")
+
+[node name="SettingsButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 259.361
+offset_top = 418.586
+offset_right = 548.361
+offset_bottom = 566.586
+rotation = -0.296706
+pivot_offset = Vector2(145, 77.63)
+texture_normal = ExtResource("4_2k2vm")
+
+[node name="QuitButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 0
+offset_left = 568.361
+offset_top = 376.586
+offset_right = 751.361
+offset_bottom = 466.586
+rotation = -0.261799
+pivot_offset = Vector2(89.61, 46.52)
+texture_normal = ExtResource("6_fm2nd")
+
+[connection signal="mouse_entered" from="StartButton" to="." method="_on_start_button_mouse_entered"]
+[connection signal="mouse_exited" from="StartButton" to="." method="_on_start_button_mouse_exited"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="SettingsButton" to="." method="_on_settings_button_mouse_entered"]
+[connection signal="mouse_exited" from="SettingsButton" to="." method="_on_settings_button_mouse_exited"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="mouse_entered" from="QuitButton" to="." method="_on_quit_button_mouse_entered"]
+[connection signal="mouse_exited" from="QuitButton" to="." method="_on_quit_button_mouse_exited"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

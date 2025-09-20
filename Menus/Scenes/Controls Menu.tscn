@@ -1,0 +1,182 @@
+[gd_scene load_steps=13 format=3 uid="uid://8popg21svl7b"]
+
+[ext_resource type="Script" uid="uid://firpo4m43j2c" path="res://Menus/Scripts/Controls Menu.gd" id="1_s1pnw"]
+[ext_resource type="PackedScene" uid="uid://dm1av7skxvp1j" path="res://game_settings/components/input_btn/input_btn.tscn" id="2_slk3k"]
+[ext_resource type="PackedScene" uid="uid://b1btmq8y3gexs" path="res://game_settings/components/_misc_components/input_confirm_window/input_confirm_window.tscn" id="2_w1gw2"]
+[ext_resource type="Theme" uid="uid://drygv0g3n8240" path="res://Menus/Assets/Label.tres" id="3_xgv3s"]
+[ext_resource type="Texture2D" uid="uid://c4vunn2rkqj83" path="res://addons/ggs/assets/game_settings/input_setting.svg" id="4_sx8st"]
+[ext_resource type="Script" uid="uid://dxpqjtyq60otq" path="res://game_settings/settings/input.gd" id="5_o64gi"]
+[ext_resource type="Theme" uid="uid://ds2r3mfc2p217" path="res://Menus/Assets/Button.tres" id="6_wp41k"]
+
+[sub_resource type="Resource" id="Resource_ny3lv"]
+resource_name = "left"
+script = ExtResource("5_o64gi")
+action = "left"
+type = 0
+current = "A"
+default = "A"
+name = "left"
+category = "Controls Menu"
+icon = ExtResource("4_sx8st")
+desc = "Rebind keyboard or gamepad input of a specific input action."
+value_type = 4
+value_hint = 0
+value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_4l617"]
+resource_name = "right"
+script = ExtResource("5_o64gi")
+action = "right"
+type = 0
+current = "D"
+default = "D"
+name = "right"
+category = "Controls Menu"
+icon = ExtResource("4_sx8st")
+desc = "Rebind keyboard or gamepad input of a specific input action."
+value_type = 4
+value_hint = 0
+value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_5jkbi"]
+resource_name = "up"
+script = ExtResource("5_o64gi")
+action = "jump"
+type = 0
+current = "Space"
+default = "Space"
+name = "up"
+category = "Controls Menu"
+icon = ExtResource("4_sx8st")
+desc = "Rebind keyboard or gamepad input of a specific input action."
+value_type = 4
+value_hint = 0
+value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_33p53"]
+resource_name = "down"
+script = ExtResource("5_o64gi")
+action = "hide"
+type = 0
+current = "Shift"
+default = "Shift"
+name = "down"
+category = "Controls Menu"
+icon = ExtResource("4_sx8st")
+desc = "Rebind keyboard or gamepad input of a specific input action."
+value_type = 4
+value_hint = 0
+value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_ngrac"]
+resource_name = "use item"
+script = ExtResource("5_o64gi")
+action = "interact"
+type = 0
+current = "E"
+default = "E"
+name = "use item"
+category = "Controls Menu"
+icon = ExtResource("4_sx8st")
+desc = "Rebind keyboard or gamepad input of a specific input action."
+value_type = 4
+value_hint = 0
+value_hint_string = ""
+
+[node name="Controls Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s1pnw")
+
+[node name="InputConfirmWindow" parent="." instance=ExtResource("2_w1gw2")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Spacer" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="Controls" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("3_xgv3s")
+theme_override_font_sizes/font_size = 96
+text = "Controls"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer2" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Left" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_slk3k")]
+layout_mode = 2
+icw = NodePath("../../../InputConfirmWindow")
+setting = SubResource("Resource_ny3lv")
+
+[node name="Right" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_slk3k")]
+layout_mode = 2
+size_flags_vertical = 4
+icw = NodePath("../../../InputConfirmWindow")
+setting = SubResource("Resource_4l617")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Jump" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("2_slk3k")]
+layout_mode = 2
+size_flags_vertical = 4
+icw = NodePath("../../../InputConfirmWindow")
+setting = SubResource("Resource_5jkbi")
+
+[node name="Hide" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("2_slk3k")]
+layout_mode = 2
+size_flags_vertical = 4
+icw = NodePath("../../../InputConfirmWindow")
+setting = SubResource("Resource_33p53")
+
+[node name="Interact" parent="VBoxContainer" instance=ExtResource("2_slk3k")]
+layout_mode = 2
+size_flags_vertical = 4
+icw = NodePath("../../InputConfirmWindow")
+setting = SubResource("Resource_ngrac")
+
+[node name="Spacer3" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("6_wp41k")
+theme_override_font_sizes/font_size = 48
+text = "Back"
+
+[node name="Spacer4" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+
+[editable path="VBoxContainer/HBoxContainer/Left"]
+[editable path="VBoxContainer/HBoxContainer/Right"]
+[editable path="VBoxContainer/HBoxContainer2/Jump"]
+[editable path="VBoxContainer/HBoxContainer2/Hide"]
+[editable path="VBoxContainer/Interact"]

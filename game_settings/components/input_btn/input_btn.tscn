@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dm1av7skxvp1j"]
+
+[ext_resource type="Script" uid="uid://bfiovaynt05gp" path="res://game_settings/components/input_btn/input_btn.gd" id="1_roqsf"]
+[ext_resource type="Theme" uid="uid://c6hlgkp88xg50" path="res://Menus/Assets/LightButton.tres" id="3_47drr"]
+[ext_resource type="FontFile" uid="uid://bypuvq5s2ra6o" path="res://Menus/Assets/font-bold.otf" id="3_d4a0r"]
+[ext_resource type="FontFile" uid="uid://bl608iusnxo45" path="res://Menus/Assets/clean_font.otf" id="3_ffbs1"]
+
+[node name="InputBtn" type="MarginContainer"]
+custom_minimum_size = Vector2(650, 0)
+offset_right = 650.0
+offset_bottom = 59.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_roqsf")
+apply_on_change = true
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(650, 80)
+layout_mode = 2
+
+[node name="Btn" type="Button" parent="Panel"]
+layout_mode = 2
+offset_right = 650.0
+offset_bottom = 80.0
+size_flags_horizontal = 3
+theme = ExtResource("3_47drr")
+theme_override_fonts/font = ExtResource("3_d4a0r")
+theme_override_font_sizes/font_size = 32
+text = "Test Button"
+alignment = 2
+icon_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ffbs1")
+theme_override_font_sizes/font_size = 36
+text = " Test Action"
+vertical_alignment = 1

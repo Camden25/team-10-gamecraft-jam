@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://drygv0g3n8240"]
+
+[ext_resource type="FontFile" uid="uid://bpdcujuxs4kq2" path="res://Menus/Assets/font.otf" id="1_y4bsl"]
+
+[resource]
+default_font = ExtResource("1_y4bsl")
+Label/colors/font_color = Color(1, 1, 1, 1)

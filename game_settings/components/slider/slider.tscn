@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ds06mwhee8ygm"]
+
+[ext_resource type="Script" uid="uid://kj08fuggbmg7" path="res://game_settings/components/slider/slider.gd" id="1_4rmgf"]
+
+[node name="Slider" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+script = ExtResource("1_4rmgf")
+
+[node name="Slider" type="HSlider" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
