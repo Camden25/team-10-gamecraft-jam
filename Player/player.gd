@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-@export var move_speed = 500
+@export var move_speed = 50000
 var move_dir = Vector2()
 
 @export var knockback_multiplier = 1
@@ -13,6 +13,11 @@ func _ready() -> void:
 	add_to_group("player")
 
 func _process(delta):
+	var window_size = get_window().size  # Get current window size
+	var half_player_size = Vector2(10, 10)  # Adjust based on player sprite size/2
+
+	position.x = clamp(position.x, half_player_size.x, window_size.x - half_player_size.x)
+	position.y = clamp(position.y, half_player_size.y, window_size.y - half_player_size.y)
 	pass
 
 func _physics_process(delta):
@@ -21,7 +26,7 @@ func _physics_process(delta):
 
 	get_input()
 	
-	velocity = move_dir*move_speed + knockback*knockback_multiplier
+	velocity = (move_dir*move_speed + knockback*knockback_multiplier) * delta
 	
 	move_dir = Vector2(0, 0)
 	
