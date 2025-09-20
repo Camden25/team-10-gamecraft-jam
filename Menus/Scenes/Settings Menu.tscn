@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://fxoxl12k8pcv"]
+
+[ext_resource type="Script" uid="uid://bssep6sood7m0" path="res://Menus/Scripts/Settings Menu.gd" id="1_y6oma"]
+[ext_resource type="Theme" uid="uid://drygv0g3n8240" path="res://Menus/Assets/Label.tres" id="2_ceqh0"]
+[ext_resource type="Theme" uid="uid://ds2r3mfc2p217" path="res://Menus/Assets/Button.tres" id="3_b02dn"]
+[ext_resource type="FontFile" uid="uid://bl608iusnxo45" path="res://Menus/Assets/clean_font.otf" id="3_jmibg"]
+
+[node name="Settings Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y6oma")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.3
+theme = ExtResource("2_ceqh0")
+theme_override_fonts/font = ExtResource("3_jmibg")
+theme_override_font_sizes/font_size = 128
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.3
+anchor_right = 1.0
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ControlsButton" type="Button" parent="HBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("3_b02dn")
+theme_override_font_sizes/font_size = 64
+text = "Controls"
+
+[node name="VideoButton" type="Button" parent="HBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("3_b02dn")
+theme_override_font_sizes/font_size = 64
+text = "Video"
+
+[node name="AudioButton" type="Button" parent="HBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("3_b02dn")
+theme_override_font_sizes/font_size = 64
+text = "Audio"
+
+[node name="Spacer" type="Control" parent="HBoxContainer/Buttons"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="HBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("3_b02dn")
+theme_override_font_sizes/font_size = 96
+text = "Back"
+
+[connection signal="pressed" from="HBoxContainer/Buttons/ControlsButton" to="." method="_on_controls_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Buttons/VideoButton" to="." method="_on_video_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Buttons/AudioButton" to="." method="_on_audio_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Buttons/BackButton" to="." method="_on_back_button_pressed"]

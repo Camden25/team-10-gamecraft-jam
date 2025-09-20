@@ -1,0 +1,245 @@
+[gd_resource type="Resource" script_class="ggsPluginData" load_steps=33 format=3 uid="uid://dpk53al471l8m"]
+
+[ext_resource type="Script" uid="uid://birymfi48wcyo" path="res://addons/ggs/classes/resources/ggs_category.gd" id="1_67lyf"]
+[ext_resource type="Script" uid="uid://cqxlefcxxbgxe" path="res://addons/ggs/classes/resources/ggs_setting.gd" id="1_hhj5u"]
+[ext_resource type="Script" uid="uid://2kg3cwgl5wm6" path="res://addons/ggs/classes/resources/ggs_plugin_data.gd" id="1_wabe0"]
+[ext_resource type="Texture2D" uid="uid://dbtn4d6130bdj" path="res://addons/ggs/assets/game_settings/audio_mute.svg" id="3_hh7i7"]
+[ext_resource type="Script" uid="uid://bxeci8lhwmvhu" path="res://game_settings/settings/audio_mute.gd" id="4_277qr"]
+[ext_resource type="Texture2D" uid="uid://buotak2dk5n0x" path="res://addons/ggs/assets/game_settings/audio_volume.svg" id="5_8w5wq"]
+[ext_resource type="Script" uid="uid://cfspnul66ypkk" path="res://game_settings/settings/audio_volume.gd" id="6_v8q61"]
+[ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="7_v54uy"]
+[ext_resource type="Script" uid="uid://hideg8jkwymx" path="res://game_settings/settings/display_fullscreen.gd" id="8_kbi3p"]
+[ext_resource type="Texture2D" uid="uid://dimhb46k7ud10" path="res://addons/ggs/assets/game_settings/display_scale.svg" id="9_4s8tg"]
+[ext_resource type="Script" uid="uid://c5ynhe88eheqy" path="res://game_settings/settings/display_scale.gd" id="10_uivmb"]
+[ext_resource type="Texture2D" uid="uid://dlvhau28nu82n" path="res://addons/ggs/assets/game_settings/display_size.svg" id="11_tkiv4"]
+[ext_resource type="Script" uid="uid://bry370ndcddj3" path="res://game_settings/settings/display_size.gd" id="12_7hen0"]
+[ext_resource type="Texture2D" uid="uid://c4vunn2rkqj83" path="res://addons/ggs/assets/game_settings/input_setting.svg" id="13_3p5ra"]
+[ext_resource type="Script" uid="uid://dxpqjtyq60otq" path="res://game_settings/settings/input.gd" id="14_f8sob"]
+
+[sub_resource type="Resource" id="Resource_ojsf3"]
+resource_name = "Master Volume"
+script = ExtResource("6_v8q61")
+bus_name = "Master"
+current = 80.0
+default = 80.0
+name = "Master Volume"
+category = "Audio Menu"
+icon = ExtResource("5_8w5wq")
+desc = "Change volume of a specific audio bus."
+value_type = 3
+value_hint = 1
+value_hint_string = "0,100"
+
+[sub_resource type="Resource" id="Resource_1db5a"]
+resource_name = "Music Volume"
+script = ExtResource("6_v8q61")
+bus_name = "Music"
+current = 80.0
+default = 80.0
+name = "Music Volume"
+category = "Master Volume"
+icon = ExtResource("5_8w5wq")
+desc = "Change volume of a specific audio bus."
+value_type = 3
+value_hint = 1
+value_hint_string = "0,100"
+
+[sub_resource type="Resource" id="Resource_yaft1"]
+resource_name = "SFX Volume"
+script = ExtResource("6_v8q61")
+bus_name = "SFX"
+current = 80.0
+default = 80.0
+name = "SFX Volume"
+category = "Audio Menu"
+icon = ExtResource("5_8w5wq")
+desc = "Change volume of a specific audio bus."
+value_type = 3
+value_hint = 1
+value_hint_string = "0,100"
+
+[sub_resource type="Resource" id="Resource_i6o3k"]
+resource_name = "Audio Menu"
+script = ExtResource("1_67lyf")
+name = "Audio Menu"
+settings = {
+"Master Volume": SubResource("Resource_ojsf3"),
+"SFX Volume": SubResource("Resource_yaft1")
+}
+item_order = Array[ExtResource("1_hhj5u")]([SubResource("Resource_ojsf3"), SubResource("Resource_1db5a"), SubResource("Resource_yaft1")])
+
+[sub_resource type="Resource" id="Resource_bsu7c"]
+resource_name = "call"
+script = ExtResource("14_f8sob")
+action = "call"
+current = "Shift"
+default = "Shift"
+name = "call"
+category = "Controls Menu"
+icon = ExtResource("13_3p5ra")
+desc = "Rebind keyboard or gamepad input of a specific input action."
+value_type = 4
+value_hint = 0
+value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_ngrac"]
+resource_name = "use item"
+script = ExtResource("14_f8sob")
+action = "use_item"
+current = "E"
+default = "E"
+name = "use item"
+category = "Controls Menu"
+icon = ExtResource("13_3p5ra")
+desc = "Rebind keyboard or gamepad input of a specific input action."
+value_type = 4
+value_hint = 0
+value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_jp52p"]
+resource_name = "Controls Menu"
+script = ExtResource("1_67lyf")
+name = "Controls Menu"
+settings = {
+"call": SubResource("Resource_bsu7c"),
+"use item": SubResource("Resource_ngrac")
+}
+item_order = Array[ExtResource("1_hhj5u")]([SubResource("Resource_bsu7c"), SubResource("Resource_ngrac")])
+
+[sub_resource type="Resource" id="Resource_4sxjw"]
+resource_name = "Video Menu"
+script = ExtResource("1_67lyf")
+name = "Video Menu"
+settings = {}
+item_order = Array[ExtResource("1_hhj5u")]([])
+
+[sub_resource type="Resource" id="Resource_gp5n2"]
+resource_name = "Master Volume"
+script = ExtResource("6_v8q61")
+bus_name = "[NONE]"
+current = 80.0
+default = 80.0
+name = "Master Volume"
+category = "Master Volume"
+icon = ExtResource("5_8w5wq")
+desc = "Change volume of a specific audio bus."
+value_type = 3
+value_hint = 1
+value_hint_string = "0,100"
+
+[sub_resource type="Resource" id="Resource_ihbdb"]
+resource_name = "Music Volume"
+script = ExtResource("6_v8q61")
+bus_name = "Master"
+current = 80.0
+default = 80.0
+name = "Music Volume"
+category = "Master Volume"
+icon = ExtResource("5_8w5wq")
+desc = "Change volume of a specific audio bus."
+value_type = 3
+value_hint = 1
+value_hint_string = "0,100"
+
+[sub_resource type="Resource" id="Resource_s71oq"]
+resource_name = "Master Volume"
+script = ExtResource("1_67lyf")
+name = "Master Volume"
+settings = {
+"Master Volume": SubResource("Resource_gp5n2")
+}
+item_order = Array[ExtResource("1_hhj5u")]([SubResource("Resource_gp5n2"), SubResource("Resource_ihbdb")])
+
+[sub_resource type="Resource" id="Resource_rqhqg"]
+resource_name = "Input Binding"
+script = ExtResource("14_f8sob")
+current = ""
+default = ""
+name = "Input Binding"
+category = ""
+icon = ExtResource("13_3p5ra")
+desc = "Rebind keyboard or gamepad input of a specific input action."
+value_type = 4
+value_hint = 0
+value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_cjupv"]
+resource_name = "Window Size"
+script = ExtResource("12_7hen0")
+current = null
+default = null
+name = "Window Size"
+category = ""
+icon = ExtResource("11_tkiv4")
+desc = "Change window size by setting its width and height to specific values."
+value_type = 2
+value_hint = 2
+value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_4wxlm"]
+resource_name = "Fullscreen Mode"
+script = ExtResource("8_kbi3p")
+current = false
+default = false
+name = "Fullscreen Mode"
+category = ""
+icon = ExtResource("7_v54uy")
+desc = "Toggle Fullscreen mode."
+value_type = 1
+value_hint = 0
+value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_t73r3"]
+resource_name = "Audio Volume"
+script = ExtResource("6_v8q61")
+current = 80.0
+default = 80.0
+name = "Audio Volume"
+category = ""
+icon = ExtResource("5_8w5wq")
+desc = "Change volume of a specific audio bus."
+value_type = 3
+value_hint = 1
+value_hint_string = "0,100"
+
+[sub_resource type="Resource" id="Resource_slamx"]
+resource_name = "Audio Mute"
+script = ExtResource("4_277qr")
+current = false
+default = false
+name = "Audio Mute"
+category = ""
+icon = ExtResource("3_hh7i7")
+desc = "Toggle mute state of a specific audio bus."
+value_type = 1
+value_hint = 0
+value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_kjorw"]
+resource_name = "Window Scale"
+script = ExtResource("10_uivmb")
+current = null
+default = null
+name = "Window Scale"
+category = ""
+icon = ExtResource("9_4s8tg")
+desc = "Change window size by multiplying its width and height by a specific value."
+value_type = 2
+value_hint = 2
+value_hint_string = ""
+
+[resource]
+script = ExtResource("1_wabe0")
+categories = {
+"Audio Menu": SubResource("Resource_i6o3k"),
+"Controls Menu": SubResource("Resource_jp52p"),
+"Video Menu": SubResource("Resource_4sxjw")
+}
+category_order = Array[ExtResource("1_67lyf")]([SubResource("Resource_s71oq"), SubResource("Resource_4sxjw"), SubResource("Resource_jp52p")])
+recent_settings = Array[ExtResource("1_hhj5u")]([SubResource("Resource_rqhqg"), SubResource("Resource_cjupv"), SubResource("Resource_4wxlm"), SubResource("Resource_t73r3")])
+setting_list_cache = Array[ExtResource("1_hhj5u")]([SubResource("Resource_slamx"), SubResource("Resource_t73r3"), SubResource("Resource_4wxlm"), SubResource("Resource_kjorw"), SubResource("Resource_cjupv"), SubResource("Resource_rqhqg")])
+dir_settings = "res://game_settings/settings"
+dir_components = "res://game_settings/components"
+dir_save_file = "user://settings.cfg"
+split_offset_0 = -225
+split_offset_1 = 420

@@ -11,9 +11,9 @@ func _ready() -> void:
 	current_scene = menu_manager_instance
 
 
-func _process(delta: float) -> void:
-	if SaveSystem.current_save != 0 and SaveSystem.current_save != null:
-		CurrentSaveData.playtime += delta
+#func _process(delta: float) -> void:
+	#if SaveSystem.current_save != 0 and SaveSystem.current_save != null:
+		#CurrentSaveData.playtime += delta
 
 
 func swap_scene(new_scene: PackedScene) -> void:

@@ -1,0 +1,175 @@
+[gd_scene load_steps=11 format=3 uid="uid://csdolkerip4lt"]
+
+[ext_resource type="PackedScene" uid="uid://ds06mwhee8ygm" path="res://game_settings/components/slider/slider.tscn" id="1_p1m33"]
+[ext_resource type="Script" uid="uid://cocdc4b46w4f2" path="res://Menus/Scripts/Audio Menu.gd" id="1_r1l6g"]
+[ext_resource type="FontFile" uid="uid://bl608iusnxo45" path="res://Menus/Assets/clean_font.otf" id="2_f4p2p"]
+[ext_resource type="Theme" uid="uid://drygv0g3n8240" path="res://Menus/Assets/Label.tres" id="2_r348k"]
+[ext_resource type="Texture2D" uid="uid://buotak2dk5n0x" path="res://addons/ggs/assets/game_settings/audio_volume.svg" id="5_ageau"]
+[ext_resource type="Script" uid="uid://cfspnul66ypkk" path="res://game_settings/settings/audio_volume.gd" id="6_2t246"]
+[ext_resource type="Theme" uid="uid://ds2r3mfc2p217" path="res://Menus/Assets/Button.tres" id="6_jowvk"]
+
+[sub_resource type="Resource" id="Resource_ojsf3"]
+resource_name = "Master Volume"
+script = ExtResource("6_2t246")
+bus_name = "Master"
+current = 0.0
+default = 80.0
+name = "Master Volume"
+category = "Audio Menu"
+icon = ExtResource("5_ageau")
+desc = "Change volume of a specific audio bus."
+value_type = 3
+value_hint = 1
+value_hint_string = "0,100"
+
+[sub_resource type="Resource" id="Resource_1db5a"]
+resource_name = "Music Volume"
+script = ExtResource("6_2t246")
+bus_name = "Music"
+current = 80.0
+default = 80.0
+name = "Music Volume"
+category = "Master Volume"
+icon = ExtResource("5_ageau")
+desc = "Change volume of a specific audio bus."
+value_type = 3
+value_hint = 1
+value_hint_string = "0,100"
+
+[sub_resource type="Resource" id="Resource_yaft1"]
+resource_name = "SFX Volume"
+script = ExtResource("6_2t246")
+bus_name = "SFX"
+current = 80.0
+default = 80.0
+name = "SFX Volume"
+category = "Audio Menu"
+icon = ExtResource("5_ageau")
+desc = "Change volume of a specific audio bus."
+value_type = 3
+value_hint = 1
+value_hint_string = "0,100"
+
+[node name="Audio Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r1l6g")
+
+[node name="AudioSettings" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.3
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_r348k")
+theme_override_fonts/font = ExtResource("2_f4p2p")
+theme_override_font_sizes/font_size = 128
+text = "Audio Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.5
+offset_top = -267.0
+offset_right = 168.5
+offset_bottom = 267.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="MasterVolume" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_r348k")
+theme_override_font_sizes/font_size = 48
+text = "Master Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MasterSlider" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_p1m33")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+setting = SubResource("Resource_ojsf3")
+apply_on_change = true
+
+[node name="Slider" parent="HBoxContainer/VBoxContainer/MasterSlider" index="0"]
+size_flags_horizontal = 5
+
+[node name="Spacer3" type="Control" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+
+[node name="MusicVolume" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_r348k")
+theme_override_font_sizes/font_size = 48
+text = "Music Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MusicSlider" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_p1m33")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+setting = SubResource("Resource_1db5a")
+apply_on_change = true
+
+[node name="Spacer4" type="Control" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+
+[node name="SFXVolume" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_r348k")
+theme_override_font_sizes/font_size = 48
+text = "SFX Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SFXSlider" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_p1m33")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+setting = SubResource("Resource_yaft1")
+apply_on_change = true
+
+[node name="Spacer5" type="Control" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("6_jowvk")
+theme_override_font_sizes/font_size = 48
+text = "Back"
+
+[node name="Spacer6" type="Control" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+
+[editable path="HBoxContainer/VBoxContainer/MasterSlider"]
+[editable path="HBoxContainer/VBoxContainer/MusicSlider"]
+[editable path="HBoxContainer/VBoxContainer/SFXSlider"]
