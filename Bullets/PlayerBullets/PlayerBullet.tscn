@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://b32s3p07s10u1"]
+
+[ext_resource type="Script" uid="uid://dktjxvadpwov6" path="res://Bullets/PlayerBullets/PlayerBullet.gd" id="1_13dxf"]
+[ext_resource type="PackedScene" uid="uid://c6whdu2xhehkh" path="res://Misc/Hitbox.tscn" id="2_3tmdv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_13dxf"]
+
+[node name="PlayerBullet" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_13dxf")
+move_speed = 2500
+target_physics_layer = 6
+metadata/_custom_type_script = "uid://k1by3k57gr2r"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_13dxf")
+
+[node name="Hitbox" parent="." instance=ExtResource("2_3tmdv")]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_13dxf")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0

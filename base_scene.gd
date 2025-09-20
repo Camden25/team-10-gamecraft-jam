@@ -7,6 +7,8 @@ class_name BaseScene
 @onready var color_layer_scene: PackedScene = load("res://Paint/Scenes/PaintLayer.tscn")
 
 func _ready() -> void:
+	add_to_group("world")
+	
 	add_child(color_layer_scene.instantiate())
 	add_child(player_scene.instantiate())
 
