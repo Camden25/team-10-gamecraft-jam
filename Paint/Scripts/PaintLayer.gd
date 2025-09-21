@@ -27,14 +27,14 @@ var tile_array: Array[Vector2i] = []
 func _ready() -> void:
 	add_to_group("paint_layer")
 	
-	await get_tree().create_timer(1).timeout
-	
-	paint_cell(Vector2(60, 33), "magenta")
-
-	paint_circle_world(Vector2(300, 300), colors[1], 5)
-
-	paint_square_world(Vector2(500, 700), colors[3], 8)
-	paint_square_world(Vector2(600, 800), colors[5], 8)
+	#await get_tree().create_timer(1).timeout
+	#
+	#paint_cell(Vector2(60, 33), "magenta")
+#
+	#paint_circle_world(Vector2(300, 300), colors[1], 5)
+#
+	#paint_square_world(Vector2(500, 700), colors[3], 8)
+	#paint_square_world(Vector2(600, 800), colors[5], 8)
 	
 func paint_cell(cell: Vector2i, color: String) -> void:
 	var current_cell_color := get_color_at_cell(cell)

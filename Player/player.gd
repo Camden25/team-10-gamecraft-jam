@@ -7,6 +7,8 @@ var move_dir := Vector2()
 @export var knockback_multiplier = 1
 var knockback := Vector2()
 
+@export var damage_invincibility_duration: float = 0.5
+
 var ability_movement := Vector2()
 
 var disabled := false
@@ -19,11 +21,21 @@ var can_take_color_damage := true
 
 var paint_layer: PaintLayer # IF WE DELETE PAINT LAYERS AND REPLACE THEM, CHANGE ME LATER
 
+var prev_x_dir: int = 1
+
+@export_category("Damage Flash")
+@export var flash_color: Color = Color.WHITE
+@export var flash_duration: float = 0.1
+@export var flash_count: int = 3  # Number of flashes
+
 func _init() -> void:
 	super._init()
 	add_to_group("player")
 
 func _ready() -> void:
+	var hurtbox = $Hurtbox
+	hurtbox.connect("hurt", Callable(self, "_on_hurt"))
+	
 	$ColorDamageTimer.wait_time = 0.1
 	$ColorDamageTimer.one_shot = true 
 	$ColorDamageTimer.connect("timeout", Callable(self, "_on_timer_timeout"))
@@ -34,10 +46,10 @@ func _process(_delta) -> void:
 	# Handling for stopping the player going out of the window
 	var window_size = get_window().size  # Get current window size
 	var half_player_size = Vector2(64, 64)
-
+	
 	position.x = clamp(position.x, half_player_size.x, window_size.x - half_player_size.x)
 	position.y = clamp(position.y, half_player_size.y, window_size.y - half_player_size.y)
-
+	
 	# Color handling
 	if can_take_color_damage:
 		var color_string := paint_layer.get_color_at_world(position)
@@ -61,6 +73,11 @@ func _physics_process(delta) -> void:
 		move_dir = Vector2(0, 0)
 	
 	velocity = (move_dir*move_speed + knockback*knockback_multiplier + ability_movement) * delta
+	
+	if move_dir.x != 0 and sign(move_dir.x) != sign(prev_x_dir):
+		sprite_flip()
+	@warning_ignore("incompatible_ternary")
+	prev_x_dir = move_dir.x if move_dir.x != 0 else prev_x_dir
 	
 	move_dir = Vector2(0, 0)
 	ability_movement = Vector2(0, 0)
@@ -112,5 +129,29 @@ func next_color() -> void:
 	set_color_visual()
 
 func set_color_visual() -> void:
-	$Sprite2D.material.set_shader_parameter("color1_replacement", Color(paint_layer.color_list[paint_layer.colors[color_index]][0]))
-	$Sprite2D.material.set_shader_parameter("color2_replacement", Color(paint_layer.color_list[paint_layer.colors[color_index]][1]))
+	$SpriteFlipping/Sprite2D.material.set_shader_parameter("color1_replacement", Color(paint_layer.color_list[paint_layer.colors[color_index]][0]))
+	$SpriteFlipping/Sprite2D.material.set_shader_parameter("color2_replacement", Color(paint_layer.color_list[paint_layer.colors[color_index]][1]))
+
+func sprite_flip():
+	var tween = create_tween()
+	tween.tween_property($SpriteFlipping, "scale", Vector2(sign(move_dir).x, 1), 0.1)
+
+func _on_hurt(damage: int, source: Node) -> void:
+	modify_health(-damage)
+	print("Ouch! Took", damage, "damage from", source)
+	$Hurtbox/CollisionShape2D.disabled = true
+	flash_sprite_multiple(flash_count)
+	await get_tree().create_timer(damage_invincibility_duration).timeout
+	$Hurtbox/CollisionShape2D.disabled = false
+
+func flash_sprite_multiple(times: int) -> void:
+	var tween = create_tween()
+	
+	# Start from the current modulate
+	var normal_color = Color(1, 1, 1, 1)
+	var color_toggle = true
+	
+	for i in range(times * 2):  # Multiply by 2 because each flash has on and off
+		var target_color = flash_color if color_toggle else normal_color
+		tween.tween_property($SpriteFlipping/Sprite2D, "modulate", target_color, flash_duration).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+		color_toggle = !color_toggle

@@ -22,7 +22,7 @@ func attack():
 			var y_coord = randi_range(0, window_size.y)
 			start_pos = Vector2(0, y_coord)
 			end_pos = Vector2(window_size.x, y_coord)
-
+		
 		var attack_instance: BossBullet = attack_scene.instantiate()
 		attack_instance.damage = damage
 		attack_instance.global_position = start_pos
@@ -32,7 +32,8 @@ func attack():
 		
 		# change this line
 		get_tree().get_nodes_in_group("world")[0].add_child(attack_instance)
+		
+		await get_tree().create_timer(0.1).timeout
 
 	await get_tree().create_timer(1).timeout
 	end_attack()
-

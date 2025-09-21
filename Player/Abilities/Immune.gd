@@ -8,7 +8,7 @@ extends Ability
 
 var is_immune := false
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("immune") and !is_immune and !player.disabled:
 		start_immune()
 

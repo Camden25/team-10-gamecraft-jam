@@ -12,16 +12,15 @@ func _ready() -> void:
 	
 	add_child(color_layer_scene.instantiate())
 	add_child(player_scene.instantiate())
-
+	
 	var boss_instance: Boss = boss_scene.instantiate()
 	add_child(boss_instance)
 	boss_instance.position = Vector2(1000, 500)
-
-	var pillar_instance: Pillar = pillar_scene.instantiate()
-	add_child(pillar_instance)
-	pillar_instance.global_position = Vector2(500, 500)
-
-	pillar_instance = pillar_scene.instantiate()
-	add_child(pillar_instance)
-	pillar_instance.global_position = Vector2(500, 800)
-
+	
+	#var pillar_instance: Pillar = pillar_scene.instantiate()
+	#add_child(pillar_instance)
+	#pillar_instance.global_position = Vector2(500, 500)
+	
+	#pillar_instance = pillar_scene.instantiate()
+	#add_child(pillar_instance)
+	#pillar_instance.global_position = Vector2(500, 800)

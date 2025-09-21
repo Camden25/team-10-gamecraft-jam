@@ -24,4 +24,3 @@ func attack():
 
 	await get_tree().create_timer(1).timeout
 	end_attack()
-
