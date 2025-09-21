@@ -8,7 +8,7 @@ var can_attack = true
 @onready var attack_scene = preload("res://Bullets/PlayerBullets/PlayerBullet.tscn")
 
 func _process(_delta):
-	if Input.is_action_just_pressed("attack_1") and can_attack and player.disabled == false:
+	if Input.is_action_pressed("attack_1") and can_attack and player.disabled == false:
 		attack()
 
 func attack():

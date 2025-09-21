@@ -20,8 +20,8 @@ func attack():
 		var laser1_color := boss.get_random_color()
 		var laser2_color := boss.get_random_color()
 
-		var laser1_hits := paint_layer.paint_line_world(Vector2(x_coord, 0), Vector2(x_coord, window_size.y), laser1_color, beam_thickness)
-		var laser2_hits := paint_layer.paint_line_world(Vector2(0, y_coord), Vector2(window_size.x, y_coord), laser2_color, beam_thickness)
+		var laser1_hits := paint_layer.paint_line_world(Vector2(x_coord, 0), Vector2(x_coord, window_size.y), laser1_color, beam_thickness, false, true)
+		var laser2_hits := paint_layer.paint_line_world(Vector2(0, y_coord), Vector2(window_size.x, y_coord), laser2_color, beam_thickness, false, true)
 
 		var player_hit_laser1 := false
 		var player_hit_laser2 := false

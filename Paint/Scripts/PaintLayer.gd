@@ -69,10 +69,13 @@ func paint_square_world(world_pos: Vector2, color: String, radius: int) -> Array
 		paint_cell(cell2, color)
 	return points
 
-func paint_line_world(start_pos: Vector2, end_pos: Vector2, color: String, radius: float, ignore_pillars: bool = false) -> Array[Vector2i]:
+func paint_line_world(start_pos: Vector2, end_pos: Vector2, color: String, radius: float, ignore_pillars: bool = false, ignore_boss: bool = false) -> Array[Vector2i]:
 	var points := get_points_in_line(local_to_map(start_pos), local_to_map(end_pos))
 	for cell: Vector2i in points:
 		if !ignore_pillars and are_pillars_in_range(map_to_local(cell), 16):
+			break
+
+		if !ignore_boss and is_boss_in_range(map_to_local(cell), 16):
 			break
 
 		if radius > 1:
@@ -85,6 +88,12 @@ func paint_line_world(start_pos: Vector2, end_pos: Vector2, color: String, radiu
 func are_pillars_in_range(target_pos: Vector2, pillar_range: float) -> bool:
 	for pillar in get_tree().get_nodes_in_group("pillar"):
 		if pillar.global_position.distance_to(target_pos) <= pillar_range:
+			return true
+	return false
+
+func is_boss_in_range(target_pos: Vector2, boss_range: float) -> bool:
+	for boss in get_tree().get_nodes_in_group("boss"):
+		if boss.global_position.distance_to(target_pos) <= boss_range:
 			return true
 	return false
 

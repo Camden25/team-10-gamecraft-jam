@@ -4,8 +4,8 @@
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_mcjtl"]
 [ext_resource type="Texture2D" uid="uid://b15bgluyb6ej4" path="res://Bosses/Boss1/boss1Sheet.png" id="3_sx76g"]
 [ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="4_0fu4o"]
-[ext_resource type="Script" uid="uid://bm4cmv2k7jcjn" path="res://Misc/Hitbox.gd" id="4_witpy"]
-[ext_resource type="Script" uid="uid://cwwrp1aprqdwl" path="res://Misc/Hurtbox.gd" id="5_7sv58"]
+[ext_resource type="Script" path="res://Misc/Hitbox.gd" id="4_witpy"]
+[ext_resource type="Script" path="res://Misc/Hurtbox.gd" id="5_7sv58"]
 [ext_resource type="Script" uid="uid://dv7uc4rhw23jb" path="res://Bosses/Scripts/Charge.gd" id="5_witpy"]
 [ext_resource type="Script" uid="uid://12wpdoptt4tg" path="res://Bosses/Scripts/ProjectileRain.gd" id="6_7sv58"]
 
@@ -391,7 +391,6 @@ shape = SubResource("RectangleShape2D_kdas0")
 collision_layer = 0
 collision_mask = 32
 script = ExtResource("4_witpy")
-metadata/_custom_type_script = "uid://bm4cmv2k7jcjn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(12.999844, -35.000057)
@@ -401,7 +400,6 @@ shape = SubResource("CircleShape2D_6o73a")
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("5_7sv58")
-metadata/_custom_type_script = "uid://cwwrp1aprqdwl"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(1.999857, -32.00001)
@@ -430,6 +428,8 @@ avoid_previous_attack = false
 
 [node name="Charge" type="Node2D" parent="Phases/1"]
 script = ExtResource("5_witpy")
+charge_speed = 2200.0
+charge_distance = 800.0
 should_rotate = false
 projectile_color = "magenta"
 trail_radius = 4.0

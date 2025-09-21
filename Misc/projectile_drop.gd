@@ -35,8 +35,8 @@ func _process(delta: float) -> void:
 			on_land()
 
 func on_land():
+	paint_layer.paint_circle_world(Vector2(global_position.x, global_position.y + 55), _color, splash_size)
 	queue_free()
-	paint_layer.paint_circle_world(global_position, _color, splash_size)
 
 func set_color(new_color: String) -> void:
 	_color = new_color

@@ -27,7 +27,7 @@ func attack():
 		player.modify_health(-splash_damage / (2 if color_to_use == paint_layer.colors[player.color_index] else 1))
 
 	for direction in direction_array:
-		var hit_tiles := paint_layer.paint_line_world(pillar_to_use.global_position, get_position_at_distance(pillar_to_use.global_position, direction, beam_length), color_to_use, beam_radius, true)
+		var hit_tiles := paint_layer.paint_line_world(pillar_to_use.global_position, get_position_at_distance(pillar_to_use.global_position, direction, beam_length), color_to_use, beam_radius, true, true)
 		if !player_hit and (player_cell in hit_tiles):
 			@warning_ignore("integer_division")
 			player.modify_health(-impact_damage / (2 if color_to_use == paint_layer.colors[player.color_index] else 1))
