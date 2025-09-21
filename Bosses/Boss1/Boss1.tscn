@@ -1,11 +1,12 @@
-[gd_scene load_steps=32 format=3 uid="uid://bt5dpvdtoubl6"]
+[gd_scene load_steps=33 format=3 uid="uid://bt5dpvdtoubl6"]
 
 [ext_resource type="Script" uid="uid://cd35g4rm086fx" path="res://Bosses/Scripts/Boss.gd" id="1_nqna2"]
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_mcjtl"]
+[ext_resource type="Texture2D" uid="uid://c3yura5j7772k" path="res://Misc/Assets/dropShadow512.png" id="2_witpy"]
 [ext_resource type="Texture2D" uid="uid://b15bgluyb6ej4" path="res://Bosses/Boss1/boss1Sheet.png" id="3_sx76g"]
 [ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="4_0fu4o"]
-[ext_resource type="Script" path="res://Misc/Hitbox.gd" id="4_witpy"]
-[ext_resource type="Script" path="res://Misc/Hurtbox.gd" id="5_7sv58"]
+[ext_resource type="Script" uid="uid://bm4cmv2k7jcjn" path="res://Misc/Hitbox.gd" id="4_witpy"]
+[ext_resource type="Script" uid="uid://cwwrp1aprqdwl" path="res://Misc/Hurtbox.gd" id="5_7sv58"]
 [ext_resource type="Script" uid="uid://dv7uc4rhw23jb" path="res://Bosses/Scripts/Charge.gd" id="5_witpy"]
 [ext_resource type="Script" uid="uid://12wpdoptt4tg" path="res://Bosses/Scripts/ProjectileRain.gd" id="6_7sv58"]
 
@@ -398,6 +399,7 @@ y_sort_enabled = true
 rotation = 6.28319
 collision_layer = 4
 script = ExtResource("1_nqna2")
+boss_name = "Slugger"
 colors = 4
 flip_sprite = true
 sprite_starts_flipped = true
@@ -405,6 +407,11 @@ metadata/_custom_type_script = "uid://cd35g4rm086fx"
 
 [node name="SpriteFlipping" type="Node2D" parent="."]
 position = Vector2(-0.0002858483, -64)
+
+[node name="Sprite2D2" type="Sprite2D" parent="SpriteFlipping"]
+position = Vector2(-5.0013714, -306.99997)
+scale = Vector2(2, 2)
+texture = ExtResource("2_witpy")
 
 [node name="Sprite2D" type="Sprite2D" parent="SpriteFlipping"]
 material = SubResource("ShaderMaterial_6o73a")

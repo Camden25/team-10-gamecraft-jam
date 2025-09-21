@@ -13,11 +13,15 @@ var paint_layer: PaintLayer
 var splash_size: float = 1
 var initial_wait: float = 0
 
+var impact_damage: int
 
 func _ready() -> void:
 	animate_drop()
 	await get_tree().create_timer(initial_wait).timeout
 	falling = true
+	$Hitbox.monitoring = false
+	$Hitbox.damage = impact_damage
+	
 
 func animate_drop():
 	original_y = $DropSprite.position.y
@@ -35,7 +39,9 @@ func _process(delta: float) -> void:
 			on_land()
 
 func on_land():
+	$Hitbox.monitoring = true
 	paint_layer.paint_circle_world(Vector2(global_position.x, global_position.y + 55), _color, splash_size)
+	await get_tree().create_timer(0.05).timeout
 	queue_free()
 
 func set_color(new_color: String) -> void:
