@@ -1,23 +1,25 @@
-[gd_scene load_steps=33 format=3 uid="uid://bt5dpvdtoubl6"]
+[gd_scene load_steps=34 format=3 uid="uid://cqi7y3ap7t2xc"]
 
-[ext_resource type="Script" uid="uid://cd35g4rm086fx" path="res://Bosses/Scripts/Boss.gd" id="1_nqna2"]
-[ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_mcjtl"]
-[ext_resource type="Texture2D" uid="uid://c3yura5j7772k" path="res://Misc/Assets/dropShadow512.png" id="2_witpy"]
-[ext_resource type="Texture2D" uid="uid://b15bgluyb6ej4" path="res://Bosses/Boss1/boss1Sheet.png" id="3_sx76g"]
-[ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="4_0fu4o"]
-[ext_resource type="Script" uid="uid://bm4cmv2k7jcjn" path="res://Misc/Hitbox.gd" id="4_witpy"]
-[ext_resource type="Script" uid="uid://cwwrp1aprqdwl" path="res://Misc/Hurtbox.gd" id="5_7sv58"]
-[ext_resource type="Script" uid="uid://dv7uc4rhw23jb" path="res://Bosses/Scripts/Charge.gd" id="5_witpy"]
-[ext_resource type="Script" uid="uid://12wpdoptt4tg" path="res://Bosses/Scripts/ProjectileRain.gd" id="6_7sv58"]
+[ext_resource type="Script" uid="uid://cd35g4rm086fx" path="res://Bosses/Scripts/Boss.gd" id="1_kp6de"]
+[ext_resource type="Texture2D" uid="uid://c3yura5j7772k" path="res://Misc/Assets/dropShadow512.png" id="2_klp4g"]
+[ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="3_8kce1"]
+[ext_resource type="Texture2D" uid="uid://cot8d01r4ek6x" path="res://Bosses/Boss3/spritesheet_Boss3.png" id="4_x1cgl"]
+[ext_resource type="Script" uid="uid://bm4cmv2k7jcjn" path="res://Misc/Hitbox.gd" id="5_1srpx"]
+[ext_resource type="Script" uid="uid://cwwrp1aprqdwl" path="res://Misc/Hurtbox.gd" id="6_f8lc8"]
+[ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="7_tvg0j"]
+[ext_resource type="Script" uid="uid://dv7uc4rhw23jb" path="res://Bosses/Scripts/Charge.gd" id="8_k5xo1"]
+[ext_resource type="Script" uid="uid://12wpdoptt4tg" path="res://Bosses/Scripts/ProjectileRain.gd" id="9_sb4lo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6o73a"]
-shader = ExtResource("2_mcjtl")
+shader = ExtResource("3_8kce1")
 shader_parameter/color1 = Color(1, 1, 1, 1)
 shader_parameter/color1_replacement = Color(1, 1, 1, 1)
 shader_parameter/color1_threshold = 0.499999988824
 shader_parameter/color2 = Color(0, 0, 0, 1)
 shader_parameter/color2_replacement = Color(0, 0, 0, 1)
 shader_parameter/color2_threshold = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="Gradient" id="Gradient_0fu4o"]
 offsets = PackedFloat32Array(0.48666668)
@@ -27,15 +29,20 @@ colors = PackedColorArray(1, 0, 1, 1)
 gradient = SubResource("Gradient_0fu4o")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_witpy"]
-radius = 147.99992
-height = 404.0
+radius = 20.0
+height = 78.00001
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6o73a"]
-radius = 146.01369
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x1cgl"]
+radius = 18.0
+height = 169.99997
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0fu4o"]
-radius = 162.0004
-height = 388.00006
+radius = 23.000013
+height = 211.99998
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_epr0c"]
+radius = 40.999992
+height = 184.00003
 
 [sub_resource type="Animation" id="Animation_mn7a3"]
 resource_name = "1"
@@ -394,13 +401,13 @@ _data = {
 &"Telegraph": SubResource("Animation_6o73a")
 }
 
-[node name="Boss2" type="CharacterBody2D"]
+[node name="Boss3" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
 rotation = 6.28319
 collision_layer = 4
-script = ExtResource("1_nqna2")
-boss_name = "Slugger"
+script = ExtResource("1_kp6de")
+boss_name = "Eraser Head"
 colors = 4
 flip_sprite = true
 sprite_starts_flipped = true
@@ -409,18 +416,19 @@ metadata/_custom_type_script = "uid://cd35g4rm086fx"
 [node name="SpriteFlipping" type="Node2D" parent="."]
 position = Vector2(-0.0002858483, -64)
 
-[node name="Sprite2D2" type="Sprite2D" parent="SpriteFlipping"]
-position = Vector2(-5.0013714, -306.99997)
-scale = Vector2(2, 2)
-texture = ExtResource("2_witpy")
+[node name="Shadow" type="Sprite2D" parent="SpriteFlipping"]
+position = Vector2(-1.000125, -27.999992)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_klp4g")
 
 [node name="Sprite2D" type="Sprite2D" parent="SpriteFlipping"]
 material = SubResource("ShaderMaterial_6o73a")
-position = Vector2(-0.0005582975, -125)
+position = Vector2(-0.00020991985, -47)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_sx76g")
+texture = ExtResource("4_x1cgl")
 flip_h = true
-hframes = 5
+hframes = 4
+vframes = 4
 frame = 3
 
 [node name="Bullet" type="Sprite2D" parent="SpriteFlipping"]
@@ -436,7 +444,7 @@ scale = Vector2(1, 1.6658175)
 texture = SubResource("GradientTexture2D_witpy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.9998168, -41.000008)
+position = Vector2(4.529953e-06, 1)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_witpy")
 
@@ -444,22 +452,26 @@ shape = SubResource("CapsuleShape2D_witpy")
 position = Vector2(-0.0002858483, -64)
 collision_layer = 16
 collision_mask = 32
-script = ExtResource("4_witpy")
+script = ExtResource("5_1srpx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(12.999844, -35.000057)
-shape = SubResource("CircleShape2D_6o73a")
+position = Vector2(-1.0000759, -16.999994)
+shape = SubResource("CapsuleShape2D_x1cgl")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 position = Vector2(-0.0002858483, -64)
 collision_layer = 64
 collision_mask = 0
-script = ExtResource("5_7sv58")
+script = ExtResource("6_f8lc8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(1.9998573, -39.000404)
-rotation = 1.5707964
+position = Vector2(-2.0001473, -32.99999)
 shape = SubResource("CapsuleShape2D_0fu4o")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-13.000446, -99.99994)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_epr0c")
 
 [node name="PhaseTransitions" type="AnimationPlayer" parent="."]
 libraries = {
@@ -475,7 +487,7 @@ libraries = {
 position = Vector2(-0.0002858483, -64)
 
 [node name="1" type="Node2D" parent="Phases" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("4_0fu4o")
+script = ExtResource("7_tvg0j")
 boss_path = NodePath("../..")
 animation_player = NodePath("../../Animations")
 phase_health = 2500
@@ -483,7 +495,7 @@ attack_cooldown = 1.5
 avoid_previous_attack = false
 
 [node name="Charge" type="Node2D" parent="Phases/1"]
-script = ExtResource("5_witpy")
+script = ExtResource("8_k5xo1")
 charge_speed = 2200.0
 charge_distance = 850.0
 should_rotate = false
@@ -498,7 +510,7 @@ libraries = {
 }
 
 [node name="ProjectileRain" type="Node2D" parent="Phases/1"]
-script = ExtResource("6_7sv58")
+script = ExtResource("9_sb4lo")
 projectile_count = 6
 top_left_limit = Vector2(320, 160)
 bottom_right_limit = Vector2(1620, 780)

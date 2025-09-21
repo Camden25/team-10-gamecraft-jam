@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvohoyvqqtraf"]
+[gd_scene load_steps=5 format=3 uid="uid://bvohoyvqqtraf"]
 
 [ext_resource type="Script" uid="uid://ciyjvbeaeftnx" path="res://UI/ui.gd" id="1_6dd3c"]
 [ext_resource type="FontFile" uid="uid://dqievavynfavi" path="res://UI/i eat crayons.ttf" id="2_dhe1o"]
+[ext_resource type="Texture2D" uid="uid://brjgw7d2vwi53" path="res://UI/spritesheet_abilityIcons.png" id="2_q0uhn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6dd3c"]
 bg_color = Color(0.078125, 0.078125, 0.078125, 1)
@@ -13,17 +14,112 @@ corner_radius_bottom_left = 10
 [node name="Ui" type="CanvasLayer"]
 script = ExtResource("1_6dd3c")
 
-[node name="PlayerHealthbar" type="Control" parent="."]
+[node name="Player" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
+[node name="PlayerHealthbar" type="Control" parent="Player"]
+anchors_preset = 0
+offset_left = 110.0
+offset_top = 40.0
+offset_right = 393.0
+offset_bottom = 80.0
+
+[node name="Background" type="Panel" parent="Player/PlayerHealthbar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6dd3c")
+
+[node name="Midground" type="ColorRect" parent="Player/PlayerHealthbar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2109375, 0, 0, 1)
+
+[node name="Health" type="ColorRect" parent="Player/PlayerHealthbar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5859375, 0, 0, 1)
+
+[node name="PlayerAbilityBar" type="Control" parent="Player"]
+anchors_preset = 0
+offset_left = 110.0
+offset_top = 73.0
+offset_right = 323.0
+offset_bottom = 113.0
+
+[node name="Background" type="Panel" parent="Player/PlayerAbilityBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6dd3c")
+
+[node name="Midground" type="ColorRect" parent="Player/PlayerAbilityBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2109375, 0, 0, 1)
+
+[node name="Ability" type="ColorRect" parent="Player/PlayerAbilityBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5859375, 0, 0, 1)
+
+[node name="PlayerShield" type="Control" parent="Player"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="PlayerAbility" type="Control" parent="Player"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Icon" type="Sprite2D" parent="Player/PlayerAbility"]
+position = Vector2(77, 77)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_q0uhn")
+hframes = 3
+vframes = 2
 
 [node name="BossHealthbar" type="Control" parent="."]
 layout_mode = 3

@@ -32,6 +32,7 @@ var prev_x_dir: int = 1
 @export var flash_count: int = 3  # Number of flashes
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var ui: UI = get_tree().get_first_node_in_group("ui")
 
 func _init() -> void:
 	super._init()
@@ -40,6 +41,9 @@ func _init() -> void:
 
 func _ready() -> void:
 	color_index = 7
+	
+	ui.player_max_health = get_max_health()
+	ui.player_health = get_health()
 	
 	$Hurtbox.connect("hurt", Callable(self, "_on_hurt"))
 	
@@ -120,12 +124,13 @@ func knockback_taken(area, knockback_amount) -> void:
 func modify_health(modify_amount: int) -> void:
 	if modify_amount < 0 and damage_immune > 0:
 		return
-
+	
 	super.modify_health(modify_amount)
+	
+	ui.player_health = get_health()
 
 func death_check() -> void:
 	super.death_check()
-	$HealthLabelTEMP.text = "%d" % get_health()
 
 func swap_color(new_color: String) -> void:
 	color_index = paint_layer.colors.find(new_color)
@@ -152,7 +157,7 @@ func _on_hurt(damage: int, source: Node) -> void:
 	modify_health(-damage)
 	print("Ouch! Took ", damage, "damage from ", source.get_parent().name)
 	$Hurtbox/CollisionShape2D.disabled = true
-	flash_sprite_multiple(flash_count)
+	$HitFlash.play("Hit")
 	await get_tree().create_timer(damage_invincibility_duration).timeout
 	$Hurtbox/CollisionShape2D.disabled = false
 

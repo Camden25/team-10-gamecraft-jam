@@ -134,6 +134,7 @@ y_sort_enabled = true
 rotation = 6.28319
 collision_layer = 4
 script = ExtResource("1_rsm42")
+boss_name = "Pizza Bug"
 colors = 20
 metadata/_custom_type_script = "uid://cd35g4rm086fx"
 
