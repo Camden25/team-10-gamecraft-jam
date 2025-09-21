@@ -41,4 +41,3 @@ func on_land():
 func set_color(new_color: String) -> void:
 	_color = new_color
 	$DropSprite.material.set_shader_parameter("color1_replacement", Color(paint_layer.color_list[_color][0]))
-	$DropSprite.material.set_shader_parameter("color2_replacement", Color(paint_layer.color_list[_color][1]))

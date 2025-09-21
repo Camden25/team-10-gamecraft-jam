@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://capao544mc8am"]
+[gd_scene load_steps=6 format=3 uid="uid://cgmy7d16qcc5p"]
 
-[ext_resource type="Script" uid="uid://bksa414ag7h4f" path="res://Misc/pillar.gd" id="1_t7gm3"]
+[ext_resource type="Script" path="res://Misc/pillar.gd" id="1_t7gm3"]
 [ext_resource type="Script" path="res://Misc/Hitbox.gd" id="2_hfdgy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aci8n"]
@@ -12,6 +12,7 @@ radius = 20.024984
 radius = 21.0
 
 [node name="Pillar" type="CharacterBody2D"]
+z_index = 5
 script = ExtResource("1_t7gm3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
