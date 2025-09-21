@@ -7,6 +7,7 @@ class_name BossAttack
 var phase: BossPhase
 var boss: Boss
 @onready var player: Player = get_tree().get_first_node_in_group("player")
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var is_attacking = false
 
@@ -24,6 +25,11 @@ func can_use() -> bool:
 
 func start_attack():
 	is_attacking = true
+	
+	animation_player.play("Telegraph")
+	await animation_player.animation_finished
+	animation_player.play("Attack")
+	
 	attack()
 
 func attack():
@@ -31,5 +37,7 @@ func attack():
 
 func end_attack():
 	is_attacking = false
+	animation_player.play("End")
+	await animation_player.animation_finished
 	phase.attack_complete()
 	boss.target_pos = null

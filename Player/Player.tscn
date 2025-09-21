@@ -1,12 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://b17mw5a7sl1uj"]
+[gd_scene load_steps=14 format=3 uid="uid://b17mw5a7sl1uj"]
 
 [ext_resource type="Script" uid="uid://cjomjfe3gexg6" path="res://Player/player.gd" id="1_3qydi"]
-[ext_resource type="Texture2D" uid="uid://cu6f65bmx4hy1" path="res://Player/Assets/PlayerCharacter512.png" id="2_q3lat"]
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_tok1r"]
+[ext_resource type="Texture2D" uid="uid://cg8rc5uaxhlio" path="res://Player/Assets/testBuckSheet.png" id="3_vlldt"]
 [ext_resource type="Script" uid="uid://etnsmxlou2wc" path="res://Player/Abilities/Dash.gd" id="4_ddoul"]
-[ext_resource type="Script" path="res://Player/Abilities/Immune.gd" id="5_8g4oa"]
-[ext_resource type="Script" path="res://Player/Abilities/Attack.gd" id="6_6ysni"]
-[ext_resource type="Script" path="res://Player/Abilities/ColorAbility.gd" id="7_vlldt"]
+[ext_resource type="Script" uid="uid://bwq0t6i57mow8" path="res://Player/Abilities/Immune.gd" id="5_8g4oa"]
+[ext_resource type="Script" uid="uid://c5v5cx2b4cbqr" path="res://Player/Abilities/Attack.gd" id="6_6ysni"]
+[ext_resource type="Script" uid="uid://bpxqbg4b3oxh4" path="res://Player/Abilities/ColorAbility.gd" id="7_vlldt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3qydi"]
 
@@ -14,12 +14,70 @@
 shader = ExtResource("2_tok1r")
 shader_parameter/color1 = Color(0.7647059, 0.7647059, 0.7764706, 1)
 shader_parameter/color1_replacement = Color(0.9424999, 0.31, 1, 1)
-shader_parameter/color1_threshold = 0.2999999932944
+shader_parameter/color1_threshold = 0.08999999798832
 shader_parameter/color2 = Color(0, 0, 0, 1)
 shader_parameter/color2_replacement = Color(0, 0, 0, 1)
 shader_parameter/color2_threshold = 0.0
 
+[sub_resource type="Animation" id="Animation_j23h2"]
+resource_name = "Idle"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_0j2ni"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_s1rgi"]
+resource_name = "Run"
+length = 0.6666834
+loop_mode = 1
+step = 0.16666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v0k0e"]
+_data = {
+&"Idle": SubResource("Animation_j23h2"),
+&"RESET": SubResource("Animation_0j2ni"),
+&"Run": SubResource("Animation_s1rgi")
+}
+
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_3qydi")
 
@@ -29,7 +87,10 @@ shape = SubResource("RectangleShape2D_3qydi")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ddoul")
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_q3lat")
+texture = ExtResource("3_vlldt")
+hframes = 3
+vframes = 2
+frame = 1
 
 [node name="ColorDamageTimer" type="Timer" parent="."]
 
@@ -40,6 +101,12 @@ offset_right = 25.0
 offset_bottom = 76.0
 text = "100"
 metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_v0k0e")
+}
+autoplay = "Run"
 
 [node name="Actions" type="Node2D" parent="."]
 

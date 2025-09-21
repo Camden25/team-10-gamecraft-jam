@@ -3,7 +3,7 @@ class_name BaseScene
 
 #@onready var scene_manager_scene: PackedScene = load("res://RootNodes/SceneManager.tscn")
 @onready var player_scene: PackedScene = load("res://Player/Player.tscn")
-@onready var boss_scene: PackedScene = load("res://Bosses/Scenes/Boss.tscn")
+@onready var boss_scene: PackedScene = load("res://Bosses/Boss1/Boss1.tscn")
 @onready var color_layer_scene: PackedScene = load("res://Paint/Scenes/PaintLayer.tscn")
 @onready var pillar_scene: PackedScene = load("res://Misc/Pillar.tscn")
 
@@ -24,3 +24,4 @@ func _ready() -> void:
 	pillar_instance = pillar_scene.instantiate()
 	add_child(pillar_instance)
 	pillar_instance.global_position = Vector2(500, 800)
+

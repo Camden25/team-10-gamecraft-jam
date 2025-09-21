@@ -21,20 +21,36 @@ var move_dir = Vector2()
 var knockback = Vector2()
 var ability_movement = Vector2()
 
-@export var colors: Array[String] = []
+@export_flags("cyan", "blue", "magenta", "red", "yellow", "green", "black") var colors
+enum color_list {cyan, blue, magenta, red, yellow, green, black}
+
+@export_group("Sprite Flipping")
+@export var flip_sprite: bool
+@export var sprite_starts_flipped: bool
+@export var flip_cooldown: float = 0.5
+@export var flip_threshold: float = 100
+var can_flip: bool = true
+
+@onready var player: Player = get_tree().get_first_node_in_group("player")
 
 func _ready():
+	var hurtbox = $Hurtbox
+	hurtbox.connect("hurt", Callable(self, "_on_hurt"))
+	
 	add_to_group("boss")
 	randomize()
 	waiting_for_new_phase = true
 
-func _process(delta):
+func _process(_delta):
 	if can_attack and waiting_for_new_phase == false:
 		active_phase.choose_attack()
 	if waiting_for_new_phase and attacking == false:
 		phase_transition(current_phase_num+1)
+	
+	if attacking == false:
+		sprite_flipping()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if target_pos != null:
 		move_dir = global_position.direction_to(target_pos)
 	else:
@@ -66,11 +82,31 @@ func death():
 	print("dead")
 	queue_free()
 
-func _on_hurtbox_area_entered(area):
-	pass
+func _on_hurt(damage: int, source: Node) -> void:
+	set_health(get_health() - damage)
+	print("Ouch! Took", damage, "damage from", source)
 
 func get_random_color() -> String:
-	if colors.size() == 0:
+	var selected: Array[int] = []
+	for i in color_list.values():
+		if colors & (1 << i): # use bitshift here when checking
+			selected.append(i)
+
+	if selected.is_empty():
 		return "black"
 
-	return colors[randi_range(0, colors.size() - 1)]
+	return color_list.keys()[selected.pick_random()]
+
+func sprite_flipping() -> void:
+	var facing_dir: int
+	if $SpriteFlipping.scale.x == 1:
+		facing_dir = 1
+	if $SpriteFlipping.scale.x == -1:
+		facing_dir = -1
+	
+	var tween = create_tween()
+	
+	if can_flip and flip_sprite and abs(global_position.x - player.global_position.x) >= flip_threshold:
+		if (global_position.x > player.global_position.x and facing_dir == 1) or (global_position.x < player.global_position.x and facing_dir == -1):
+			#$SpriteFlipping.scale = Vector2(facing_dir*-1, 1)
+			tween.tween_property($SpriteFlipping, "scale", Vector2(facing_dir*-1, 1), 0.3)
