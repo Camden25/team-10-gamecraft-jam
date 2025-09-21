@@ -1,7 +1,51 @@
-[gd_scene load_steps=4 format=3 uid="uid://b32s3p07s10u1"]
+[gd_scene load_steps=12 format=3 uid="uid://b32s3p07s10u1"]
 
 [ext_resource type="Script" uid="uid://dktjxvadpwov6" path="res://Bullets/PlayerBullets/PlayerBullet.gd" id="1_13dxf"]
 [ext_resource type="PackedScene" uid="uid://c6whdu2xhehkh" path="res://Misc/Hitbox.tscn" id="2_3tmdv"]
+[ext_resource type="Texture2D" uid="uid://caxgjq4deljmq" path="res://Misc/Assets/bigDrop512.png" id="2_204sb"]
+[ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_fgtxt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yru8l"]
+shader = ExtResource("2_fgtxt")
+shader_parameter/color1 = Color(1, 1, 1, 1)
+shader_parameter/color1_replacement = Color(0.053955078, 1, 0.0234375, 1)
+shader_parameter/color1_threshold = 0.3999999910592
+shader_parameter/color2 = Color(0, 0, 0, 1)
+shader_parameter/color2_replacement = Color(0, 0, 0, 1)
+shader_parameter/color2_threshold = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgtxt"]
+atlas = ExtResource("2_204sb")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yru8l"]
+atlas = ExtResource("2_204sb")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cufei"]
+atlas = ExtResource("2_204sb")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ndawk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgtxt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yru8l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cufei")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_204sb"]
+radius = 13.0
+height = 54.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_13dxf"]
 
@@ -10,21 +54,25 @@ collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_13dxf")
 move_speed = 2500
-target_physics_layer = 7
 metadata/_custom_type_script = "uid://k1by3k57gr2r"
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_yru8l")
+rotation = -1.5707964
+scale = Vector2(0.125, 0.125)
+sprite_frames = SubResource("SpriteFrames_ndawk")
+autoplay = "default"
+frame_progress = 0.6889258
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_13dxf")
+visible = false
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_204sb")
 
 [node name="Hitbox" parent="." instance=ExtResource("2_3tmdv")]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 8
+collision_mask = 64
+destroy_parent_on_collision = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 visible = false

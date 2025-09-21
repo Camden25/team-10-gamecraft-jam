@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvohoyvqqtraf"]
+
+[ext_resource type="Script" uid="uid://ciyjvbeaeftnx" path="res://UI/ui.gd" id="1_6dd3c"]
+[ext_resource type="FontFile" uid="uid://dqievavynfavi" path="res://UI/i eat crayons.ttf" id="2_dhe1o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6dd3c"]
+bg_color = Color(0.078125, 0.078125, 0.078125, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Ui" type="CanvasLayer"]
+script = ExtResource("1_6dd3c")
+
+[node name="PlayerHealthbar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BossHealthbar" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.15
+anchor_top = 0.9
+anchor_right = 0.85
+anchor_bottom = 0.95
+
+[node name="Background" type="Panel" parent="BossHealthbar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6dd3c")
+
+[node name="Midground" type="ColorRect" parent="BossHealthbar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2109375, 0, 0, 1)
+
+[node name="Health" type="ColorRect" parent="BossHealthbar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5859375, 0, 0, 1)
+
+[node name="BossName" type="Label" parent="BossHealthbar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -634.0
+offset_top = -162.0
+offset_right = 634.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_dhe1o")
+theme_override_font_sizes/font_size = 96
+text = "Boss"
+horizontal_alignment = 1
+vertical_alignment = 1

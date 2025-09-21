@@ -12,15 +12,16 @@ void fragment() {
 	if(tex_color.a == 0.0) {
 		discard;
 	}
-	
+
 	float color1_distance = length(tex_color.rgb - color1.rgb);
-	
+	float color2_distance = length(tex_color.rgb - color2.rgb);
+
 	if (color1_distance <= color1_threshold) {
 		tex_color = color1_replacement;
 	}
-	if (tex_color.rgba == color2) {
+	if (color2_distance <= color2_threshold) {
 		tex_color = color2_replacement;
 	}
-	
+
 	COLOR = tex_color;
 }

@@ -1,24 +1,25 @@
-[gd_scene load_steps=16 format=3 uid="uid://b17mw5a7sl1uj"]
+[gd_scene load_steps=19 format=3 uid="uid://b17mw5a7sl1uj"]
 
 [ext_resource type="Script" uid="uid://cjomjfe3gexg6" path="res://Player/player.gd" id="1_3qydi"]
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_tok1r"]
-[ext_resource type="Texture2D" uid="uid://cg8rc5uaxhlio" path="res://Player/Assets/testBuckSheet.png" id="3_vlldt"]
+[ext_resource type="Texture2D" uid="uid://dq4cw83br1q5i" path="res://Player/Assets/spritesheet_player.png" id="3_s1rgi"]
 [ext_resource type="Script" uid="uid://etnsmxlou2wc" path="res://Player/Abilities/Dash.gd" id="4_ddoul"]
 [ext_resource type="Script" path="res://Misc/Hurtbox.gd" id="4_s1rgi"]
 [ext_resource type="Script" uid="uid://bwq0t6i57mow8" path="res://Player/Abilities/Immune.gd" id="5_8g4oa"]
 [ext_resource type="Script" uid="uid://c5v5cx2b4cbqr" path="res://Player/Abilities/Attack.gd" id="6_6ysni"]
 [ext_resource type="Script" uid="uid://bvvem7mx6ob83" path="res://Player/Abilities/Colors/Yellow.gd" id="8_s1rgi"]
+[ext_resource type="Texture2D" uid="uid://c3yura5j7772k" path="res://Misc/Assets/dropShadow512.png" id="9_j23h2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s1rgi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ddoul"]
 shader = ExtResource("2_tok1r")
-shader_parameter/color1 = Color(0.7647059, 0.7647059, 0.7764706, 1)
-shader_parameter/color1_replacement = Color(0.9424999, 0.31, 1, 1)
-shader_parameter/color1_threshold = 0.08999999798832
-shader_parameter/color2 = Color(0, 0, 0, 1)
-shader_parameter/color2_replacement = Color(0, 0, 0, 1)
-shader_parameter/color2_threshold = 0.0
+shader_parameter/color1 = Color(1, 0, 0.29803923, 1)
+shader_parameter/color1_replacement = Color(0.30980396, 0.8382353, 1, 1)
+shader_parameter/color1_threshold = 0.6999999843536
+shader_parameter/color2 = Color(0, 0.9764706, 1, 1)
+shader_parameter/color2_replacement = Color(0.9254902, 0.40379903, 0.1490196, 1)
+shader_parameter/color2_threshold = 0.66999998502416
 
 [sub_resource type="Animation" id="Animation_j23h2"]
 resource_name = "Idle"
@@ -53,9 +54,9 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_s1rgi"]
 resource_name = "Run"
-length = 0.6666834
+length = 0.7500125
 loop_mode = 1
-step = 0.16666667
+step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -63,15 +64,52 @@ tracks/0/path = NodePath("SpriteFlipping/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [3, 4, 5, 4]
+"values": [10, 11, 12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_v0k0e"]
+resource_name = "Dash"
+length = 0.20000668
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteFlipping/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_5wa8t"]
+resource_name = "Immune"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteFlipping/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [16, 17]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v0k0e"]
 _data = {
+&"Dash": SubResource("Animation_v0k0e"),
 &"Idle": SubResource("Animation_j23h2"),
+&"Immune": SubResource("Animation_5wa8t"),
 &"RESET": SubResource("Animation_0j2ni"),
 &"Run": SubResource("Animation_s1rgi")
 }
@@ -86,29 +124,32 @@ y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_3qydi")
 move_speed = 40000
+damage_invincibility_duration = 1.0
+dash_colors = Array[int]([2])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 48)
+visible = false
+position = Vector2(0, -11)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_s1rgi")
 
 [node name="SpriteFlipping" type="Node2D" parent="."]
+position = Vector2(0, -59)
 
 [node name="Sprite2D" type="Sprite2D" parent="SpriteFlipping"]
 material = SubResource("ShaderMaterial_ddoul")
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("3_vlldt")
-hframes = 3
-vframes = 2
+texture = ExtResource("3_s1rgi")
+hframes = 18
 frame = 1
 
 [node name="ColorDamageTimer" type="Timer" parent="."]
 
 [node name="HealthLabelTEMP" type="Label" parent="."]
 offset_left = -15.0
-offset_top = 53.0
+offset_top = -6.0
 offset_right = 25.0
-offset_bottom = 76.0
+offset_bottom = 17.0
 text = "100"
 metadata/_edit_use_anchors_ = true
 
@@ -116,9 +157,10 @@ metadata/_edit_use_anchors_ = true
 libraries = {
 &"": SubResource("AnimationLibrary_v0k0e")
 }
-autoplay = "Run"
+autoplay = "Idle"
 
 [node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(0, -59)
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("4_s1rgi")
@@ -127,11 +169,11 @@ script = ExtResource("4_s1rgi")
 shape = SubResource("CapsuleShape2D_j23h2")
 
 [node name="Actions" type="Node2D" parent="."]
+position = Vector2(0, -59)
 
 [node name="Dash" type="Node2D" parent="Actions"]
 script = ExtResource("4_ddoul")
-dash_distance = 350
-dash_time = 0.1
+dash_distance = 400
 metadata/_custom_type_script = "uid://djpdmjiqd5j87"
 
 [node name="Immune" type="Node2D" parent="Actions"]
@@ -140,5 +182,15 @@ script = ExtResource("5_8g4oa")
 [node name="Attack" type="Node2D" parent="Actions"]
 script = ExtResource("6_6ysni")
 
+[node name="ProjectileSpawn" type="Marker2D" parent="Actions/Attack"]
+position = Vector2(0, -1)
+
 [node name="ColorAbility" type="Node2D" parent="Actions"]
 script = ExtResource("8_s1rgi")
+
+[node name="DropShadow512" type="Sprite2D" parent="."]
+position = Vector2(0, -49)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("9_j23h2")
+
+[node name="InteractPosition" type="Marker2D" parent="."]

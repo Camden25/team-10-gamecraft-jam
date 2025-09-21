@@ -39,6 +39,8 @@ func _process(delta: float) -> void:
 			previous_position = boss.global_position
 
 func attack():
+	boss.get_node("Hitbox").damage = damage
+	
 	# Direction to player
 	var direction_to_player = (player.global_position - boss.global_position).normalized()
 	

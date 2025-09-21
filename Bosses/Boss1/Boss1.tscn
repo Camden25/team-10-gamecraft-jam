@@ -31,8 +31,9 @@ size = Vector2(388.00006, 334.00006)
 [sub_resource type="CircleShape2D" id="CircleShape2D_6o73a"]
 radius = 146.01369
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0kgbn"]
-radius = 208.40587
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0fu4o"]
+radius = 162.0004
+height = 388.00006
 
 [sub_resource type="Animation" id="Animation_mn7a3"]
 resource_name = "1"
@@ -296,8 +297,8 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_6o73a"]
 resource_name = "Telegraph"
-length = 1.8
-step = 0.1
+length = 2.1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -346,6 +347,42 @@ tracks/3/keys = {
 "update": 1,
 "values": [true, false, true, false, true, false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../../SpriteFlipping/Bullet2:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.65, 0.75, 1.15, 1.25, 1.65, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0), Vector2(1, 1.6658175), Vector2(1, 0), Vector2(1, 1.6658175), Vector2(1, 0), Vector2(1, 1.6658175)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../../SpriteFlipping/Bullet2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.65, 0.75, 1.05, 1.15, 1.25, 1.55, 1.65, 1.75, 2.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-26.00116, -227.57343), Vector2(-26.00116, -280.87927), Vector2(-26.009962, -2252), Vector2(-26.00116, -227.57343), Vector2(-26.00116, -280.87927), Vector2(-26.009962, -2252), Vector2(-26.00116, -227.57343), Vector2(-26.00116, -280.87927), Vector2(-26.009962, -2252)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../../../SpriteFlipping/Bullet2:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.65, 1.05, 1.15, 1.55, 1.65, 2.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0kgbn"]
 _data = {
@@ -367,6 +404,7 @@ sprite_starts_flipped = true
 metadata/_custom_type_script = "uid://cd35g4rm086fx"
 
 [node name="SpriteFlipping" type="Node2D" parent="."]
+position = Vector2(-0.0002858483, -64)
 
 [node name="Sprite2D" type="Sprite2D" parent="SpriteFlipping"]
 material = SubResource("ShaderMaterial_6o73a")
@@ -383,12 +421,19 @@ position = Vector2(-26.00116, -227.57343)
 scale = Vector2(1, -0.013326824)
 texture = SubResource("GradientTexture2D_witpy")
 
+[node name="Bullet2" type="Sprite2D" parent="SpriteFlipping"]
+visible = false
+position = Vector2(-26.009962, -2252)
+scale = Vector2(1, 1.6658175)
+texture = SubResource("GradientTexture2D_witpy")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3.9997902, -47.00002)
+position = Vector2(3.9995043, -111.000015)
 shape = SubResource("RectangleShape2D_kdas0")
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 0
+position = Vector2(-0.0002858483, -64)
+collision_layer = 16
 collision_mask = 32
 script = ExtResource("4_witpy")
 
@@ -397,14 +442,15 @@ position = Vector2(12.999844, -35.000057)
 shape = SubResource("CircleShape2D_6o73a")
 
 [node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(-0.0002858483, -64)
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("5_7sv58")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(1.999857, -32.00001)
+position = Vector2(1.9998573, -39.000404)
 rotation = 1.5707964
-shape = SubResource("CircleShape2D_0kgbn")
+shape = SubResource("CapsuleShape2D_0fu4o")
 
 [node name="PhaseTransitions" type="AnimationPlayer" parent="."]
 libraries = {
@@ -417,19 +463,20 @@ libraries = {
 }
 
 [node name="Phases" type="Node2D" parent="."]
+position = Vector2(-0.0002858483, -64)
 
 [node name="1" type="Node2D" parent="Phases" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_0fu4o")
 boss_path = NodePath("../..")
 animation_player = NodePath("../../Animations")
-phase_health = 500
+phase_health = 2500
 attack_cooldown = 1.5
 avoid_previous_attack = false
 
 [node name="Charge" type="Node2D" parent="Phases/1"]
 script = ExtResource("5_witpy")
 charge_speed = 2200.0
-charge_distance = 800.0
+charge_distance = 850.0
 should_rotate = false
 projectile_color = "magenta"
 trail_radius = 4.0
@@ -441,7 +488,7 @@ libraries = {
 
 [node name="ProjectileRain" type="Node2D" parent="Phases/1"]
 script = ExtResource("6_7sv58")
-projectile_count = 3
+projectile_count = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Phases/1/ProjectileRain"]
 libraries = {
