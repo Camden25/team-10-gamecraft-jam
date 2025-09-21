@@ -15,7 +15,7 @@ func attack():
 	var start_degree = randi_range(0, 36) * 10
 	var player_cell := paint_layer.local_to_map(player.global_position)
 	for i in range(1, 37):
-		var hit_cells := paint_layer.paint_line_world(boss.position, get_position_at_distance(boss.position, i * 10 + start_degree, beam_length), color_to_use, beam_radius)
+		var hit_cells := paint_layer.paint_line_world(boss.position, get_position_at_distance(boss.position, i * 10 + start_degree, beam_length), color_to_use, beam_radius, false, true)
 		if player_cell in hit_cells:
 			@warning_ignore("integer_division")
 			player.modify_health(-impact_damage / (2 if color_to_use == paint_layer.colors[player.color_index] else 1))

@@ -14,14 +14,14 @@ func attack():
 	if randi_range(1, 2) == 1:
 		var x_coord = randi_range(0, window_size.x)
 		var color_to_use := boss.get_random_color()
-		var hit_cells := paint_layer.paint_line_world(Vector2(x_coord, 0), Vector2(x_coord, window_size.y), color_to_use, beam_thickness)
+		var hit_cells := paint_layer.paint_line_world(Vector2(x_coord, 0), Vector2(x_coord, window_size.y), color_to_use, beam_thickness, false, true)
 		if player_cell in hit_cells:
 			@warning_ignore("integer_division")
 			player.modify_health(-impact_damage / (2 if color_to_use == paint_layer.colors[player.color_index] else 1))
 	else:
 		var y_coord = randi_range(0, window_size.y)
 		var color_to_use := boss.get_random_color()
-		var hit_cells := paint_layer.paint_line_world(Vector2(0, y_coord), Vector2(window_size.x, y_coord), color_to_use, beam_thickness)
+		var hit_cells := paint_layer.paint_line_world(Vector2(0, y_coord), Vector2(window_size.x, y_coord), color_to_use, beam_thickness, false, true)
 		if player_cell in hit_cells:
 			@warning_ignore("integer_division")
 			player.modify_health(-impact_damage / (2 if color_to_use == paint_layer.colors[player.color_index] else 1))
