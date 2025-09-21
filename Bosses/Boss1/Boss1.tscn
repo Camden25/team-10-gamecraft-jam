@@ -1,0 +1,106 @@
+[gd_scene load_steps=13 format=3 uid="uid://bt5dpvdtoubl6"]
+
+[ext_resource type="Script" uid="uid://cd35g4rm086fx" path="res://Bosses/Scripts/Boss.gd" id="1_nqna2"]
+[ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_mcjtl"]
+[ext_resource type="Texture2D" uid="uid://b15bgluyb6ej4" path="res://Bosses/Boss1/boss1Sheet.png" id="3_sx76g"]
+[ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="4_0fu4o"]
+[ext_resource type="Script" uid="uid://dv7uc4rhw23jb" path="res://Bosses/Scripts/Charge.gd" id="5_witpy"]
+[ext_resource type="Script" uid="uid://12wpdoptt4tg" path="res://Bosses/Scripts/ProjectileRain.gd" id="6_7sv58"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6o73a"]
+shader = ExtResource("2_mcjtl")
+shader_parameter/color1 = Color(1, 1, 1, 1)
+shader_parameter/color1_replacement = Color(1, 1, 1, 1)
+shader_parameter/color1_threshold = 0.40999999083568
+shader_parameter/color2 = Color(0, 0, 0, 1)
+shader_parameter/color2_replacement = Color(0, 0, 0, 1)
+shader_parameter/color2_threshold = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kdas0"]
+size = Vector2(40, 54)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0kgbn"]
+radius = 64.03124
+
+[sub_resource type="Animation" id="Animation_mn7a3"]
+resource_name = "1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_h8jtw"]
+resource_name = "2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h8vwy"]
+_data = {
+&"1": SubResource("Animation_mn7a3"),
+&"2": SubResource("Animation_h8jtw")
+}
+
+[node name="Boss1" type="CharacterBody2D"]
+script = ExtResource("1_nqna2")
+metadata/_custom_type_script = "uid://cd35g4rm086fx"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_6o73a")
+position = Vector2(0, -84)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_sx76g")
+flip_h = true
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, -22)
+shape = SubResource("RectangleShape2D_kdas0")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -29)
+rotation = 1.5707964
+shape = SubResource("CircleShape2D_0kgbn")
+
+[node name="PhaseTransitions" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_h8vwy")
+}
+
+[node name="Phases" type="Node2D" parent="."]
+
+[node name="1" type="Node2D" parent="Phases"]
+script = ExtResource("4_0fu4o")
+boss_path = NodePath("../..")
+phase_health = 500
+avoid_previous_attack = false
+
+[node name="Charge" type="Node2D" parent="Phases/1"]
+script = ExtResource("5_witpy")
+rotate = false
+
+[node name="ProjectileRain" type="Node2D" parent="Phases/1"]
+script = ExtResource("6_7sv58")
+projectile_count = 3
+projectile_color = "magenta"
