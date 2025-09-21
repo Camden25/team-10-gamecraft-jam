@@ -4,8 +4,11 @@ extends ColorAbility
 @export var cone_range := 250.0
 
 func attack():
-	for cell: Vector2i in get_cone_cells(paint_layer, player.global_position):
+	var cells_hit := get_cone_cells(paint_layer, player.global_position)
+	for cell: Vector2i in cells_hit:
 		paint_layer.paint_cell(cell, "magenta")
+
+	deal_boss_damage(cells_hit, damage)
 	start_cooldown()
 
 func get_cone_cells(tilemap: TileMapLayer, start_pos: Vector2) -> Array[Vector2i]:

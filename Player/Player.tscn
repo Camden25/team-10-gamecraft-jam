@@ -1,14 +1,19 @@
-[gd_scene load_steps=19 format=3 uid="uid://b17mw5a7sl1uj"]
+[gd_scene load_steps=24 format=3 uid="uid://b17mw5a7sl1uj"]
 
 [ext_resource type="Script" uid="uid://cjomjfe3gexg6" path="res://Player/player.gd" id="1_3qydi"]
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_tok1r"]
 [ext_resource type="Texture2D" uid="uid://dq4cw83br1q5i" path="res://Player/Assets/spritesheet_player.png" id="3_s1rgi"]
 [ext_resource type="Script" uid="uid://etnsmxlou2wc" path="res://Player/Abilities/Dash.gd" id="4_ddoul"]
-[ext_resource type="Script" uid="uid://cwwrp1aprqdwl" path="res://Misc/Hurtbox.gd" id="4_s1rgi"]
+[ext_resource type="Script" path="res://Misc/Hurtbox.gd" id="4_s1rgi"]
 [ext_resource type="Script" uid="uid://bwq0t6i57mow8" path="res://Player/Abilities/Immune.gd" id="5_8g4oa"]
 [ext_resource type="Script" uid="uid://c5v5cx2b4cbqr" path="res://Player/Abilities/Attack.gd" id="6_6ysni"]
 [ext_resource type="Script" uid="uid://bvvem7mx6ob83" path="res://Player/Abilities/Colors/Yellow.gd" id="8_s1rgi"]
+[ext_resource type="Script" uid="uid://c447fcb2sh58l" path="res://Player/Abilities/Colors/Magenta.gd" id="9_dm7nj"]
 [ext_resource type="Texture2D" uid="uid://c3yura5j7772k" path="res://Misc/Assets/dropShadow512.png" id="9_j23h2"]
+[ext_resource type="Script" uid="uid://c54ov0vwv7kiy" path="res://Player/Abilities/Colors/Blue.gd" id="10_3mea3"]
+[ext_resource type="Script" uid="uid://cg8eghdmpix2x" path="res://Player/Abilities/Colors/Cyan.gd" id="11_7v5gs"]
+[ext_resource type="Script" uid="uid://ped175q8jkyv" path="res://Player/Abilities/Colors/Red.gd" id="12_8sa4y"]
+[ext_resource type="Script" uid="uid://dr8v6lu5ht8y4" path="res://Player/Abilities/Colors/Green.gd" id="13_3nb2p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s1rgi"]
 
@@ -185,8 +190,33 @@ script = ExtResource("6_6ysni")
 [node name="ProjectileSpawn" type="Marker2D" parent="Actions/Attack"]
 position = Vector2(0, -1)
 
-[node name="ColorAbility" type="Node2D" parent="Actions"]
+[node name="CB_Yellow" type="Node2D" parent="Actions"]
 script = ExtResource("8_s1rgi")
+cooldown = 6
+damage = 0
+color_index = 4
+
+[node name="CB_Magenta" type="Node2D" parent="Actions"]
+script = ExtResource("9_dm7nj")
+color_index = 2
+
+[node name="CB_Blue" type="Node2D" parent="Actions"]
+script = ExtResource("10_3mea3")
+color_index = 1
+
+[node name="CB_Cyan" type="Node2D" parent="Actions"]
+script = ExtResource("11_7v5gs")
+color_index = 0
+
+[node name="CB_Red" type="Node2D" parent="Actions"]
+script = ExtResource("12_8sa4y")
+cooldown = 5
+damage = 17
+color_index = 3
+
+[node name="CB_Green" type="Node2D" parent="Actions"]
+script = ExtResource("13_3nb2p")
+color_index = 5
 
 [node name="DropShadow512" type="Sprite2D" parent="."]
 position = Vector2(0, -49)

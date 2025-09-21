@@ -4,8 +4,12 @@ extends ColorAbility
 @export var triangle_height := 700.0
 
 func attack():
-	for cell: Vector2i in get_isosceles_triangle_cells(paint_layer, player.global_position, triangle_width, triangle_height):
+	var triangle_cells := get_isosceles_triangle_cells(paint_layer, player.global_position, triangle_width, triangle_height)
+	for cell: Vector2i in triangle_cells:
 		paint_layer.paint_cell(cell, "cyan")
+	
+	deal_boss_damage(triangle_cells, damage)
+
 	start_cooldown()
 
 func get_isosceles_triangle_cells(tilemap: TileMapLayer, user_pos: Vector2, base_width: float, height: float) -> Array[Vector2i]:

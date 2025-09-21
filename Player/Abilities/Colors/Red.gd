@@ -9,8 +9,11 @@ extends ColorAbility
 func attack():
 	start_cooldown()
 	for i in range(cone_count):
-		for cell: Vector2i in get_cone_cells(paint_layer, player.global_position, cone_angle + (cone_angle_growth * i)):
+		var cells_hit := get_cone_cells(paint_layer, player.global_position, cone_angle + (cone_angle_growth * i))
+		for cell: Vector2i in cells_hit:
 			paint_layer.paint_cell(cell, "red")
+
+		deal_boss_damage(cells_hit, damage)
 		
 		await get_tree().create_timer(cone_blast_delay).timeout
 

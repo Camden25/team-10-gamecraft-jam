@@ -5,10 +5,13 @@ class_name ColorAbility
 
 @export var hold_time = 0.0
 @export var cooldown = 4
+@export var damage = 20
 
 var holding_attack = false
 var current_hold_time := 0.0
 var can_attack = true
+
+@export var color_index := -1
 
 @onready var paint_layer: PaintLayer = get_tree().get_first_node_in_group("paint_layer")
 
@@ -16,7 +19,7 @@ func _ready() -> void:
 	set_process(true)
 
 func _process(delta):
-	if !can_attack:
+	if !can_attack or (color_index != player.color_index):
 		return
 
 	if Input.is_action_just_pressed("attack_2") and can_attack and player.disabled == false:
@@ -42,8 +45,10 @@ func start_cooldown():
 	await get_tree().create_timer(cooldown).timeout
 	can_attack = true
 
-func deal_boss_damage(cell_array: Array[Vector2i], damage: int):
+func deal_boss_damage(cell_array: Array[Vector2i], damage_to_deal: int) -> bool:
 	for boss in get_tree().get_nodes_in_group("boss"):
 		if paint_layer.local_to_map(boss.global_position) in cell_array:
-			boss.modify_health(-damage)
+			boss.modify_health(-damage_to_deal)
+			return true
+	return false
 		
