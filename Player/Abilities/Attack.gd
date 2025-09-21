@@ -21,6 +21,7 @@ func attack():
 	
 	# change this line
 	get_tree().get_nodes_in_group("world")[0].add_child(attack_instance)
+	player.get_node("PlayerShoot").play()
 	
 	await get_tree().create_timer(cooldown).timeout
 	can_attack = true

@@ -34,6 +34,7 @@ func start_dash():
 	player.damage_immune += 1
 	player.animation_override = true
 	player.animation_player.play("Dash")
+	player.get_node("PlayerDash").play()
 	dash_timer()
 
 func dash(delta):

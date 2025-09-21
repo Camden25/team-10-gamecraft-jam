@@ -1,4 +1,6 @@
-[gd_scene load_steps=28 format=3 uid="uid://b17mw5a7sl1uj"]
+
+[gd_scene load_steps=32 format=3 uid="uid://b17mw5a7sl1uj"]
+
 
 [ext_resource type="Script" uid="uid://cjomjfe3gexg6" path="res://Player/player.gd" id="1_3qydi"]
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_tok1r"]
@@ -14,6 +16,11 @@
 [ext_resource type="Script" uid="uid://cg8eghdmpix2x" path="res://Player/Abilities/Colors/Cyan.gd" id="11_7v5gs"]
 [ext_resource type="Script" uid="uid://ped175q8jkyv" path="res://Player/Abilities/Colors/Red.gd" id="12_8sa4y"]
 [ext_resource type="Script" uid="uid://dr8v6lu5ht8y4" path="res://Player/Abilities/Colors/Green.gd" id="13_3nb2p"]
+[ext_resource type="AudioStream" uid="uid://c73hn7bcm00b4" path="res://Sound/playershoot.mp3" id="15_3mea3"]
+[ext_resource type="AudioStream" uid="uid://bgrgnfhfnh5xq" path="res://Sound/playerdash.mp3" id="16_8sa4y"]
+[ext_resource type="AudioStream" uid="uid://c2g8ji72hrbyn" path="res://Sound/playerhurt.mp3" id="17_3nb2p"]
+[ext_resource type="AudioStream" uid="uid://byvnwsqqkduad" path="res://Sound/dropsplash.mp3" id="18_3nb2p"]
+[ext_resource type="AudioStream" uid="uid://dkvdxy168wpfk" path="res://Sound/spin.mp3" id="19_d7xyo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s1rgi"]
 
@@ -286,3 +293,19 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("9_j23h2")
 
 [node name="InteractPosition" type="Marker2D" parent="."]
+
+[node name="PlayerShoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_3mea3")
+
+[node name="PlayerDash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_8sa4y")
+
+[node name="PlayerHurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_3nb2p")
+
+[node name="DropSplash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_3nb2p")
+
+[node name="Spin" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_d7xyo")
+volume_db = -10.0

@@ -170,6 +170,7 @@ func _on_hurt(damage: int, source: Node) -> void:
 	print("Ouch! Took ", damage, "damage from ", source.get_parent().name)
 	$Hurtbox/CollisionShape2D.disabled = true
 	$HitFlash.play("Hit")
+	get_node("PlayerHurt").play()
 	await get_tree().create_timer(damage_invincibility_duration).timeout
 	$Hurtbox/CollisionShape2D.disabled = false
 

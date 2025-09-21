@@ -4,6 +4,7 @@ extends BossAttack
 @export var beam_length: int = 800
 @export var beam_radius: float = 2
 @export var impact_damage: int = 15
+@export_enum("cyan", "blue", "magenta", "red", "yellow", "green", "black") var force_color: String 
 
 var paint_layer: PaintLayer # IF WE DELETE PAINT LAYERS AND REPLACE THEM, CHANGE ME LATER
 
@@ -11,7 +12,11 @@ func _ready() -> void:
 	paint_layer = get_tree().get_first_node_in_group("paint_layer")
 
 func attack():
-	var color_to_use := boss.get_random_color()
+	var color_to_use: String
+	if force_color:
+		color_to_use = force_color
+	else:
+		color_to_use = boss.get_random_color()
 	var start_degree = randi_range(0, 36) * 10
 	var player_cell := paint_layer.local_to_map(player.global_position)
 	for i in range(1, 37):

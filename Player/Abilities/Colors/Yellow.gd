@@ -12,6 +12,7 @@ func attack():
 	is_enabled = false
 
 func _process(delta):
+	super._process(delta)
 	if !is_enabled:
 		return
 	

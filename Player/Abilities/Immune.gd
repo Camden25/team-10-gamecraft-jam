@@ -23,6 +23,7 @@ func start_immune():
 	player.damage_immune += 1
 	player.animation_override = true
 	player.animation_player.play("Immune")
+	player.get_node("Spin").play()
 	ui.player_ability = 0
 	immune_timer()
 

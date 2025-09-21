@@ -213,6 +213,7 @@ func get_all_tiles() -> Array:
 		
 		for i in range((bottom_right.x - top_left.x) / tile_set.tile_size.x):
 			for j in range((bottom_right.y - top_left.y) / tile_set.tile_size.y):
+
 				tile_array.append(Vector2i(i, j))
 	
 	return tile_array
