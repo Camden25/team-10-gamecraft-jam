@@ -20,6 +20,8 @@ var move_dir = Vector2()
 var knockback = Vector2()
 var ability_movement = Vector2()
 
+@export var colors: Array[String] = []
+
 func _ready():
 	add_to_group("boss")
 	randomize()
@@ -65,3 +67,9 @@ func death():
 
 func _on_hurtbox_area_entered(area):
 	pass
+
+func get_random_color() -> String:
+	if colors.size() == 0:
+		return "black"
+
+	return colors[randi_range(0, colors.size() - 1)]

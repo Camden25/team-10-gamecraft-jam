@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://cu6f65bmx4hy1" path="res://Player/Assets/PlayerCharacter512.png" id="2_q3lat"]
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_tok1r"]
 [ext_resource type="Script" uid="uid://etnsmxlou2wc" path="res://Player/Abilities/Dash.gd" id="4_ddoul"]
-[ext_resource type="Script" uid="uid://bwq0t6i57mow8" path="res://Player/Abilities/Immune.gd" id="5_8g4oa"]
+[ext_resource type="Script" path="res://Player/Abilities/Immune.gd" id="5_8g4oa"]
 [ext_resource type="Script" path="res://Player/Abilities/Attack.gd" id="6_6ysni"]
-[ext_resource type="Script" uid="uid://bpxqbg4b3oxh4" path="res://Player/Abilities/ColorAbility.gd" id="7_vlldt"]
+[ext_resource type="Script" path="res://Player/Abilities/ColorAbility.gd" id="7_vlldt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3qydi"]
 

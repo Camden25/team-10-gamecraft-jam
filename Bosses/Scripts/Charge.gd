@@ -10,16 +10,6 @@ var paint_layer: PaintLayer # IF WE DELETE PAINT LAYERS AND REPLACE THEM, CHANGE
 func _ready() -> void:
 	paint_layer = get_tree().get_first_node_in_group("paint_layer")
 
-"""
-func attack():
-	boss.rotation = global_position.angle_to_point(player.global_position)
-	var opposite_direction := get_opposite_angle(boss.rotation)
-	var angle_radians := deg_to_rad(opposite_direction)
-	boss.global_position += Vector2(cos(angle_radians), sin(angle_radians)) * 100
-
-	await get_tree().create_timer(1).timeout
-	end_attack()"""
-
 func attack():
 	# Get direction away from player (for sliding back)
 	var direction_to_player = (player.global_position - boss.global_position).normalized()
