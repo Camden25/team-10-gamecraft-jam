@@ -186,6 +186,7 @@ script = ExtResource("5_8g4oa")
 
 [node name="Attack" type="Node2D" parent="Actions"]
 script = ExtResource("6_6ysni")
+cooldown = 0.35
 
 [node name="ProjectileSpawn" type="Marker2D" parent="Actions/Attack"]
 position = Vector2(0, -1)
