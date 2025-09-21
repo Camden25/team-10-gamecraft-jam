@@ -1,4 +1,5 @@
 extends Node2D
+class_name CornerMarker
 
 @export var bottom_right_corner := false
 

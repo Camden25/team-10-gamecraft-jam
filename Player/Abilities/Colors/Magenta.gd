@@ -7,7 +7,7 @@ func attack():
 	var cells_hit := get_cone_cells(paint_layer, player.global_position)
 	for cell: Vector2i in cells_hit:
 		paint_layer.paint_cell(cell, "magenta")
-
+	
 	deal_boss_damage(cells_hit, damage)
 	start_cooldown()
 

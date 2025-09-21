@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://binfwbmlvv0a6"]
+
+[ext_resource type="Texture2D" uid="uid://vci4hshk80sn" path="res://World/Assets/Deathscreen.png" id="1_6rwxw"]
+[ext_resource type="Script" uid="uid://bnodkd3geslad" path="res://UI/death_screen.gd" id="1_oaxie"]
+
+[node name="DeathScreen" type="CanvasLayer"]
+script = ExtResource("1_oaxie")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_6rwxw")

@@ -12,6 +12,7 @@ var current_hold_time := 0.0
 var can_attack = true
 
 @export var color_index := -1
+@export var ui_player_icon := 0
 
 @onready var paint_layer: PaintLayer = get_tree().get_first_node_in_group("paint_layer")
 
@@ -21,13 +22,20 @@ func _ready() -> void:
 func _process(delta):
 	if !can_attack or (color_index != player.color_index):
 		return
-
+	
+	if color_index == player.color_index:
+		player.ui.player_icon = ui_player_icon
+	
 	if Input.is_action_just_pressed("attack_2") and can_attack and player.disabled == false:
 		holding_attack = true
 	
 	if holding_attack:
 		if current_hold_time >= hold_time:
+			player.animation_override = true
+			player.animation_player.play("ColorAbility")
+			await player.animation_player.animation_finished
 			attack()
+			player.animation_override = false
 		elif Input.is_action_pressed("attack_2"):
 			current_hold_time += delta
 		else:

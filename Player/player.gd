@@ -80,7 +80,7 @@ func _physics_process(delta) -> void:
 	
 	get_input()
 	
-	if ability_movement != Vector2(0, 0):
+	if ability_movement != Vector2(0, 0) or knockback != Vector2(0, 0):
 		move_dir = Vector2(0, 0)
 	
 	animations()
@@ -94,7 +94,9 @@ func _physics_process(delta) -> void:
 	
 	move_dir = Vector2(0, 0)
 	ability_movement = Vector2(0, 0)
-	knockback = Vector2(0, 0)
+	knockback *= 0.8
+	if knockback <= Vector2(10, 10):
+		knockback = Vector2(0, 0)
 	
 	move_and_slide()
 
@@ -133,6 +135,12 @@ func modify_health(modify_amount: int) -> void:
 func death_check() -> void:
 	super.death_check()
 
+func death():
+	disabled = true
+	var death_screen = load("res://UI/DeathScreen.tscn")
+	var death_instance = death_screen.instantiate()
+	get_parent().add_child(death_instance)
+
 func swap_color(new_color: String) -> void:
 	color_index = paint_layer.colors.find(new_color)
 	set_color_visual()
@@ -157,7 +165,7 @@ func sprite_flip():
 func _on_hurt(damage: int, source: Node) -> void:
 	if source.get_parent() == get_tree().get_first_node_in_group("boss"):
 		#knockback_taken(get_opposite_direction(global_position, get_tree().get_first_node_in_group("boss").global_position), 10)
-		knockback = get_opposite_direction(global_position, get_tree().get_first_node_in_group("boss").global_position) * 1000000
+		knockback = get_opposite_direction(global_position, get_tree().get_first_node_in_group("boss").global_position) * 200000
 	modify_health(-damage)
 	print("Ouch! Took ", damage, "damage from ", source.get_parent().name)
 	$Hurtbox/CollisionShape2D.disabled = true

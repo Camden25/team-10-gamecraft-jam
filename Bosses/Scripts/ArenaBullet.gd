@@ -33,7 +33,7 @@ func attack():
 		# change this line
 		get_tree().get_nodes_in_group("world")[0].add_child(attack_instance)
 		
-		await get_tree().create_timer(0.1).timeout
+		#await get_tree().create_timer(0.1).timeout
 
 	await get_tree().create_timer(1).timeout
 	end_attack()

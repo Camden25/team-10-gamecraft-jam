@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b15bgluyb6ej4" path="res://Bosses/Boss1/boss1Sheet.png" id="3_sx76g"]
 [ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="4_0fu4o"]
 [ext_resource type="Script" uid="uid://bm4cmv2k7jcjn" path="res://Misc/Hitbox.gd" id="4_witpy"]
-[ext_resource type="Script" path="res://Misc/Hurtbox.gd" id="5_7sv58"]
+[ext_resource type="Script" uid="uid://cwwrp1aprqdwl" path="res://Misc/Hurtbox.gd" id="5_7sv58"]
 [ext_resource type="Script" uid="uid://dv7uc4rhw23jb" path="res://Bosses/Scripts/Charge.gd" id="5_witpy"]
 [ext_resource type="Script" uid="uid://12wpdoptt4tg" path="res://Bosses/Scripts/ProjectileRain.gd" id="6_7sv58"]
 
@@ -18,6 +18,8 @@ shader_parameter/color1_threshold = 0.499999988824
 shader_parameter/color2 = Color(0, 0, 0, 1)
 shader_parameter/color2_replacement = Color(0, 0, 0, 1)
 shader_parameter/color2_threshold = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="Gradient" id="Gradient_0fu4o"]
 offsets = PackedFloat32Array(0.48666668)
@@ -394,7 +396,7 @@ _data = {
 &"Telegraph": SubResource("Animation_6o73a")
 }
 
-[node name="Boss2" type="CharacterBody2D"]
+[node name="Boss1" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
 rotation = 6.28319
@@ -500,8 +502,6 @@ libraries = {
 [node name="ProjectileRain" type="Node2D" parent="Phases/1"]
 script = ExtResource("6_7sv58")
 projectile_count = 6
-top_left_limit = Vector2(320, 160)
-bottom_right_limit = Vector2(1620, 780)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Phases/1/ProjectileRain"]
 libraries = {

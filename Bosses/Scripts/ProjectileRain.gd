@@ -4,9 +4,6 @@ extends BossAttack
 @export var splash_radius = 5
 @export var impact_damage = 20
 
-@export var top_left_limit: Vector2
-@export var bottom_right_limit: Vector2
-
 @export var single_color: bool = false
 @export_enum("cyan", "blue", "magenta", "red", "yellow", "green", "black") var projectile_color: String 
 
