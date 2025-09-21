@@ -7,6 +7,9 @@ uniform vec4 color2 : source_color;
 uniform vec4 color2_replacement : source_color;
 uniform float color2_threshold : hint_range(0.0, 1.0, 0.01);
 
+uniform vec4 flash_color: source_color = vec4(1.0);
+uniform float flash_modifier: hint_range(0.0, 1.0, 0.1) = 0;
+
 void fragment() {
 	vec4 tex_color = texture(TEXTURE, UV);
 	if(tex_color.a == 0.0) {
@@ -22,6 +25,14 @@ void fragment() {
 	if (color2_distance <= color2_threshold) {
 		tex_color = color2_replacement;
 	}
-
-	COLOR = tex_color;
+	
+	vec4 color = texture(TEXTURE, UV);
+	color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
+	
+	if (flash_modifier != 0.0) {
+		
+	COLOR = tex_color + color;
+	} else {
+		COLOR = tex_color;
+	}
 }

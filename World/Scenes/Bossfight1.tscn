@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bwxj4iny22i3" path="res://Paint/Scenes/PaintLayer.tscn" id="5_ftloe"]
 [ext_resource type="PackedScene" uid="uid://b17mw5a7sl1uj" path="res://Player/Player.tscn" id="6_i63af"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ftloe"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i63af"]
 texture = ExtResource("3_4owf0")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -73,7 +73,7 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_i63af"]
 tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_ftloe")
+sources/0 = SubResource("TileSetAtlasSource_i63af")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4owf0"]
 size = Vector2(525.5, 1080)
