@@ -22,9 +22,14 @@ func _ready() -> void:
 func choose_attack():
 	boss.can_attack = false
 	boss.attacking = true
-	var child_count = get_child_count()
-	active_attack = get_child(randi_range(0, child_count)-1)
-	if active_attack != prev_attack or child_count == 1:
+	var valid_attacks: Array = []
+	for i in range(get_child_count()):
+		var node: Node2D = get_child(i)
+		if node.can_use():
+			valid_attacks.append(node)
+
+	active_attack = valid_attacks[randi_range(0, valid_attacks.size() - 1)]
+	if active_attack != prev_attack or valid_attacks.size() == 1:
 		prev_attack = active_attack
 		active_attack.start_attack()
 	else:

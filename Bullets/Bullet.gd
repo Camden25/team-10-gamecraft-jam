@@ -16,6 +16,7 @@ func _ready() -> void:
 	$Hitbox.damage = damage
 	rotation = rotation_angle
 	wait_for_destroy()
+	add_to_group("Bullets")
 
 func _physics_process(_delta):
 	velocity = Vector2(speed, 0).rotated(rotation_angle)

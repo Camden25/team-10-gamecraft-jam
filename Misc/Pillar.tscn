@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://capao544mc8am"]
+
+[ext_resource type="Script" uid="uid://bksa414ag7h4f" path="res://Misc/pillar.gd" id="1_t7gm3"]
+[ext_resource type="Script" path="res://Misc/Hitbox.gd" id="2_hfdgy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aci8n"]
+radius = 20.024984
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_t7gm3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t7gm3"]
+radius = 21.0
+
+[node name="Pillar" type="CharacterBody2D"]
+script = ExtResource("1_t7gm3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_aci8n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(33, 28)
+texture = SubResource("PlaceholderTexture2D_t7gm3")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+scale = Vector2(28, 33)
+texture = SubResource("PlaceholderTexture2D_t7gm3")
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("2_hfdgy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_t7gm3")

@@ -10,6 +10,7 @@ var waiting_for_new_phase = false
 
 var can_attack = false
 var attacking = false
+var in_air := false # I don't like doing this for a single boss but such is life in a gamejam
 
 @export var move_speed = 450
 @export var knockback_multiplier = 1
