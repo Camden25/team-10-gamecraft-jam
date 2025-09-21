@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="2_8sqon"]
 [ext_resource type="Script" uid="uid://dv7uc4rhw23jb" path="res://Bosses/Scripts/Charge.gd" id="3_8rgwt"]
 
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5g7g"]
 size = Vector2(120, 180)
 
@@ -84,7 +85,6 @@ boss_path = NodePath("../..")
 phase_health = 500
 
 [node name="Node2D" type="Node2D" parent="Phases/1"]
-position = Vector2(0, 1)
 script = ExtResource("3_8rgwt")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

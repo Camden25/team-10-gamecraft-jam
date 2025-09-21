@@ -7,7 +7,7 @@ var paint_layer: PaintLayer # IF WE DELETE PAINT LAYERS AND REPLACE THEM, CHANGE
 func _physics_process(_delta):
 	super._physics_process(_delta)
 	if _color:
-		paint_layer.paint_cell_world(global_position, _color);
+		paint_layer.paint_circle_world(global_position, _color, 1.5)
 
 func set_color(new_color: String):
 	_color = new_color

@@ -30,41 +30,12 @@ func _ready() -> void:
 	await get_tree().create_timer(1).timeout
 	
 	paint_cell(Vector2(60, 33), "magenta")
-	"""
-	for x in range(120):
-		for y in range(67):
-			if (x-60)**2 + (y-33)**2 <= 100:
-				paint_cell(Vector2(x,y), "cyan")
-	
-	for x in range(120):
-		for y in range(67):
-			if (x-85)**2 + (y-33)**2 <= 400:
-				paint_cell(Vector2(x,y), "yellow")
-	
-	for x in range(120):
-		for y in range(67):
-			if (x-30)**2 + (y-10)**2 <= 900:
-				paint_cell(Vector2(x,y), "magenta")
-	
-	for x in range(120):
-		for y in range(67):
-			if (x-45)**2 + (y-50)**2 <= 600:
-				paint_cell(Vector2(x,y), "yellow")
-				"""
 
 	paint_circle_world(Vector2(300, 300), colors[1], 5)
 
 	paint_square_world(Vector2(500, 700), colors[3], 8)
 	paint_square_world(Vector2(600, 800), colors[5], 8)
 	
-	#for i in range(6):
-		#for y in range(4):
-			#paint_cell(Vector2i(i, y), colors[i])
-	#
-	#for i in range(3):
-		#for x in range(6):
-			#paint_cell(Vector2i(x, i+1), colors[2*i])
-
 func paint_cell(cell: Vector2i, color: String) -> void:
 	var current_cell_color := get_color_at_cell(cell)
 	if current_cell_color != "":
@@ -79,25 +50,43 @@ func paint_cell(cell: Vector2i, color: String) -> void:
 
 func reset_black_tile(cell: Vector2i):
 	await get_tree().create_timer(black_decay_time).timeout
+	if get_color_at_cell(cell) != "black":
+		return
+		
 	set_cell(cell, 0, Vector2i(-1, 0))
 
-func paint_circle_world(world_pos: Vector2, color: String, radius: float) -> void:
+func paint_circle_world(world_pos: Vector2, color: String, radius: float) -> Array[Vector2i]:
 	var cell := local_to_map(world_pos)
-	for cell2: Vector2i in get_points_in_circle(cell, radius):
+	var points := get_points_in_circle(cell, radius)
+	for cell2: Vector2i in points:
 		paint_cell(cell2, color)
+	return points
 
-func paint_square_world(world_pos: Vector2, color: String, radius: int) -> void:
+func paint_square_world(world_pos: Vector2, color: String, radius: int) -> Array[Vector2i]:
 	var cell := local_to_map(world_pos)
-	for cell2: Vector2i in get_points_in_square(cell, radius):
+	var points := get_points_in_square(cell, radius)
+	for cell2: Vector2i in points:
 		paint_cell(cell2, color)
+	return points
 
-func paint_line_world(start_pos: Vector2, end_pos: Vector2, color: String, radius: float) -> void:
-	for cell: Vector2i in get_points_in_line(local_to_map(start_pos), local_to_map(end_pos)):
+func paint_line_world(start_pos: Vector2, end_pos: Vector2, color: String, radius: float, ignore_pillars: bool = false) -> Array[Vector2i]:
+	var points := get_points_in_line(local_to_map(start_pos), local_to_map(end_pos))
+	for cell: Vector2i in points:
+		if !ignore_pillars and are_pillars_in_range(map_to_local(cell), 16):
+			break
+
 		if radius > 1:
 			for cell2: Vector2i in get_points_in_circle(cell, radius):
 				paint_cell(cell2, color)
 		else:
 			paint_cell(cell, color)
+	return points
+
+func are_pillars_in_range(target_pos: Vector2, pillar_range: float) -> bool:
+	for pillar in get_tree().get_nodes_in_group("pillar"):
+		if pillar.global_position.distance_to(target_pos) <= pillar_range:
+			return true
+	return false
 
 ## Using Bresenham line algorithm for this
 func get_points_in_line(start: Vector2i, end: Vector2i) -> Array[Vector2i]:
@@ -129,8 +118,8 @@ func get_points_in_line(start: Vector2i, end: Vector2i) -> Array[Vector2i]:
 	
 	return points
 
-func get_points_in_circle(cell: Vector2i, radius: float) -> Array:
-	var points = []
+func get_points_in_circle(cell: Vector2i, radius: float) -> Array[Vector2i]:
+	var points: Array[Vector2i] = []
 	var min_x = int(floor(cell.x - radius))
 	var max_x = int(floor(cell.x + radius))
 	var min_y = int(floor(cell.y - radius))
@@ -144,8 +133,8 @@ func get_points_in_circle(cell: Vector2i, radius: float) -> Array:
 	
 	return points
 
-func get_points_in_square(cell: Vector2i, radius: int) -> Array:
-	var points = []
+func get_points_in_square(cell: Vector2i, radius: int) -> Array[Vector2i]:
+	var points: Array[Vector2i] = []
 	var min_x = int(floor(cell.x - radius))
 	var max_x = int(floor(cell.x + radius))
 	var min_y = int(floor(cell.y - radius))
@@ -157,9 +146,10 @@ func get_points_in_square(cell: Vector2i, radius: int) -> Array:
 	
 	return points
 
-func paint_cell_world(world_pos: Vector2, color: String) -> void:
+func paint_cell_world(world_pos: Vector2, color: String) -> Vector2i:
 	var cell := local_to_map(world_pos)
 	paint_cell(cell, color)
+	return cell
 
 func get_color_at_cell(cell: Vector2i) -> String:
 	var tile_id := get_cell_atlas_coords(cell).x

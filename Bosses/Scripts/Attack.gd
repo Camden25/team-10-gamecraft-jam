@@ -6,7 +6,7 @@ class_name BossAttack
 #@onready var boss = phase.boss
 var phase: BossPhase
 var boss: Boss
-@onready var player = get_tree().get_first_node_in_group("player")
+@onready var player: Player = get_tree().get_first_node_in_group("player")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var is_attacking = false
@@ -17,6 +17,11 @@ func post_init() -> void:
 
 func _process(delta):
 	pass
+
+func can_use() -> bool:
+	if boss.in_air:
+		return false
+	return true
 
 func start_attack():
 	is_attacking = true

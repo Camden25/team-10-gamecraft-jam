@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6vj3lgcitiys"]
+[gd_scene load_steps=7 format=3 uid="uid://b6vj3lgcitiys"]
 
 [ext_resource type="Script" uid="uid://ds5c4ghd14op0" path="res://Bullets/BossBullets/boss_bullet.gd" id="1_h8bwt"]
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_1cj7m"]
@@ -13,6 +13,9 @@ shader_parameter/color2 = Color(0, 0, 0, 1)
 shader_parameter/color2_replacement = Color(0, 0, 0, 1)
 shader_parameter/color2_threshold = 0.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tp5oi"]
+size = Vector2(40, 40)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_re3do"]
 size = Vector2(40, 40)
 
@@ -20,7 +23,7 @@ size = Vector2(40, 40)
 script = ExtResource("1_h8bwt")
 despawn_time = 5.0
 damping = 1.0
-target_physics_layer = 1
+target_physics_layer = 6
 metadata/_custom_type_script = "uid://k1by3k57gr2r"
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -29,6 +32,10 @@ offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tp5oi")
+disabled = true
 
 [node name="Hitbox" parent="." instance=ExtResource("3_tp5oi")]
 collision_layer = 0

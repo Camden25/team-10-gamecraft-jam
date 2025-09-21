@@ -16,7 +16,7 @@ func _ready() -> void:
 func attack():
 	var cells: Array[Vector2i] = paint_layer.get_all_tiles()
 	for i: int in range(projectile_count):
-		var chosen_cell := cells[randi_range(0, cells.size())]
+		var chosen_cell := cells[randi_range(0, cells.size() - 1)]
 		var drop_instance: ProjectileDrop = projectile_drop.instantiate()
 		var proper_location := paint_layer.map_to_local(chosen_cell)
 		
@@ -34,3 +34,6 @@ func attack():
 
 	await get_tree().create_timer(1).timeout
 	end_attack()
+
+func can_use() -> bool:
+	return true
