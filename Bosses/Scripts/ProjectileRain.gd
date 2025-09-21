@@ -23,7 +23,7 @@ func attack():
 		drop_instance.global_position = proper_location
 		drop_instance.paint_layer = paint_layer
 		drop_instance.splash_size = splash_radius
-		drop_instance.initial_wait = i*0.4 + 0.3
+		drop_instance.initial_wait = i*0.2 + 0.3
 		
 		if single_color:
 			drop_instance.set_color(projectile_color)

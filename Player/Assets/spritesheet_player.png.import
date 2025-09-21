@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cg8rc5uaxhlio"
-path="res://.godot/imported/testBuckSheet.png-b36f54afd104cb269c927b5314aaf500.ctex"
+uid="uid://dq4cw83br1q5i"
+path="res://.godot/imported/spritesheet_player.png-cc45cf3874b95c37b2a63467b0a5a463.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/Assets/testBuckSheet.png"
-dest_files=["res://.godot/imported/testBuckSheet.png-b36f54afd104cb269c927b5314aaf500.ctex"]
+source_file="res://Player/Assets/spritesheet_player.png"
+dest_files=["res://.godot/imported/spritesheet_player.png-cc45cf3874b95c37b2a63467b0a5a463.ctex"]
 
 [params]
 

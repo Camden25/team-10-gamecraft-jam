@@ -16,6 +16,8 @@ func start_immune():
 	is_immune = true
 	immunes_left -= 1
 	player.damage_immune += 1
+	player.animation_override = true
+	player.animation_player.play("Immune")
 	immune_timer()
 
 func end_immune():
@@ -24,6 +26,7 @@ func end_immune():
 		player.swap_color(color_string)
 	is_immune = false
 	player.damage_immune -= 1
+	player.animation_override = false
 	immune_cooldown_timer()
 
 func immune_timer():

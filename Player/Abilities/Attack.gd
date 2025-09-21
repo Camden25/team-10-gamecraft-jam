@@ -16,7 +16,8 @@ func attack():
 	var attack_instance = attack_scene.instantiate()
 	attack_instance.damage = damage #* player.damage_modifier
 	attack_instance.rotation_angle = global_position.angle_to_point(get_global_mouse_position())
-	attack_instance.global_position = player.global_position
+	attack_instance.global_position = $ProjectileSpawn.global_position
+	attack_instance.get_node("Sprite2D").material.set_shader_parameter("color1_replacement", Color(player.paint_layer.color_list[player.paint_layer.colors[player.color_index]][0]))
 	
 	# change this line
 	get_tree().get_nodes_in_group("world")[0].add_child(attack_instance)
