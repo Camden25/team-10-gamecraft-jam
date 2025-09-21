@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://yy4jyrmbl6hu"]
+[gd_scene load_steps=9 format=3 uid="uid://yy4jyrmbl6hu"]
 
 [ext_resource type="Script" uid="uid://cd35g4rm086fx" path="res://Bosses/Scripts/Boss.gd" id="1_h6esm"]
 [ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="2_8sqon"]
-[ext_resource type="Script" uid="uid://dv7uc4rhw23jb" path="res://Bosses/Scripts/Charge.gd" id="3_8rgwt"]
-[ext_resource type="Script" uid="uid://12wpdoptt4tg" path="res://Bosses/Scripts/ProjectileRain.gd" id="4_1nqhu"]
+[ext_resource type="Script" uid="uid://coqiuhe4o85jq" path="res://Bosses/Scripts/ArenaBullet.gd" id="3_8rgwt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5g7g"]
 size = Vector2(120, 180)
@@ -48,9 +47,11 @@ _data = {
 }
 
 [node name="Boss" type="CharacterBody2D"]
+position = Vector2(0, -1)
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_h6esm")
+colors = Array[String](["cyan", "blue"])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
@@ -83,12 +84,9 @@ script = ExtResource("2_8sqon")
 boss_path = NodePath("../..")
 phase_health = 500
 
-[node name="Node2D2" type="Node2D" parent="Phases/1"]
-script = ExtResource("3_8rgwt")
-
 [node name="Node2D" type="Node2D" parent="Phases/1"]
-script = ExtResource("4_1nqhu")
-projectile_count = 3
+position = Vector2(0, 1)
+script = ExtResource("3_8rgwt")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.5

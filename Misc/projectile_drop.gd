@@ -11,16 +11,6 @@ var paint_layer: PaintLayer
 @export var start_height: int = 1500
 var splash_size: float = 1
 
-var color_list := {
-	"cyan" : ["35cbc8", "99dace"],
-	"blue" : ["403e85", "9a9eb8"],
-	"magenta" : ["d757b7", "d99bb8"],
-	"red" : ["b3133b", "b26d7e"],
-	"yellow" : ["ffdb85", "f7dfc3"],
-	"green" : ["54bc54", "afd4a8"],
-	"black" : ["1b192a", "83838a"]
-}
-
 
 func _ready() -> void:
 	animate_drop()
@@ -45,5 +35,5 @@ func on_land():
 
 func set_color(new_color: String) -> void:
 	_color = new_color
-	$DropSprite.material.set_shader_parameter("color1_replacement", Color(color_list[_color][0]))
-	$DropSprite.material.set_shader_parameter("color2_replacement", Color(color_list[_color][1]))
+	$DropSprite.material.set_shader_parameter("color1_replacement", Color(paint_layer.color_list[_color][0]))
+	$DropSprite.material.set_shader_parameter("color2_replacement", Color(paint_layer.color_list[_color][1]))

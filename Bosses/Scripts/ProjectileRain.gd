@@ -20,7 +20,7 @@ func attack():
 		drop_instance.global_position = proper_location
 		drop_instance.paint_layer = paint_layer
 		drop_instance.splash_size = splash_radius
-		drop_instance.set_color("cyan")
+		drop_instance.set_color(boss.get_random_color())
 		get_tree().root.add_child(drop_instance)
 
 	await get_tree().create_timer(1).timeout

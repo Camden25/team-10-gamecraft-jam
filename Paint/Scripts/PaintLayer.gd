@@ -12,6 +12,16 @@ var secondary_map: Dictionary = {
 	"green": ["cyan","yellow"]
 }
 
+var color_list := {
+	"cyan" : ["35cbc8", "99dace"],
+	"blue" : ["403e85", "9a9eb8"],
+	"magenta" : ["d757b7", "d99bb8"],
+	"red" : ["b3133b", "b26d7e"],
+	"yellow" : ["ffdb85", "f7dfc3"],
+	"green" : ["54bc54", "afd4a8"],
+	"black" : ["1b192a", "83838a"]
+}
+
 var tile_array: Array[Vector2i] = []
 
 func _ready() -> void:
