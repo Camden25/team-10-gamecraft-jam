@@ -28,7 +28,7 @@ func choose_attack():
 		var node: Node2D = get_child(i)
 		if node.can_use():
 			valid_attacks.append(node)
-
+	
 	active_attack = valid_attacks[randi_range(0, valid_attacks.size() - 1)]
 	if active_attack != prev_attack or valid_attacks.size() == 1:
 		prev_attack = active_attack

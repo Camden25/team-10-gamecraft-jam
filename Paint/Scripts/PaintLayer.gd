@@ -1,7 +1,7 @@
 extends TileMapLayer
 class_name PaintLayer
 
-@export var colors: Array[String] = ["cyan", "blue", "magenta", "red", "yellow", "green", "black"]
+@export var colors: Array[String] = ["cyan", "blue", "magenta", "red", "yellow", "green", "black", "white"]
 @export var black_decay_time: float = 5.0
 
 var primaries: Array[String] = ["cyan", "magenta", "yellow"]
@@ -19,7 +19,8 @@ var color_list := {
 	"red" : ["b3133b", "b26d7e"],
 	"yellow" : ["ffdb85", "f7dfc3"],
 	"green" : ["54bc54", "afd4a8"],
-	"black" : ["1b192a", "83838a"]
+	"black" : ["1b192a", "83838a"],
+	"white" : ["b1b1b9", "b1b1b9"]
 }
 
 var tile_array: Array[Vector2i] = []

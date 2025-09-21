@@ -1,6 +1,7 @@
 extends HealthCharacter
-
 class_name Boss
+
+@export var boss_name: String
 
 @export var phases = 1
 var current_phase_num = 0
@@ -34,10 +35,13 @@ enum color_list {cyan, blue, magenta, red, yellow, green, black}
 var can_flip: bool = true
 
 @onready var player: Player = get_tree().get_first_node_in_group("player")
+@onready var ui: UI = get_tree().get_first_node_in_group("ui")
 
 func _ready():
 	var hurtbox = $Hurtbox
 	hurtbox.connect("hurt", Callable(self, "_on_hurt"))
+	
+	ui.boss_name = boss_name
 	
 	add_to_group("boss")
 	randomize()
@@ -79,6 +83,8 @@ func phase_transition(phase):
 	active_phase = $Phases.get_children()[phase-1]
 	set_max_health(active_phase.phase_health)
 	set_health(active_phase.phase_health)
+	ui.boss_max_health = get_max_health()
+	ui.boss_health = get_health()
 	can_attack = true
 
 func death():
@@ -87,17 +93,18 @@ func death():
 
 func _on_hurt(damage: int, source: Node) -> void:
 	set_health(get_health() - damage)
-	print("Ouch! Took", damage, "damage from", source)
+	ui.boss_health = get_health()
+	print("Ouch! Took ", damage, " damage from ", source)
 
 func get_random_color() -> String:
 	var selected: Array[int] = []
 	for i in color_list.values():
 		if colors & (1 << i): # use bitshift here when checking
 			selected.append(i)
-
+	
 	if selected.is_empty():
 		return "black"
-
+	
 	return color_list.keys()[selected.pick_random()]
 
 func sprite_flipping() -> void:

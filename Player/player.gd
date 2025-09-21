@@ -10,6 +10,7 @@ var knockback := Vector2()
 @export var damage_invincibility_duration: float = 0.5
 
 var ability_movement := Vector2()
+var animation_override := false
 
 var disabled := false
 ## Add 1 for each source of damage immunity, remove 1 when no longer immune
@@ -23,18 +24,24 @@ var paint_layer: PaintLayer # IF WE DELETE PAINT LAYERS AND REPLACE THEM, CHANGE
 
 var prev_x_dir: int = 1
 
+@export var dash_colors: Array[int]
+
 @export_category("Damage Flash")
 @export var flash_color: Color = Color.WHITE
 @export var flash_duration: float = 0.1
 @export var flash_count: int = 3  # Number of flashes
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 func _init() -> void:
 	super._init()
 	add_to_group("player")
 
+
 func _ready() -> void:
-	var hurtbox = $Hurtbox
-	hurtbox.connect("hurt", Callable(self, "_on_hurt"))
+	color_index = 7
+	
+	$Hurtbox.connect("hurt", Callable(self, "_on_hurt"))
 	
 	$ColorDamageTimer.wait_time = 0.1
 	$ColorDamageTimer.one_shot = true 
@@ -71,6 +78,8 @@ func _physics_process(delta) -> void:
 	
 	if ability_movement != Vector2(0, 0):
 		move_dir = Vector2(0, 0)
+	
+	animations()
 	
 	velocity = (move_dir*move_speed + knockback*knockback_multiplier + ability_movement) * delta
 	
@@ -126,7 +135,10 @@ func next_color() -> void:
 	color_index += 1
 	if color_index > 5:
 		color_index = 0
-	set_color_visual()
+	if dash_colors.has(color_index):
+		set_color_visual()
+	else:
+		next_color()
 
 func set_color_visual() -> void:
 	$SpriteFlipping/Sprite2D.material.set_shader_parameter("color1_replacement", Color(paint_layer.color_list[paint_layer.colors[color_index]][0]))
@@ -138,7 +150,7 @@ func sprite_flip():
 
 func _on_hurt(damage: int, source: Node) -> void:
 	modify_health(-damage)
-	print("Ouch! Took", damage, "damage from", source)
+	print("Ouch! Took ", damage, "damage from ", source.get_parent().name)
 	$Hurtbox/CollisionShape2D.disabled = true
 	flash_sprite_multiple(flash_count)
 	await get_tree().create_timer(damage_invincibility_duration).timeout
@@ -155,3 +167,10 @@ func flash_sprite_multiple(times: int) -> void:
 		var target_color = flash_color if color_toggle else normal_color
 		tween.tween_property($SpriteFlipping/Sprite2D, "modulate", target_color, flash_duration).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 		color_toggle = !color_toggle
+
+func animations() -> void:
+	if animation_override == false:
+		if move_dir != Vector2(0, 0):
+			animation_player.play("Run")
+		else:
+			animation_player.play("Idle")
