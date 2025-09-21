@@ -2,18 +2,22 @@ extends Node2D
 class_name ProjectileDrop
 
 var ready_to_move := false
+var falling := false
 @onready var ending_location := Vector2($DropSprite.position.x, $DropSprite.position.y)
 var original_y: float
 var _color: String
 var paint_layer: PaintLayer
 
-@export var speed: float = 0.1
-@export var start_height: int = 1500
+@export var speed: float = 0.5
+@export var start_height: int = 4500
 var splash_size: float = 1
+var initial_wait: float = 0
 
 
 func _ready() -> void:
 	animate_drop()
+	await get_tree().create_timer(initial_wait).timeout
+	falling = true
 
 func animate_drop():
 	original_y = $DropSprite.position.y
@@ -22,12 +26,13 @@ func animate_drop():
 	ready_to_move = true
 
 func _process(delta: float) -> void:
-	if ready_to_move:
-		$DropSprite.position = $DropSprite.position.lerp(ending_location, (speed * delta)**0.5)
-		#$DropSprite.modulate = $DropSprite.modulate.lerp(Color(1, 1, 1), (speed * delta)**0.5)
-		
-	if $DropSprite.position.y + 50 >= original_y:
-		on_land()
+	if falling:
+		if ready_to_move:
+			$DropSprite.position = $DropSprite.position.lerp(ending_location, (speed * delta)**0.5)
+			#$DropSprite.modulate = $DropSprite.modulate.lerp(Color(1, 1, 1), (speed * delta)**0.5)
+			
+		if $DropSprite.position.y + 50 >= original_y:
+			on_land()
 
 func on_land():
 	queue_free()

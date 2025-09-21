@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://lmh5r53hahu7"]
+[gd_scene load_steps=10 format=3 uid="uid://db2pd5ncsnbxf"]
 
 [ext_resource type="Script" uid="uid://d0ee10m76u0to" path="res://Misc/projectile_drop.gd" id="1_06ve2"]
 [ext_resource type="Texture2D" uid="uid://caxgjq4deljmq" path="res://Misc/Assets/bigDrop512.png" id="1_m1btn"]
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_kdckf"]
+[ext_resource type="Texture2D" uid="uid://c3yura5j7772k" path="res://Misc/Assets/dropShadow512.png" id="4_yc3uv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yc3uv"]
 shader = ExtResource("2_kdckf")
@@ -48,7 +49,15 @@ scale = Vector2(0.25, 0.25)
 script = ExtResource("1_06ve2")
 
 [node name="DropSprite" type="AnimatedSprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
 material = SubResource("ShaderMaterial_yc3uv")
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_3lneg")
 autoplay = "default"
 frame_progress = 0.53306115
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+texture = ExtResource("4_yc3uv")

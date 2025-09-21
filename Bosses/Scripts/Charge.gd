@@ -1,5 +1,7 @@
 extends BossAttack
 
+@export var damage: float = 20
+
 @export var slide_back_distance: float = 100.0
 @export var slide_back_duration: float = 0.5
 @export var charge_speed: float = 1600.0
