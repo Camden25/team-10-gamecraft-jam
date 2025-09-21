@@ -18,6 +18,8 @@ shader_parameter/color1_threshold = 0.30999999307088
 shader_parameter/color2 = Color(0, 0, 0, 1)
 shader_parameter/color2_replacement = Color(0, 0, 0, 1)
 shader_parameter/color2_threshold = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdas0"]
 size = Vector2(388.00006, 334.00006)
@@ -120,8 +122,8 @@ _data = {
 &"Telegraph": SubResource("Animation_mcjtl")
 }
 
-[node name="Boss4" type="CharacterBody2D"]
-z_index = 1
+[node name="Boss5" type="CharacterBody2D"]
+z_index = 12
 y_sort_enabled = true
 rotation = 6.28319
 collision_layer = 4
