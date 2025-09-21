@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cd35g4rm086fx" path="res://Bosses/Scripts/Boss.gd" id="1_h6esm"]
 [ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="2_8sqon"]
-[ext_resource type="Script" uid="uid://coqiuhe4o85jq" path="res://Bosses/Scripts/ArenaBullet.gd" id="3_8rgwt"]
-[ext_resource type="Script" path="res://Bosses/Scripts/Charge.gd" id="3_8rgwt"]
-[ext_resource type="Script" path="res://Bosses/Scripts/ProjectileRain.gd" id="4_1nqhu"]
+[ext_resource type="Script" uid="uid://dv7uc4rhw23jb" path="res://Bosses/Scripts/Charge.gd" id="3_8rgwt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5g7g"]
 size = Vector2(120, 180)
@@ -53,7 +51,6 @@ position = Vector2(0, -1)
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_h6esm")
-colors = Array[String](["cyan", "blue"])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 

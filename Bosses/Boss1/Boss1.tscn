@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bt5dpvdtoubl6"]
+[gd_scene load_steps=32 format=3 uid="uid://bt5dpvdtoubl6"]
 
 [ext_resource type="Script" uid="uid://cd35g4rm086fx" path="res://Bosses/Scripts/Boss.gd" id="1_nqna2"]
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_mcjtl"]
 [ext_resource type="Texture2D" uid="uid://b15bgluyb6ej4" path="res://Bosses/Boss1/boss1Sheet.png" id="3_sx76g"]
 [ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="4_0fu4o"]
+[ext_resource type="Script" uid="uid://bm4cmv2k7jcjn" path="res://Misc/Hitbox.gd" id="4_witpy"]
+[ext_resource type="Script" uid="uid://cwwrp1aprqdwl" path="res://Misc/Hurtbox.gd" id="5_7sv58"]
 [ext_resource type="Script" uid="uid://dv7uc4rhw23jb" path="res://Bosses/Scripts/Charge.gd" id="5_witpy"]
 [ext_resource type="Script" uid="uid://12wpdoptt4tg" path="res://Bosses/Scripts/ProjectileRain.gd" id="6_7sv58"]
 
@@ -11,31 +13,29 @@
 shader = ExtResource("2_mcjtl")
 shader_parameter/color1 = Color(1, 1, 1, 1)
 shader_parameter/color1_replacement = Color(1, 1, 1, 1)
-shader_parameter/color1_threshold = 0.40999999083568
+shader_parameter/color1_threshold = 0.499999988824
 shader_parameter/color2 = Color(0, 0, 0, 1)
 shader_parameter/color2_replacement = Color(0, 0, 0, 1)
 shader_parameter/color2_threshold = 0.0
 
+[sub_resource type="Gradient" id="Gradient_0fu4o"]
+offsets = PackedFloat32Array(0.48666668)
+colors = PackedColorArray(1, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_witpy"]
+gradient = SubResource("Gradient_0fu4o")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdas0"]
-size = Vector2(40, 54)
+size = Vector2(388.00006, 334.00006)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6o73a"]
+radius = 146.01369
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0kgbn"]
-radius = 64.03124
+radius = 208.40587
 
 [sub_resource type="Animation" id="Animation_mn7a3"]
 resource_name = "1"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 6.28319]
-}
 
 [sub_resource type="Animation" id="Animation_h8jtw"]
 resource_name = "2"
@@ -58,28 +58,339 @@ _data = {
 &"2": SubResource("Animation_h8jtw")
 }
 
+[sub_resource type="Animation" id="Animation_23q8p"]
+resource_name = "Attacking"
+length = 0.1
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_nw3vt"]
+resource_name = "Idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteFlipping/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 1]
+}
+
+[sub_resource type="Animation" id="Animation_100xo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteFlipping/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_23q8p"]
+_data = {
+&"Attacking": SubResource("Animation_23q8p"),
+&"Idle": SubResource("Animation_nw3vt"),
+&"RESET": SubResource("Animation_100xo")
+}
+
+[sub_resource type="Animation" id="Animation_sx76g"]
+resource_name = "Attack"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../SpriteFlipping/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_witpy"]
+resource_name = "End"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../SpriteFlipping/Sprite2D:material:shader_parameter/color1_replacement")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.20784314, 0.79607844, 0.78431374, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../SpriteFlipping/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_0fu4o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../SpriteFlipping/Sprite2D:material:shader_parameter/color1_replacement")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../SpriteFlipping/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_mcjtl"]
+resource_name = "Telegraph"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../SpriteFlipping/Sprite2D:material:shader_parameter/color1_replacement")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.20784314, 0.79607844, 0.78431374, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../SpriteFlipping/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0fu4o"]
+_data = {
+&"Attack": SubResource("Animation_sx76g"),
+&"End": SubResource("Animation_witpy"),
+&"RESET": SubResource("Animation_0fu4o"),
+&"Telegraph": SubResource("Animation_mcjtl")
+}
+
+[sub_resource type="Animation" id="Animation_7sv58"]
+resource_name = "Attack"
+length = 0.1
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_kdas0"]
+resource_name = "End"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../SpriteFlipping/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 2]
+}
+
+[sub_resource type="Animation" id="Animation_0kgbn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../SpriteFlipping/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../SpriteFlipping/Bullet:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, -0.013326824)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../SpriteFlipping/Bullet:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-26.00116, -227.57343)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../../SpriteFlipping/Bullet:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_6o73a"]
+resource_name = "Telegraph"
+length = 1.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../SpriteFlipping/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../SpriteFlipping/Bullet:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4, 0.5, 0.9, 1, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0), Vector2(1, 1.6658175), Vector2(1, 0), Vector2(1, 1.6658175), Vector2(1, 0), Vector2(1, 1.6658175)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../SpriteFlipping/Bullet:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4, 0.5, 0.8, 0.9, 1, 1.3, 1.4, 1.5, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-26.00116, -227.57343), Vector2(-26.00116, -280.87927), Vector2(-26.009962, -2252), Vector2(-26.00116, -227.57343), Vector2(-26.00116, -280.87927), Vector2(-26.009962, -2252), Vector2(-26.00116, -227.57343), Vector2(-26.00116, -280.87927), Vector2(-26.009962, -2252)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../../SpriteFlipping/Bullet:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4, 0.8, 0.9, 1.3, 1.4, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0kgbn"]
+_data = {
+&"Attack": SubResource("Animation_7sv58"),
+&"End": SubResource("Animation_kdas0"),
+&"RESET": SubResource("Animation_0kgbn"),
+&"Telegraph": SubResource("Animation_6o73a")
+}
+
 [node name="Boss1" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
+rotation = 6.28319
+collision_layer = 4
 script = ExtResource("1_nqna2")
+colors = 4
+flip_sprite = true
+sprite_starts_flipped = true
 metadata/_custom_type_script = "uid://cd35g4rm086fx"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="SpriteFlipping" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="SpriteFlipping"]
 material = SubResource("ShaderMaterial_6o73a")
-position = Vector2(0, -84)
-scale = Vector2(0.25, 0.25)
+position = Vector2(-0.0005582975, -125)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_sx76g")
 flip_h = true
 hframes = 5
+frame = 3
+
+[node name="Bullet" type="Sprite2D" parent="SpriteFlipping"]
+visible = false
+position = Vector2(-26.00116, -227.57343)
+scale = Vector2(1, -0.013326824)
+texture = SubResource("GradientTexture2D_witpy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5, -22)
+position = Vector2(3.9997902, -47.00002)
 shape = SubResource("RectangleShape2D_kdas0")
 
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("4_witpy")
+metadata/_custom_type_script = "uid://bm4cmv2k7jcjn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(12.999844, -35.000057)
+shape = SubResource("CircleShape2D_6o73a")
+
 [node name="Hurtbox" type="Area2D" parent="."]
-collision_layer = 32
-collision_mask = 16
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("5_7sv58")
+metadata/_custom_type_script = "uid://cwwrp1aprqdwl"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, -29)
+position = Vector2(1.999857, -32.00001)
 rotation = 1.5707964
 shape = SubResource("CircleShape2D_0kgbn")
 
@@ -88,19 +399,35 @@ libraries = {
 &"": SubResource("AnimationLibrary_h8vwy")
 }
 
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_23q8p")
+}
+
 [node name="Phases" type="Node2D" parent="."]
 
-[node name="1" type="Node2D" parent="Phases"]
+[node name="1" type="Node2D" parent="Phases" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_0fu4o")
 boss_path = NodePath("../..")
+animation_player = NodePath("../../Animations")
 phase_health = 500
+attack_cooldown = 1.5
 avoid_previous_attack = false
 
 [node name="Charge" type="Node2D" parent="Phases/1"]
 script = ExtResource("5_witpy")
 rotate = false
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Phases/1/Charge"]
+libraries = {
+&"": SubResource("AnimationLibrary_0fu4o")
+}
+
 [node name="ProjectileRain" type="Node2D" parent="Phases/1"]
 script = ExtResource("6_7sv58")
 projectile_count = 3
-projectile_color = "magenta"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Phases/1/ProjectileRain"]
+libraries = {
+&"": SubResource("AnimationLibrary_0kgbn")
+}
