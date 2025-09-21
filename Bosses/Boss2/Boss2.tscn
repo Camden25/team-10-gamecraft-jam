@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://cd35g4rm086fx" path="res://Bosses/Scripts/Boss.gd" id="1_rsm42"]
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_860yj"]
 [ext_resource type="Texture2D" uid="uid://cergcyf7jmnoa" path="res://Bosses/Boss2/boss2Sheet.png" id="3_cv137"]
-[ext_resource type="Script" path="res://Misc/Hitbox.gd" id="4_rcs3h"]
-[ext_resource type="Script" path="res://Misc/Hurtbox.gd" id="5_o08gg"]
+[ext_resource type="Script" uid="uid://bm4cmv2k7jcjn" path="res://Misc/Hitbox.gd" id="4_rcs3h"]
+[ext_resource type="Script" uid="uid://cwwrp1aprqdwl" path="res://Misc/Hurtbox.gd" id="5_o08gg"]
 [ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="6_7h1y5"]
 [ext_resource type="Script" uid="uid://dnkbxi0cyquy1" path="res://Bosses/Scripts/WideBeam.gd" id="7_cv137"]
 [ext_resource type="Script" uid="uid://12wpdoptt4tg" path="res://Bosses/Scripts/ProjectileRain.gd" id="8_0e8pw"]
@@ -142,7 +142,7 @@ metadata/_custom_type_script = "uid://cd35g4rm086fx"
 [node name="Sprite2D" type="Sprite2D" parent="SpriteFlipping"]
 material = SubResource("ShaderMaterial_6o73a")
 position = Vector2(-0.0005582975, -125)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_cv137")
 flip_h = true
 hframes = 2
@@ -155,9 +155,9 @@ scale = Vector2(1, -0.013326824)
 texture = SubResource("GradientTexture2D_witpy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(3.9997902, -47.00002)
 shape = SubResource("RectangleShape2D_kdas0")
+disabled = true
 
 [node name="Hitbox" type="Area2D" parent="."]
 visible = false

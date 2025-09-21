@@ -9,6 +9,9 @@ extends BossAttack
 @export_enum("cyan", "blue", "magenta", "red", "yellow", "green", "black") var projectile_color: String
 @export var trail_radius: float = 2.0
 
+@export var top_left_limit: Vector2
+@export var bottom_right_limit: Vector2
+
 var paint_layer: PaintLayer
 var charging: bool = false
 var charge_direction: Vector2
@@ -73,6 +76,12 @@ func attack():
 
 func _start_charge():
 	charge_direction = next_charge_direction
-	charge_target = next_charge_target
+	charge_target = Vector2(clamp(next_charge_target.x, top_left_limit.x, bottom_right_limit.x), clamp(next_charge_target.y, top_left_limit.y, bottom_right_limit.y))
 	previous_position = boss.global_position
 	charging = true
+	
+	await get_tree().create_timer((charge_distance / charge_speed)*1.5).timeout
+	
+	if charging:
+		charging = false
+		end_attack()

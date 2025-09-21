@@ -26,8 +26,9 @@ colors = PackedColorArray(1, 0, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_witpy"]
 gradient = SubResource("Gradient_0fu4o")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kdas0"]
-size = Vector2(388.00006, 334.00006)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_witpy"]
+radius = 147.99992
+height = 404.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6o73a"]
 radius = 146.01369
@@ -435,8 +436,9 @@ scale = Vector2(1, 1.6658175)
 texture = SubResource("GradientTexture2D_witpy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3.9995043, -111.000015)
-shape = SubResource("RectangleShape2D_kdas0")
+position = Vector2(1.9998168, -41.000008)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_witpy")
 
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(-0.0002858483, -64)
@@ -487,6 +489,8 @@ charge_distance = 850.0
 should_rotate = false
 projectile_color = "magenta"
 trail_radius = 4.0
+top_left_limit = Vector2(500, 300)
+bottom_right_limit = Vector2(1400, 700)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Phases/1/Charge"]
 libraries = {
@@ -496,6 +500,8 @@ libraries = {
 [node name="ProjectileRain" type="Node2D" parent="Phases/1"]
 script = ExtResource("6_7sv58")
 projectile_count = 6
+top_left_limit = Vector2(320, 160)
+bottom_right_limit = Vector2(1620, 780)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Phases/1/ProjectileRain"]
 libraries = {
