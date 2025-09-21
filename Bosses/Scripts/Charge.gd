@@ -5,6 +5,8 @@ extends BossAttack
 @export var charge_speed: float = 1600.0
 @export var charge_distance: float = 600.0
 
+@export var rotate: bool = true
+
 var paint_layer: PaintLayer # IF WE DELETE PAINT LAYERS AND REPLACE THEM, CHANGE ME LATER
 
 func _ready() -> void:
@@ -19,7 +21,8 @@ func attack():
 	var tween = create_tween()
 	
 	# Slide back
-	tween.tween_property(boss, "rotation", global_position.angle_to_point(player.global_position), slide_back_duration * 0.25)
+	if rotate:
+		tween.tween_property(boss, "rotation", global_position.angle_to_point(player.global_position), slide_back_duration * 0.25)
 	tween.tween_property(boss, "global_position", slide_back_position, slide_back_duration * 0.75).set_ease(Tween.EASE_OUT)
 	
 	# Charge towards player after sliding back
