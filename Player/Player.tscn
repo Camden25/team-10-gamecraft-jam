@@ -1,10 +1,12 @@
+
 [gd_scene load_steps=32 format=3 uid="uid://b17mw5a7sl1uj"]
+
 
 [ext_resource type="Script" uid="uid://cjomjfe3gexg6" path="res://Player/player.gd" id="1_3qydi"]
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_tok1r"]
 [ext_resource type="Texture2D" uid="uid://dq4cw83br1q5i" path="res://Player/Assets/spritesheet_player.png" id="3_s1rgi"]
 [ext_resource type="Script" uid="uid://etnsmxlou2wc" path="res://Player/Abilities/Dash.gd" id="4_ddoul"]
-[ext_resource type="Script" path="res://Misc/Hurtbox.gd" id="4_s1rgi"]
+[ext_resource type="Script" uid="uid://cwwrp1aprqdwl" path="res://Misc/Hurtbox.gd" id="4_s1rgi"]
 [ext_resource type="Script" uid="uid://bwq0t6i57mow8" path="res://Player/Abilities/Immune.gd" id="5_8g4oa"]
 [ext_resource type="Script" uid="uid://c5v5cx2b4cbqr" path="res://Player/Abilities/Attack.gd" id="6_6ysni"]
 [ext_resource type="Script" uid="uid://bvvem7mx6ob83" path="res://Player/Abilities/Colors/Yellow.gd" id="8_s1rgi"]
@@ -32,6 +34,23 @@ shader_parameter/color2_replacement = Color(0.9254902, 0.40379903, 0.1490196, 1)
 shader_parameter/color2_threshold = 0.66999998502416
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_modifier = 0.0
+
+[sub_resource type="Animation" id="Animation_3mea3"]
+resource_name = "ColorAbility"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteFlipping/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 6]
+}
 
 [sub_resource type="Animation" id="Animation_v0k0e"]
 resource_name = "Dash"
@@ -119,6 +138,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v0k0e"]
 _data = {
+&"ColorAbility": SubResource("Animation_3mea3"),
 &"Dash": SubResource("Animation_v0k0e"),
 &"Idle": SubResource("Animation_j23h2"),
 &"Immune": SubResource("Animation_5wa8t"),
@@ -239,24 +259,29 @@ script = ExtResource("8_s1rgi")
 cooldown = 6
 damage = 0
 color_index = 4
+ui_player_icon = 5
 
 [node name="CB_Magenta" type="Node2D" parent="Actions"]
 script = ExtResource("9_dm7nj")
 color_index = 2
+ui_player_icon = 2
 
 [node name="CB_Blue" type="Node2D" parent="Actions"]
 script = ExtResource("10_3mea3")
 color_index = 1
+ui_player_icon = 1
 
 [node name="CB_Cyan" type="Node2D" parent="Actions"]
 script = ExtResource("11_7v5gs")
 color_index = 0
+ui_player_icon = 4
 
 [node name="CB_Red" type="Node2D" parent="Actions"]
 script = ExtResource("12_8sa4y")
 cooldown = 5
 damage = 17
 color_index = 3
+ui_player_icon = 3
 
 [node name="CB_Green" type="Node2D" parent="Actions"]
 script = ExtResource("13_3nb2p")

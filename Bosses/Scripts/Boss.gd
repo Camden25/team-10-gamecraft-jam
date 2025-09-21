@@ -1,6 +1,8 @@
 extends HealthCharacter
 class_name Boss
 
+@export var next_scene: PackedScene
+
 @export var boss_name: String
 
 @export var phases = 1
@@ -88,8 +90,9 @@ func phase_transition(phase):
 	can_attack = true
 
 func death():
-	print("dead")
 	queue_free()
+	
+	get_tree().get_first_node_in_group("SceneManager").swap_scene(next_scene)
 
 func _on_hurt(damage: int, source: Node) -> void:
 	set_health(get_health() - damage)

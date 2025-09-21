@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://cgsi5f6iood7x"]
+[gd_scene load_steps=12 format=4 uid="uid://cgsi5f6iood7x"]
 
 [ext_resource type="Script" uid="uid://ce7twe87wwbxp" path="res://World/World.gd" id="1_22knj"]
 [ext_resource type="PackedScene" uid="uid://bt5dpvdtoubl6" path="res://Bosses/Boss1/Boss1.tscn" id="2_4owf0"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bvohoyvqqtraf" path="res://UI/UI.tscn" id="4_4owf0"]
 [ext_resource type="PackedScene" uid="uid://bwxj4iny22i3" path="res://Paint/Scenes/PaintLayer.tscn" id="5_ftloe"]
 [ext_resource type="PackedScene" uid="uid://b17mw5a7sl1uj" path="res://Player/Player.tscn" id="6_i63af"]
+[ext_resource type="Script" uid="uid://dgdikrdi6oosk" path="res://Misc/corner_marker.gd" id="7_hbopn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i63af"]
 texture = ExtResource("3_4owf0")
@@ -116,3 +117,14 @@ position = Vector2(966, 752)
 
 [node name="Boss1" parent="." instance=ExtResource("2_4owf0")]
 position = Vector2(945, 330)
+
+[node name="CornerMarker" type="Node2D" parent="."]
+position = Vector2(352, 192)
+script = ExtResource("7_hbopn")
+metadata/_custom_type_script = "uid://dgdikrdi6oosk"
+
+[node name="CornerMarker2" type="Node2D" parent="."]
+position = Vector2(1600, 768)
+script = ExtResource("7_hbopn")
+bottom_right_corner = true
+metadata/_custom_type_script = "uid://dgdikrdi6oosk"
