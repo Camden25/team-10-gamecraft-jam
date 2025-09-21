@@ -6,9 +6,13 @@ extends ColorAbility
 @export var end_splash_radius := 8
 
 func attack():
-	paint_layer.paint_circle_world(player.global_position, "green", self_splash_radius)
+	var has_damaged_boss := deal_boss_damage(paint_layer.paint_circle_world(player.global_position, "green", self_splash_radius), damage)
 	var painted_cells := paint_layer.paint_line_world(player.global_position, get_clamped_mouse_position(player.global_position, get_viewport().get_mouse_position(), beam_max_length), "green", laser_radius, false, true)
-	paint_layer.paint_circle_world(paint_layer.map_to_local(painted_cells[painted_cells.size() - 1]), "green", end_splash_radius)
+	if !has_damaged_boss:
+		has_damaged_boss = deal_boss_damage(painted_cells, damage)
+	var end_painted_cells := paint_layer.paint_circle_world(paint_layer.map_to_local(painted_cells[painted_cells.size() - 1]), "green", end_splash_radius)
+	if !has_damaged_boss:
+		deal_boss_damage(end_painted_cells, damage)
 	start_cooldown()
 
 func get_clamped_mouse_position(start_pos: Vector2, mouse_pos: Vector2, max_length: float) -> Vector2:

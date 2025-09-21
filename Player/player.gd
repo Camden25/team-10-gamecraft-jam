@@ -94,6 +94,7 @@ func _physics_process(delta) -> void:
 	
 	move_dir = Vector2(0, 0)
 	ability_movement = Vector2(0, 0)
+	knockback = Vector2(0, 0)
 	
 	move_and_slide()
 
@@ -108,8 +109,8 @@ func set_move_dir() -> void:
 	move_dir.y += int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 	move_dir = move_dir.normalized()
 
-func knockback_taken(area, knockback_amount) -> void:
-	knockback = global_position.direction_to(area.global_position) * knockback_amount
+#func knockback_taken(area, knockback_amount) -> void:
+#	knockback = global_position.direction_to(area) * knockback_amount
 
 #func swap_in() -> void:
 	#disabled = false
@@ -154,6 +155,9 @@ func sprite_flip():
 	tween.tween_property($SpriteFlipping, "scale", Vector2(sign(move_dir).x, 1), 0.1)
 
 func _on_hurt(damage: int, source: Node) -> void:
+	if source.get_parent() == get_tree().get_first_node_in_group("boss"):
+		#knockback_taken(get_opposite_direction(global_position, get_tree().get_first_node_in_group("boss").global_position), 10)
+		knockback = get_opposite_direction(global_position, get_tree().get_first_node_in_group("boss").global_position) * 1000000
 	modify_health(-damage)
 	print("Ouch! Took ", damage, "damage from ", source.get_parent().name)
 	$Hurtbox/CollisionShape2D.disabled = true
@@ -179,3 +183,6 @@ func animations() -> void:
 			animation_player.play("Run")
 		else:
 			animation_player.play("Idle")
+
+func get_opposite_direction(start: Vector2, end: Vector2) -> Vector2:
+	return -((end - start).normalized())

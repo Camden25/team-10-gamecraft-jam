@@ -71,6 +71,7 @@ func paint_square_world(world_pos: Vector2, color: String, radius: int) -> Array
 	return points
 
 func paint_line_world(start_pos: Vector2, end_pos: Vector2, color: String, radius: float, ignore_pillars: bool = false, ignore_boss: bool = false) -> Array[Vector2i]:
+	var already_painted_cells: Array[Vector2i] = []
 	var points := get_points_in_line(local_to_map(start_pos), local_to_map(end_pos))
 	for cell: Vector2i in points:
 		if !ignore_pillars and are_pillars_in_range(map_to_local(cell), 16):
@@ -81,9 +82,17 @@ func paint_line_world(start_pos: Vector2, end_pos: Vector2, color: String, radiu
 
 		if radius > 1:
 			for cell2: Vector2i in get_points_in_circle(cell, radius):
+				if cell2 in already_painted_cells:
+					continue
+					
 				paint_cell(cell2, color)
+				already_painted_cells.append(cell2)
 		else:
+			if cell in already_painted_cells:
+				continue
+
 			paint_cell(cell, color)
+			already_painted_cells.append(cell)
 	return points
 
 func are_pillars_in_range(target_pos: Vector2, pillar_range: float) -> bool:
@@ -199,9 +208,11 @@ func mix_colors(color_a: String, color_b: String) -> String:
 
 func get_all_tiles() -> Array:
 	if !tile_array.size():
-		var window_size = get_window().size
-		for i in range(window_size.x / tile_set.tile_size.x):
-			for j in range(window_size.y / tile_set.tile_size.y):
+		var top_left: Node2D = get_tree().get_first_node_in_group("top_left")
+		var bottom_right: Node2D = get_tree().get_first_node_in_group("bottom_right")
+
+		for i in range((bottom_right.x - top_left.x) / tile_set.tile_size.x):
+			for j in range((bottom_right.y - top_left.y) / tile_set.tile_size.y):
 				tile_array.append(Vector2i(i, j))
 	
 	return tile_array
