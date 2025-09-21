@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://db2pd5ncsnbxf"]
+[gd_scene load_steps=12 format=3 uid="uid://db2pd5ncsnbxf"]
 
 [ext_resource type="Script" uid="uid://d0ee10m76u0to" path="res://Misc/projectile_drop.gd" id="1_06ve2"]
 [ext_resource type="Texture2D" uid="uid://caxgjq4deljmq" path="res://Misc/Assets/bigDrop512.png" id="1_m1btn"]
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_kdckf"]
 [ext_resource type="Texture2D" uid="uid://c3yura5j7772k" path="res://Misc/Assets/dropShadow512.png" id="4_yc3uv"]
+[ext_resource type="Script" uid="uid://bm4cmv2k7jcjn" path="res://Misc/Hitbox.gd" id="5_jwq2a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yc3uv"]
 shader = ExtResource("2_kdckf")
@@ -44,6 +45,9 @@ animations = [{
 "speed": 3.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_iwkd8"]
+radius = 241.66092
+
 [node name="ProjectileDrop" type="Node2D"]
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_06ve2")
@@ -61,3 +65,13 @@ frame_progress = 0.53306115
 y_sort_enabled = true
 scale = Vector2(2, 2)
 texture = ExtResource("4_yc3uv")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 32
+script = ExtResource("5_jwq2a")
+metadata/_custom_type_script = "uid://bm4cmv2k7jcjn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(4, 364)
+shape = SubResource("CircleShape2D_iwkd8")

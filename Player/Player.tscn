@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_tok1r"]
 [ext_resource type="Texture2D" uid="uid://dq4cw83br1q5i" path="res://Player/Assets/spritesheet_player.png" id="3_s1rgi"]
 [ext_resource type="Script" uid="uid://etnsmxlou2wc" path="res://Player/Abilities/Dash.gd" id="4_ddoul"]
-[ext_resource type="Script" path="res://Misc/Hurtbox.gd" id="4_s1rgi"]
+[ext_resource type="Script" uid="uid://cwwrp1aprqdwl" path="res://Misc/Hurtbox.gd" id="4_s1rgi"]
 [ext_resource type="Script" uid="uid://bwq0t6i57mow8" path="res://Player/Abilities/Immune.gd" id="5_8g4oa"]
 [ext_resource type="Script" uid="uid://c5v5cx2b4cbqr" path="res://Player/Abilities/Attack.gd" id="6_6ysni"]
 [ext_resource type="Script" uid="uid://bvvem7mx6ob83" path="res://Player/Abilities/Colors/Yellow.gd" id="8_s1rgi"]
@@ -21,6 +21,23 @@ shader_parameter/color2 = Color(0, 0.9764706, 1, 1)
 shader_parameter/color2_replacement = Color(0.9254902, 0.40379903, 0.1490196, 1)
 shader_parameter/color2_threshold = 0.66999998502416
 
+[sub_resource type="Animation" id="Animation_v0k0e"]
+resource_name = "Dash"
+length = 0.20000668
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteFlipping/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [7, 8, 9]
+}
+
 [sub_resource type="Animation" id="Animation_j23h2"]
 resource_name = "Idle"
 length = 0.01
@@ -35,6 +52,24 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_5wa8t"]
+resource_name = "Immune"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteFlipping/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [16, 17]
 }
 
 [sub_resource type="Animation" id="Animation_0j2ni"]
@@ -68,41 +103,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [10, 11, 12, 13, 14, 15]
-}
-
-[sub_resource type="Animation" id="Animation_v0k0e"]
-resource_name = "Dash"
-length = 0.20000668
-step = 0.02
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteFlipping/Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.02, 0.04),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [7, 8, 9]
-}
-
-[sub_resource type="Animation" id="Animation_5wa8t"]
-resource_name = "Immune"
-length = 0.2
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteFlipping/Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.10000001),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [16, 17]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v0k0e"]

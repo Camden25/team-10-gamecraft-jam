@@ -2,6 +2,7 @@ extends BossAttack
 
 @export var projectile_count = 10
 @export var splash_radius = 5
+@export var impact_damage = 20
 
 @export var single_color: bool = false
 @export_enum("cyan", "blue", "magenta", "red", "yellow", "green", "black") var projectile_color: String 
@@ -24,6 +25,7 @@ func attack():
 		drop_instance.paint_layer = paint_layer
 		drop_instance.splash_size = splash_radius
 		drop_instance.initial_wait = i*0.2 + 0.3
+		drop_instance.impact_damage = impact_damage
 		
 		if single_color:
 			drop_instance.set_color(projectile_color)
