@@ -1,0 +1,247 @@
+[gd_scene load_steps=26 format=3 uid="uid://pky7bgsibt5y"]
+
+[ext_resource type="Script" uid="uid://cd35g4rm086fx" path="res://Bosses/Scripts/Boss.gd" id="1_4nuip"]
+[ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_b7oi1"]
+[ext_resource type="Texture2D" uid="uid://dcveqajq5lvxd" path="res://Bosses/Boss4/boss4Sheet.png" id="3_ickvh"]
+[ext_resource type="Script" uid="uid://bm4cmv2k7jcjn" path="res://Misc/Hitbox.gd" id="4_birp0"]
+[ext_resource type="Script" path="res://Misc/Hurtbox.gd" id="5_ermvk"]
+[ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="6_gk6hw"]
+[ext_resource type="Script" uid="uid://cmw7s8aytwaf6" path="res://Bosses/Scripts/LaserChannel.gd" id="7_ickvh"]
+[ext_resource type="Script" uid="uid://cgikycrj8ffcf" path="res://Bosses/Scripts/BeamSpin.gd" id="9_4nuip"]
+[ext_resource type="Script" uid="uid://12wpdoptt4tg" path="res://Bosses/Scripts/ProjectileRain.gd" id="10_3eqoy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6o73a"]
+shader = ExtResource("2_b7oi1")
+shader_parameter/color1 = Color(1, 0.42745098, 0.42745098, 1)
+shader_parameter/color1_replacement = Color(1, 0.34375, 0.9897461, 1)
+shader_parameter/color1_threshold = 0.30999999307088
+shader_parameter/color2 = Color(0, 0, 0, 1)
+shader_parameter/color2_replacement = Color(0, 0, 0, 1)
+shader_parameter/color2_threshold = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kdas0"]
+size = Vector2(388.00006, 334.00006)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6o73a"]
+radius = 146.01369
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0kgbn"]
+radius = 208.40587
+
+[sub_resource type="Animation" id="Animation_mn7a3"]
+resource_name = "1"
+
+[sub_resource type="Animation" id="Animation_h8jtw"]
+resource_name = "2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h8vwy"]
+_data = {
+&"1": SubResource("Animation_mn7a3"),
+&"2": SubResource("Animation_h8jtw")
+}
+
+[sub_resource type="Animation" id="Animation_23q8p"]
+resource_name = "Attacking"
+length = 0.1
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_nw3vt"]
+resource_name = "Idle"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteFlipping/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_100xo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteFlipping/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_23q8p"]
+_data = {
+&"Attacking": SubResource("Animation_23q8p"),
+&"Idle": SubResource("Animation_nw3vt"),
+&"RESET": SubResource("Animation_100xo")
+}
+
+[sub_resource type="Animation" id="Animation_sx76g"]
+resource_name = "Attack"
+length = 0.1
+
+[sub_resource type="Animation" id="Animation_witpy"]
+resource_name = "End"
+length = 0.2
+
+[sub_resource type="Animation" id="Animation_0fu4o"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_mcjtl"]
+resource_name = "Telegraph"
+length = 0.2
+step = 0.1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0fu4o"]
+_data = {
+&"Attack": SubResource("Animation_sx76g"),
+&"End": SubResource("Animation_witpy"),
+&"RESET": SubResource("Animation_0fu4o"),
+&"Telegraph": SubResource("Animation_mcjtl")
+}
+
+[node name="Boss4" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
+rotation = 6.28319
+collision_layer = 4
+script = ExtResource("1_4nuip")
+colors = 63
+metadata/_custom_type_script = "uid://cd35g4rm086fx"
+
+[node name="SpriteFlipping" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="SpriteFlipping"]
+visibility_layer = 131072
+material = SubResource("ShaderMaterial_6o73a")
+position = Vector2(3.9998927, -24.000015)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_ickvh")
+flip_h = true
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.9997902, -47.00002)
+shape = SubResource("RectangleShape2D_kdas0")
+disabled = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("4_birp0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(12.999844, -35.000057)
+shape = SubResource("CircleShape2D_6o73a")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("5_ermvk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(1.999857, -32.00001)
+rotation = 1.5707964
+shape = SubResource("CircleShape2D_0kgbn")
+
+[node name="PhaseTransitions" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_h8vwy")
+}
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_23q8p")
+}
+
+[node name="Phases" type="Node2D" parent="."]
+
+[node name="1" type="Node2D" parent="Phases" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("6_gk6hw")
+boss_path = NodePath("../..")
+animation_player = NodePath("../../Animations")
+phase_health = 3500
+attack_cooldown = 1.5
+avoid_previous_attack = false
+
+[node name="LaserChannel" type="Node2D" parent="Phases/1"]
+script = ExtResource("7_ickvh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Phases/1/LaserChannel"]
+libraries = {
+&"": SubResource("AnimationLibrary_0fu4o")
+}
+
+[node name="ProjectileRain" type="Node2D" parent="Phases/1"]
+script = ExtResource("10_3eqoy")
+projectile_count = 7
+splash_radius = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Phases/1/ProjectileRain"]
+libraries = {
+&"": SubResource("AnimationLibrary_0fu4o")
+}
+
+[node name="LaserSpin" type="Node2D" parent="Phases/1"]
+script = ExtResource("9_4nuip")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Phases/1/LaserSpin"]
+libraries = {
+&"": SubResource("AnimationLibrary_0fu4o")
+}
+
+[node name="2" type="Node2D" parent="Phases" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("6_gk6hw")
+boss_path = NodePath("../..")
+animation_player = NodePath("../../Animations")
+phase_health = 500
+attack_cooldown = 1.5
+avoid_previous_attack = false
+
+[node name="LaserChannel" type="Node2D" parent="Phases/2"]
+script = ExtResource("7_ickvh")
+beam_length = 1920
+beam_radius = 2.0
+splash_radius = 11.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Phases/2/LaserChannel"]
+libraries = {
+&"": SubResource("AnimationLibrary_0fu4o")
+}
+
+[node name="ProjectileRain" type="Node2D" parent="Phases/2"]
+script = ExtResource("10_3eqoy")
+projectile_count = 11
+splash_radius = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Phases/2/ProjectileRain"]
+libraries = {
+&"": SubResource("AnimationLibrary_0fu4o")
+}
+
+[node name="LaserSpin" type="Node2D" parent="Phases/2"]
+script = ExtResource("9_4nuip")
+force_color = "black"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Phases/2/LaserSpin"]
+libraries = {
+&"": SubResource("AnimationLibrary_0fu4o")
+}

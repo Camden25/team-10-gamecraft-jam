@@ -211,8 +211,8 @@ func get_all_tiles() -> Array:
 		var top_left: Node2D = get_tree().get_first_node_in_group("top_left")
 		var bottom_right: Node2D = get_tree().get_first_node_in_group("bottom_right")
 
-		for i in range((bottom_right.x - top_left.x) / tile_set.tile_size.x):
-			for j in range((bottom_right.y - top_left.y) / tile_set.tile_size.y):
+		for i in range(top_left.global_position.x / tile_set.tile_size.x, bottom_right.global_position.x / tile_set.tile_size.x):
+			for j in range(top_left.global_position.y / tile_set.tile_size.y, bottom_right.global_position.y / tile_set.tile_size.y):
 				tile_array.append(Vector2i(i, j))
 	
 	return tile_array
