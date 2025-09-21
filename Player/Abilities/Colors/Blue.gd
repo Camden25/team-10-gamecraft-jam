@@ -5,8 +5,13 @@ extends ColorAbility
 @export var line_radius := 2.5
 
 func attack():
-	for target_pos in compute_aim_lines(player.global_position, get_viewport().get_mouse_position()):
+	var end_positions := compute_aim_lines(player.global_position, get_viewport().get_mouse_position())
+	var cell_positions: Array[Vector2i] = []
+	for target_pos in end_positions:
 		paint_layer.paint_line_world(player.global_position, target_pos, "blue", line_radius)
+		cell_positions.append(paint_layer.local_to_map(target_pos))
+	
+	deal_boss_damage(cell_positions, damage)
 	start_cooldown()
 
 func compute_aim_lines(player_pos: Vector2, mouse_pos: Vector2) -> Array:

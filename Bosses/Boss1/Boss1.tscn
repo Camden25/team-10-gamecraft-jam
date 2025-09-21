@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b15bgluyb6ej4" path="res://Bosses/Boss1/boss1Sheet.png" id="3_sx76g"]
 [ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="4_0fu4o"]
 [ext_resource type="Script" uid="uid://bm4cmv2k7jcjn" path="res://Misc/Hitbox.gd" id="4_witpy"]
-[ext_resource type="Script" uid="uid://cwwrp1aprqdwl" path="res://Misc/Hurtbox.gd" id="5_7sv58"]
+[ext_resource type="Script" path="res://Misc/Hurtbox.gd" id="5_7sv58"]
 [ext_resource type="Script" uid="uid://dv7uc4rhw23jb" path="res://Bosses/Scripts/Charge.gd" id="5_witpy"]
 [ext_resource type="Script" uid="uid://12wpdoptt4tg" path="res://Bosses/Scripts/ProjectileRain.gd" id="6_7sv58"]
 
