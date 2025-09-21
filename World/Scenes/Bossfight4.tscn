@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1c11nu3kp067"]
+
+[ext_resource type="Script" uid="uid://ce7twe87wwbxp" path="res://World/World.gd" id="1_c7rww"]
+[ext_resource type="PackedScene" uid="uid://781pkh12rn3r" path="res://Bosses/Boss2/Boss2.tscn" id="2_lvan6"]
+[ext_resource type="Texture2D" uid="uid://sesya4mfv2ip" path="res://World/Assets/Background.png" id="3_bsebv"]
+[ext_resource type="PackedScene" uid="uid://cgmy7d16qcc5p" path="res://Misc/Pillar.tscn" id="4_lvan6"]
+
+[node name="Bossfight2" type="Node2D"]
+script = ExtResource("1_c7rww")
+boss_scene = ExtResource("2_lvan6")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(960, 540)
+texture = ExtResource("3_bsebv")
+
+[node name="Pillar" parent="." instance=ExtResource("4_lvan6")]
+position = Vector2(506, 244)
+
+[node name="Pillar2" parent="." instance=ExtResource("4_lvan6")]
+position = Vector2(1518, 244)
+
+[node name="Pillar3" parent="." instance=ExtResource("4_lvan6")]
+position = Vector2(506, 832)
+
+[node name="Pillar4" parent="." instance=ExtResource("4_lvan6")]
+position = Vector2(1518, 832)
