@@ -3,7 +3,7 @@ class_name Bullet
 
 @export var move_speed = 1000
 @export var despawn_time = 0.75
-@export var damping = 0.98
+@export var damping = 1
 @export var target_physics_layer: int
 
 var damage = 0

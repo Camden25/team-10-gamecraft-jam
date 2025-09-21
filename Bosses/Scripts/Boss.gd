@@ -15,6 +15,8 @@ var in_air := false # I don't like doing this for a single boss but such is life
 @export var move_speed = 450
 @export var knockback_multiplier = 1
 
+@export var contact_damage: int = 10
+
 var target_pos = null
 
 var move_dir = Vector2()
@@ -49,6 +51,7 @@ func _process(_delta):
 	
 	if attacking == false:
 		sprite_flipping()
+		$Hitbox.damage = contact_damage
 
 func _physics_process(_delta):
 	if target_pos != null:

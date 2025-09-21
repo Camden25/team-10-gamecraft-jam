@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bee3lkscqqmd3"]
+[gd_scene load_steps=3 format=3 uid="uid://bee3lkscqqmd3"]
 
 [ext_resource type="Script" uid="uid://wtiuy5imtnwu" path="res://base_scene.gd" id="1_m2yd1"]
+[ext_resource type="Texture2D" uid="uid://sesya4mfv2ip" path="res://World/Assets/Background.png" id="2_r0f7s"]
 
 [node name="BaseScene" type="Node2D"]
 script = ExtResource("1_m2yd1")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("2_r0f7s")

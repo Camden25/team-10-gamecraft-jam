@@ -15,7 +15,7 @@ func post_init() -> void:
 	phase = get_parent()
 	boss = phase.boss
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 func can_use() -> bool:

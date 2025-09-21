@@ -1,14 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://b17mw5a7sl1uj"]
+[gd_scene load_steps=16 format=3 uid="uid://b17mw5a7sl1uj"]
 
 [ext_resource type="Script" uid="uid://cjomjfe3gexg6" path="res://Player/player.gd" id="1_3qydi"]
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_tok1r"]
 [ext_resource type="Texture2D" uid="uid://cg8rc5uaxhlio" path="res://Player/Assets/testBuckSheet.png" id="3_vlldt"]
 [ext_resource type="Script" uid="uid://etnsmxlou2wc" path="res://Player/Abilities/Dash.gd" id="4_ddoul"]
+[ext_resource type="Script" uid="uid://cwwrp1aprqdwl" path="res://Misc/Hurtbox.gd" id="4_s1rgi"]
 [ext_resource type="Script" uid="uid://bwq0t6i57mow8" path="res://Player/Abilities/Immune.gd" id="5_8g4oa"]
 [ext_resource type="Script" uid="uid://c5v5cx2b4cbqr" path="res://Player/Abilities/Attack.gd" id="6_6ysni"]
 [ext_resource type="Script" uid="uid://bpxqbg4b3oxh4" path="res://Player/Abilities/ColorAbility.gd" id="7_vlldt"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3qydi"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s1rgi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ddoul"]
 shader = ExtResource("2_tok1r")
@@ -25,7 +26,7 @@ length = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("SpriteFlipping/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -40,7 +41,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("SpriteFlipping/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -58,7 +59,7 @@ step = 0.16666667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("SpriteFlipping/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -75,16 +76,25 @@ _data = {
 &"Run": SubResource("Animation_s1rgi")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j23h2"]
+radius = 19.0
+height = 110.0
+
 [node name="Player" type="CharacterBody2D"]
-z_index = 1
+z_index = 2
 y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_3qydi")
+move_speed = 40000
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_3qydi")
+position = Vector2(0, 48)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_s1rgi")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="SpriteFlipping" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="SpriteFlipping"]
 material = SubResource("ShaderMaterial_ddoul")
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_vlldt")
@@ -108,10 +118,21 @@ libraries = {
 }
 autoplay = "Run"
 
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("4_s1rgi")
+metadata/_custom_type_script = "uid://cwwrp1aprqdwl"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_j23h2")
+
 [node name="Actions" type="Node2D" parent="."]
 
 [node name="Dash" type="Node2D" parent="Actions"]
 script = ExtResource("4_ddoul")
+dash_distance = 350
+dash_time = 0.1
 metadata/_custom_type_script = "uid://djpdmjiqd5j87"
 
 [node name="Immune" type="Node2D" parent="Actions"]
