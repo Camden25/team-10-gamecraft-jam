@@ -2,13 +2,17 @@ extends Node
 class_name SceneManager
 
 var current_scene: Node
+var current_scene_packed: PackedScene
+var previous_scene: PackedScene
 
-@onready var menu_manager_scene: PackedScene = load("res://Menus/Scenes/MenuManager.tscn")
+@onready var scene: PackedScene = load("res://UI/IntroSequence.tscn")
 
 func _ready() -> void:
-	var menu_manager_instance: MenuManager = menu_manager_scene.instantiate()
-	add_child(menu_manager_instance)
-	current_scene = menu_manager_instance
+	current_scene_packed = scene
+	previous_scene = scene
+	var scene_instance = scene.instantiate()
+	add_child(scene_instance)
+	current_scene = scene_instance
 
 
 #func _process(delta: float) -> void:
@@ -17,11 +21,10 @@ func _ready() -> void:
 
 
 func swap_scene(new_scene: PackedScene) -> void:
+	previous_scene = current_scene_packed
+	current_scene_packed = new_scene
 	var new_scene_instance: Node = new_scene.instantiate()
-	$SceneTransitions/AnimationPlayer.play("FadeToBlack")
-	await $SceneTransitions/AnimationPlayer.animation_finished
 	remove_child(current_scene)
 	call_deferred("add_child", new_scene_instance)
 	await new_scene_instance.tree_entered
-	$SceneTransitions/AnimationPlayer.play("FadeFromBlack")
 	current_scene = new_scene_instance

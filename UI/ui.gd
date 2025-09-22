@@ -11,7 +11,7 @@ var player_max_health: float
 var player_ability: float
 var player_max_ability: float
 
-var player_icon: int
+var player_icon: int = 2
 
 func _ready() -> void:
 	add_to_group("ui")

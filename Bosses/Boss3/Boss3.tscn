@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="3_8kce1"]
 [ext_resource type="Texture2D" uid="uid://cot8d01r4ek6x" path="res://Bosses/Boss3/spritesheet_Boss3.png" id="4_x1cgl"]
 [ext_resource type="Script" uid="uid://bm4cmv2k7jcjn" path="res://Misc/Hitbox.gd" id="5_1srpx"]
-[ext_resource type="Script" path="res://Misc/Hurtbox.gd" id="6_f8lc8"]
+[ext_resource type="Script" uid="uid://cwwrp1aprqdwl" path="res://Misc/Hurtbox.gd" id="6_f8lc8"]
 [ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="7_tvg0j"]
 [ext_resource type="Script" uid="uid://dv7uc4rhw23jb" path="res://Bosses/Scripts/Charge.gd" id="8_k5xo1"]
 [ext_resource type="Script" uid="uid://coqiuhe4o85jq" path="res://Bosses/Scripts/ArenaBullet.gd" id="11_yvjxu"]
@@ -14,9 +14,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6o73a"]
 shader = ExtResource("3_8kce1")
-shader_parameter/color1 = Color(1, 1, 1, 1)
+shader_parameter/color1 = Color(0, 0, 0, 1)
 shader_parameter/color1_replacement = Color(1, 1, 1, 1)
-shader_parameter/color1_threshold = 0.499999988824
+shader_parameter/color1_threshold = 0.0
 shader_parameter/color2 = Color(0, 0, 0, 1)
 shader_parameter/color2_replacement = Color(0, 0, 0, 1)
 shader_parameter/color2_threshold = 0.0
@@ -228,6 +228,7 @@ y_sort_enabled = true
 rotation = 6.28319
 collision_layer = 4
 script = ExtResource("1_kp6de")
+next_scene = "res://BossKillAnimations/Boss3/Boss3Dead.tscn"
 boss_name = "Eraser Head"
 colors = 21
 flip_sprite = true
@@ -310,7 +311,7 @@ position = Vector2(-0.0002858483, -64)
 script = ExtResource("7_tvg0j")
 boss_path = NodePath("../..")
 animation_player = NodePath("../../Animations")
-phase_health = 2500
+phase_health = 2000
 attack_cooldown = 1.5
 avoid_previous_attack = false
 

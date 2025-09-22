@@ -50,10 +50,13 @@ func start_cooldown():
 	can_attack = false
 	holding_attack = false
 	current_hold_time = 0
-	await get_tree().create_timer(cooldown).timeout
-	can_attack = true
+	if get_tree():
+		await get_tree().create_timer(cooldown).timeout
+		can_attack = true
 
 func deal_boss_damage(cell_array: Array[Vector2i], damage_to_deal: int) -> bool:
+	if not get_tree():
+		return false
 	for boss in get_tree().get_nodes_in_group("boss"):
 		if paint_layer.local_to_map(boss.global_position) in cell_array:
 			boss.modify_health(-damage_to_deal)
