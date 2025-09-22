@@ -32,11 +32,13 @@ gradient = SubResource("Gradient_0fu4o")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdas0"]
 size = Vector2(388.00006, 334.00006)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6o73a"]
-radius = 146.01369
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xtl4d"]
+radius = 88.0
+height = 435.9999
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0kgbn"]
-radius = 208.40587
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_du5ar"]
+radius = 137.00006
+height = 547.99994
 
 [sub_resource type="Animation" id="Animation_mn7a3"]
 resource_name = "1"
@@ -136,6 +138,7 @@ y_sort_enabled = true
 rotation = 6.28319
 collision_layer = 4
 script = ExtResource("1_rsm42")
+next_scene = "res://BossKillAnimations/Boss2/Boss2Dead.tscn"
 boss_name = "Pizza Bug"
 colors = 20
 metadata/_custom_type_script = "uid://cd35g4rm086fx"
@@ -163,23 +166,22 @@ shape = SubResource("RectangleShape2D_kdas0")
 disabled = true
 
 [node name="Hitbox" type="Area2D" parent="."]
-visible = false
 script = ExtResource("4_rcs3h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(12.999844, -35.000057)
-shape = SubResource("CircleShape2D_6o73a")
+position = Vector2(0.9999018, -22.000008)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_xtl4d")
 
 [node name="Hurtbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("5_o08gg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(1.999857, -32.00001)
+position = Vector2(-0.00026798248, -60)
 rotation = 1.5707964
-shape = SubResource("CircleShape2D_0kgbn")
+shape = SubResource("CapsuleShape2D_du5ar")
 
 [node name="PhaseTransitions" type="AnimationPlayer" parent="."]
 libraries = {
@@ -197,7 +199,7 @@ libraries = {
 script = ExtResource("6_7h1y5")
 boss_path = NodePath("../..")
 animation_player = NodePath("../../Animations")
-phase_health = 500
+phase_health = 1500
 attack_cooldown = 1.5
 avoid_previous_attack = false
 

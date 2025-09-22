@@ -41,9 +41,12 @@ func _process(delta: float) -> void:
 func on_land():
 	$Hitbox.monitoring = true
 	paint_layer.paint_circle_world(Vector2(global_position.x, global_position.y + 55), _color, splash_size)
-	get_tree().get_first_node_in_group("player").get_node("DropSplash").play()
-	await get_tree().create_timer(0.05).timeout
-	queue_free()
+	if not get_tree():
+		queue_free()
+	elif get_tree().get_first_node_in_group("player"):
+		get_tree().get_first_node_in_group("player").get_node("DropSplash").play()
+		await get_tree().create_timer(0.05).timeout
+		queue_free()
 
 func set_color(new_color: String) -> void:
 	_color = new_color

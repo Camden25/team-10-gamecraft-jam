@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://c7hsw6wvn7bdj" path="res://Player/Assets/PlayerColorReplacement.gdshader" id="2_b7oi1"]
 [ext_resource type="Texture2D" uid="uid://dcveqajq5lvxd" path="res://Bosses/Boss4/boss4Sheet.png" id="3_ickvh"]
 [ext_resource type="Script" uid="uid://bm4cmv2k7jcjn" path="res://Misc/Hitbox.gd" id="4_birp0"]
-[ext_resource type="Script" path="res://Misc/Hurtbox.gd" id="5_ermvk"]
+[ext_resource type="Script" uid="uid://cwwrp1aprqdwl" path="res://Misc/Hurtbox.gd" id="5_ermvk"]
 [ext_resource type="Script" uid="uid://bkf0erswfv7dg" path="res://Bosses/Scripts/Phase.gd" id="6_gk6hw"]
 [ext_resource type="Script" uid="uid://cmw7s8aytwaf6" path="res://Bosses/Scripts/LaserChannel.gd" id="7_ickvh"]
 [ext_resource type="Script" uid="uid://cgikycrj8ffcf" path="res://Bosses/Scripts/BeamSpin.gd" id="9_4nuip"]
@@ -122,12 +122,14 @@ _data = {
 &"Telegraph": SubResource("Animation_mcjtl")
 }
 
-[node name="Boss5" type="CharacterBody2D"]
+[node name="Boss4" type="CharacterBody2D"]
 z_index = 12
 y_sort_enabled = true
 rotation = 6.28319
 collision_layer = 4
 script = ExtResource("1_4nuip")
+next_scene = "res://BossKillAnimations/Boss4/Boss4Dead.tscn"
+boss_name = "Jet Black"
 colors = 63
 metadata/_custom_type_script = "uid://cd35g4rm086fx"
 
@@ -180,7 +182,7 @@ libraries = {
 script = ExtResource("6_gk6hw")
 boss_path = NodePath("../..")
 animation_player = NodePath("../../Animations")
-phase_health = 3500
+phase_health = 2750
 attack_cooldown = 1.5
 avoid_previous_attack = false
 

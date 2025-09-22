@@ -1,9 +1,37 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5rw7xdxajcb2"]
+[gd_scene load_steps=11 format=3 uid="uid://c5rw7xdxajcb2"]
 
 [ext_resource type="Script" uid="uid://mqnpns3qw0ca" path="res://UI/intro_sequence.gd" id="1_1a6cq"]
 [ext_resource type="Texture2D" uid="uid://bwiepp3ho5ydp" path="res://Menus/Assets/image.png" id="1_ilije"]
 [ext_resource type="Texture2D" uid="uid://ykoa0sx5xs0v" path="res://Menus/Assets/instructions_screen.png" id="2_0q84r"]
+[ext_resource type="AudioStream" uid="uid://baxv7vx8pp6hs" path="res://Music/opening theme.mp3" id="2_u8hgr"]
 [ext_resource type="FontFile" uid="uid://imxkeyhbvm6n" path="res://UI/Handwriting.ttf" id="3_1a6cq"]
+
+[sub_resource type="Animation" id="Animation_ilije"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_kxeac"]
 resource_name = "Start"
@@ -34,33 +62,6 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_ilije"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("1:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("2:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ilije"]
 _data = {
 &"RESET": SubResource("Animation_ilije"),
@@ -84,6 +85,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1a6cq")
+music = ExtResource("2_u8hgr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

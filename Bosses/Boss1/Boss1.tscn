@@ -402,6 +402,7 @@ y_sort_enabled = true
 rotation = 6.28319
 collision_layer = 4
 script = ExtResource("1_nqna2")
+next_scene = "res://BossKillAnimations/Boss1/Boss1Dead.tscn"
 boss_name = "Slugger"
 colors = 4
 flip_sprite = true
@@ -480,7 +481,7 @@ position = Vector2(-0.0002858483, -64)
 script = ExtResource("4_0fu4o")
 boss_path = NodePath("../..")
 animation_player = NodePath("../../Animations")
-phase_health = 2500
+phase_health = 1000
 attack_cooldown = 1.5
 avoid_previous_attack = false
 

@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://gjb03pancpwt"]
+
+[ext_resource type="Texture2D" uid="uid://bjwjdr4p05toi" path="res://Menus/Assets/bigBuck.png" id="1_46rli"]
+[ext_resource type="Script" uid="uid://ldeixc0huqch" path="res://UI/win_screen.gd" id="1_xcbig"]
+[ext_resource type="AudioStream" uid="uid://c2kjro3tcuyg8" path="res://Music/win.mp3" id="2_wmf7b"]
+[ext_resource type="FontFile" uid="uid://dqievavynfavi" path="res://UI/i eat crayons.ttf" id="2_xcbig"]
+
+[node name="WinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xcbig")
+music = ExtResource("2_wmf7b")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_46rli")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 795.0
+offset_top = 49.0
+offset_right = 1796.0
+offset_bottom = 411.0
+theme_override_fonts/font = ExtResource("2_xcbig")
+theme_override_font_sizes/font_size = 256
+text = "YOU WIN"

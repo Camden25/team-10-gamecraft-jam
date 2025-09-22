@@ -14,8 +14,10 @@ func attack():
 
 func get_isosceles_triangle_cells(tilemap: TileMapLayer, user_pos: Vector2, base_width: float, height: float) -> Array[Vector2i]:
 	# Get mouse position in world coordinates
-	var mouse_pos = get_viewport().get_mouse_position()
-	mouse_pos = tilemap.get_viewport_transform().affine_inverse() * mouse_pos
+	var mouse_pos = Vector2(0, 0)
+	if get_viewport():
+		mouse_pos = get_viewport().get_mouse_position()
+		mouse_pos = tilemap.get_viewport_transform().affine_inverse() * mouse_pos
 	
 	# Convert user position to tilemap coordinates
 	var user_cell = tilemap.local_to_map(user_pos)

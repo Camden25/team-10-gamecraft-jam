@@ -50,6 +50,8 @@ func paint_cell(cell: Vector2i, color: String) -> void:
 			reset_black_tile(cell)
 
 func reset_black_tile(cell: Vector2i):
+	if not get_tree():
+		return
 	await get_tree().create_timer(black_decay_time).timeout
 	if get_color_at_cell(cell) != "black":
 		return
@@ -214,6 +216,6 @@ func get_all_tiles() -> Array:
 		for i in range((bottom_right.x - top_left.x) / tile_set.tile_size.x):
 			for j in range((bottom_right.y - top_left.y) / tile_set.tile_size.y):
 
-				tile_array.append(Vector2i(i, j))
+				tile_array.append(Vector2i(i + top_left.x / tile_set.tile_size.x, j + top_left.y / tile_set.tile_size.y))
 	
 	return tile_array

@@ -43,6 +43,7 @@ func immune_timer():
 func immune_cooldown_timer():
 	var tween = create_tween()
 	tween.tween_property(ui, "player_ability", 1, immune_cooldown)
-	await get_tree().create_timer(immune_cooldown).timeout
+	if get_tree():
+		await get_tree().create_timer(immune_cooldown).timeout
 	if immunes_left < max_immunes:
 		immunes_left += 1

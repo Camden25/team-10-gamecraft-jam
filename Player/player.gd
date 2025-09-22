@@ -1,6 +1,8 @@
 extends HealthCharacter
 class_name Player
 
+@export var current_scene: String
+
 @export var move_speed = 50000
 var move_dir := Vector2()
 
@@ -25,11 +27,6 @@ var paint_layer: PaintLayer # IF WE DELETE PAINT LAYERS AND REPLACE THEM, CHANGE
 var prev_x_dir: int = 1
 
 @export var dash_colors: Array[int]
-
-@export_category("Damage Flash")
-@export var flash_color: Color = Color.WHITE
-@export var flash_duration: float = 0.1
-@export var flash_count: int = 3  # Number of flashes
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var ui: UI = get_tree().get_first_node_in_group("ui")
@@ -137,9 +134,7 @@ func death_check() -> void:
 
 func death():
 	disabled = true
-	var death_screen = load("res://UI/DeathScreen.tscn")
-	var death_instance = death_screen.instantiate()
-	get_parent().add_child(death_instance)
+	get_tree().get_first_node_in_group("SceneManager").swap_scene(load("res://UI/DeathScreen.tscn"))
 
 func swap_color(new_color: String) -> void:
 	color_index = paint_layer.colors.find(new_color)
@@ -163,28 +158,21 @@ func sprite_flip():
 	tween.tween_property($SpriteFlipping, "scale", Vector2(sign(move_dir).x, 1), 0.1)
 
 func _on_hurt(damage: int, source: Node) -> void:
+	if damage_immune > 0:
+		return
+	
 	if source.get_parent() == get_tree().get_first_node_in_group("boss"):
 		#knockback_taken(get_opposite_direction(global_position, get_tree().get_first_node_in_group("boss").global_position), 10)
 		knockback = get_opposite_direction(global_position, get_tree().get_first_node_in_group("boss").global_position) * 200000
+	
 	modify_health(-damage)
 	print("Ouch! Took ", damage, "damage from ", source.get_parent().name)
-	$Hurtbox/CollisionShape2D.disabled = true
-	$HitFlash.play("Hit")
-	get_node("PlayerHurt").play()
-	await get_tree().create_timer(damage_invincibility_duration).timeout
-	$Hurtbox/CollisionShape2D.disabled = false
-
-func flash_sprite_multiple(times: int) -> void:
-	var tween = create_tween()
-	
-	# Start from the current modulate
-	var normal_color = Color(1, 1, 1, 1)
-	var color_toggle = true
-	
-	for i in range(times * 2):  # Multiply by 2 because each flash has on and off
-		var target_color = flash_color if color_toggle else normal_color
-		tween.tween_property($SpriteFlipping/Sprite2D, "modulate", target_color, flash_duration).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-		color_toggle = !color_toggle
+	if dead == false:
+		$Hurtbox/CollisionShape2D.disabled = true
+		$HitFlash.play("Hit")
+		get_node("PlayerHurt").play()
+		await get_tree().create_timer(damage_invincibility_duration).timeout
+		$Hurtbox/CollisionShape2D.disabled = false
 
 func animations() -> void:
 	if animation_override == false:

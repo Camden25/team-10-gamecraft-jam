@@ -15,12 +15,15 @@ func attack():
 
 		deal_boss_damage(cells_hit, damage)
 		
-		await get_tree().create_timer(cone_blast_delay).timeout
+		if get_tree():
+			await get_tree().create_timer(cone_blast_delay).timeout
 
 func get_cone_cells(tilemap: TileMapLayer, start_pos: Vector2, angle: float) -> Array[Vector2i]:
 	# Get mouse position in world coordinates
-	var mouse_pos = get_viewport().get_mouse_position()
-	mouse_pos = tilemap.get_viewport_transform().affine_inverse() * mouse_pos
+	var mouse_pos = Vector2(0, 0)
+	if get_viewport():
+		mouse_pos = get_viewport().get_mouse_position()
+		mouse_pos = tilemap.get_viewport_transform().affine_inverse() * mouse_pos
 	
 	# Convert start position to tilemap coordinates
 	var start_cell = tilemap.local_to_map(start_pos)
